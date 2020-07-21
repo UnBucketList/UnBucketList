@@ -5,7 +5,8 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "dev": "nodemon server/server.js"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -15,6 +16,9 @@
     "expo-splash-screen": "~0.4.0",
     "expo-status-bar": "^1.0.0",
     "expo-updates": "~0.2.10",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "pg": "^8.3.0",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "~0.62.2",
