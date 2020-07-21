@@ -8,76 +8,73 @@ import {
   Button,
 } from 'react-native';
 
-const SignUp = (props) => {
-  let name;
-  let email;
-  let username;
-  let password;
-  let ConfirmPassword;
-
+const EditEvent = (props) => {
+  let eventName, eventDetails, eventLoc, eventTime, eventGuests;
   return (
     <View style={styles.container}>
-      <Text>Please enter information below</Text>
-      <br></br>
+      <Text> Edit Event </Text>
       <TextInput
+        value={eventName}
         onChangeText={(e) => {
-          name = e;
+          eventName = e;
         }}
-        placeholder={'name'}
+        placeholder="Event Name"
         style={styles.input}
       />
       <TextInput
+        value={eventDetails}
         onChangeText={(e) => {
-          email = e;
+          eventDetails = e;
         }}
-        placeholder={'email'}
+        placeholder="Event Details"
         style={styles.input}
       />
       <TextInput
+        value={eventLoc}
         onChangeText={(e) => {
-          username = e;
+          eventLoc = e;
         }}
-        placeholder={'username'}
+        placeholder="Location"
         style={styles.input}
       />
       <TextInput
+        value={eventTime}
         onChangeText={(e) => {
-          password = e;
+          eventTime = e;
         }}
-        placeholder={'password'}
-        secureTextEntry={true}
+        placeholder="Event Time"
         style={styles.input}
       />
       <TextInput
+        value={eventGuests}
         onChangeText={(e) => {
-          ConfirmPassword = e;
+          eventGuests = e;
         }}
-        placeholder={'ConfirmPassword'}
-        secureTextEntry={true}
+        placeholder="Participants"
         style={styles.input}
       />
       <TouchableOpacity
         onPress={() => {
-          console.log(name);
-          console.log(email);
-          console.log(username);
-          console.log(password);
-          console.log(ConfirmPassword);
+          console.log('Event Name is', eventName);
+          console.log('Event Name is', eventDetails);
+          console.log('Event Location is', eventLoc);
+          console.log('Event Time is', eventTime);
+          console.log('Participants are', eventGuests);
           props.navigation.navigate('Home');
         }}
       >
-        <Text>Sign-Up!</Text>
+        <Text>Edit</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: 10,
   },
   input: {
     width: 200,
@@ -88,5 +85,4 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-
-export default SignUp;
+export default EditEvent;

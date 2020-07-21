@@ -1,17 +1,59 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 
-const SignIn = ({ navigation }) => {
+const SignIn = (props) => {
+  let username;
+  let password;
+
   return (
     <View style={styles.container}>
-      <Text>This is Sign In</Text>
+      <Text>Welcome to UnBucket List!</Text>
+      <br></br>
+      <Text>Please sign in to continue</Text>
+      <br></br>
+      <TextInput
+        value={username}
+        onChangeText={(e) => {
+          username = e;
+        }}
+        placeholder={'Username'}
+        style={styles.input}
+      />
+      <TextInput
+        value={password}
+        onChangeText={(pw) => {
+          password = pw;
+        }}
+        placeholder={'Password'}
+        secureTextEntry={true}
+        style={styles.input}
+      />
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('Home');
+          console.log('Username', username);
+          console.log('Password', password);
+          props.navigation.navigate('Home');
         }}
       >
-        <Text>Go back Home</Text>
+        <Text>Log In</Text>
       </TouchableOpacity>
+      <br></br>
+      <Text>
+        Don't have an account?
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('SignUp');
+          }}
+        >
+          <Text> Sign Up!</Text>
+        </TouchableOpacity>
+      </Text>
     </View>
   );
 };
@@ -19,9 +61,17 @@ const SignIn = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ecf0f1',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    width: 200,
+    height: 44,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'black',
+    marginBottom: 10,
   },
 });
 
