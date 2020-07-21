@@ -67,3 +67,7 @@ package-lock.json
 
 #vsCode
 .vsCode
+
+
+# dotenv
+.env
