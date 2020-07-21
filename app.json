@@ -1,0 +1,12 @@
+{
+  "name": "unBucketList",
+  "displayName": "unBucketList",
+  "expo": {
+    "name": "unBucketList",
+    "slug": "unBucketList",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
