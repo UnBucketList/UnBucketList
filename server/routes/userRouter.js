@@ -7,7 +7,7 @@ userRouter.get("/", (req, res) => {
 });
 
 userRouter.post(
-  "/signup",
+  "/signup/:username",
   verificationController.createUser,
   //probably need to send to eventController to get all events BOTH
   (req, res) => {
@@ -17,7 +17,7 @@ userRouter.post(
 );
 
 userRouter.post(
-  "/login",
+  "/login/:username",
   verificationController.verifyUser,
   //probably need to send to eventController to get all events BOTH
   (req, res) => {
