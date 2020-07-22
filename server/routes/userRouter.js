@@ -12,7 +12,7 @@ userRouter.post(
   //probably need to send to eventController to get all events BOTH
   (req, res) => {
     // will need to send res.locals info
-    return res.status(404).json("working SON");
+    return res.status(200).json("working SON");
   }
 );
 
@@ -21,7 +21,7 @@ userRouter.post(
   verificationController.verifyUser,
   //probably need to send to eventController to get all events BOTH
   (req, res) => {
-    return res.status(404).json("worked");
+    return res.status(200).json("worked");
   }
 );
 
