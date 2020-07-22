@@ -107,8 +107,13 @@ eventController.deleteEvent = (req, res, next) => {
 eventController.addParticipants = (req, res, next) => {
   const { username } = req.params;
   const { guests } = req.body;
-  const event = res.locals.eventID;
-  guests.split(',').forEach((participant) => {
+
+  let event;
+  req.params.event ? (event = req.params.event) : (event = res.locals.eventID);
+
+  const split = guests.split(',');
+
+  split.forEach((participant) => {
     let queryString = `INSERT INTO event_participants (user_username, event_id) VALUES ($1, $2)`;
     let params = [participant, event];
 
@@ -118,8 +123,8 @@ eventController.addParticipants = (req, res, next) => {
       }
       console.log('response adding participants', response.rows);
     });
-    return next();
   });
+  return next();
 };
 
 // controller to grab all participants for an event
