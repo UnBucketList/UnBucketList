@@ -111,19 +111,22 @@ eventController.addParticipants = (req, res, next) => {
   let event;
   req.params.event ? (event = req.params.event) : (event = res.locals.eventID);
 
-  const split = guests.split(',');
+  if (guests) {
+    const split = guests.split(',');
 
-  split.forEach((participant) => {
-    let queryString = `INSERT INTO event_participants (user_username, event_id) VALUES ($1, $2)`;
-    let params = [participant, event];
+    split.forEach((participant) => {
+      let queryString = `INSERT INTO event_participants (user_username, event_id) VALUES ($1, $2)`;
+      let params = [participant, event];
 
-    db.query(queryString, params, (err, response) => {
-      if (err) {
-        return next(err);
-      }
-      console.log('response adding participants', response.rows);
+      db.query(queryString, params, (err, response) => {
+        if (err) {
+          return next(err);
+        }
+        console.log('response adding participants', response.rows);
+      });
     });
-  });
+    return next();
+  }
   return next();
 };
 
