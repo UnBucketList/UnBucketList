@@ -29,8 +29,6 @@ const AddEvent = (props) => {
     if (!event_name || !description) {
       alert('You must set an event name and description');
       return;
-    } else if (!date) {
-      date = null;
     }
     const event = {
       event_name,
