@@ -8,9 +8,11 @@ const eventController = {};
 eventController.getUserEvents = (req, res, next) => {
   //const { username } = req.params;
   let username;
-  req.body.username ? username = res.locals.username : username = req.params.username;
+  req.body.username
+    ? (username = res.locals.username)
+    : (username = req.params.username);
   let queryString =
-    'SELECT events.name, events.location, events.date FROM events INNER JOIN users u ON u.username = events.creator WHERE u.username = $1';
+    'SELECT events.creator as creator, events.description as description, events.location as location, events.date as date, events._id as event_id, events.name as event_name FROM events INNER JOIN users u ON u.name = events.creator WHERE u.username = $1';
 
   let params = [username];
 
@@ -19,8 +21,8 @@ eventController.getUserEvents = (req, res, next) => {
       console.log('error in getting events for particular user', err);
       return next(err);
     }
+    console.log('response', response.rows);
     res.locals.allEvents = response.rows;
-    console.log(res.locals.allEvents)
     return next();
   });
 };
