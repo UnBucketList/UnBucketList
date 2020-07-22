@@ -24,13 +24,30 @@ const Home = (props) => {
   console.log('Events in state are', props.events);
 
   const eventList = props.events.map((event, i) => {
-    return (
-      <ScrollView style={styles.eventCard}>
-        <Text>Event Name: {event.event_name}</Text>
-        <Text>Event Location: {event.location}</Text>
-        <Text>Event Date: {event.date}</Text>
-      </ScrollView>
-    );
+    if (props.creator === event.creator) {
+      return (
+        <View style={styles.myEventCard}>
+          <Text>Event Name: {event.event_name}</Text>
+          <Text>Event Location: {event.location}</Text>
+          <Text>Event Date: {event.date}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate('EditEvent');
+            }}
+          >
+            <Text>Edit Event</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.friendEventCard}>
+          <Text>Event Name: {event.event_name}</Text>
+          <Text>Event Location: {event.location}</Text>
+          <Text>Event Date: {event.date}</Text>
+        </View>
+      );
+    }
   });
 
   return (
@@ -39,7 +56,7 @@ const Home = (props) => {
         <Text>Welcome {props.creator}!</Text>
         <Text>Here is your unBucket List</Text>
       </View>
-      <View style={styles.eventContainer}>{eventList}</View>
+      <ScrollView style={styles.eventContainer}>{eventList}</ScrollView>
       <TouchableOpacity
         onPress={() => {
           console.log('Add event pressed');
@@ -73,8 +90,17 @@ const styles = StyleSheet.create({
     overflow: 'scroll',
     maxHeight: 500,
   },
-  eventCard: {
+  myEventCard: {
     backgroundColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 3,
+    margin: 5,
+    height: 100,
+    overflow: 'scroll',
+    padding: 5,
+  },
+  friendEventCard: {
+    backgroundColor: 'gray',
     borderWidth: 1,
     borderRadius: 3,
     margin: 5,
