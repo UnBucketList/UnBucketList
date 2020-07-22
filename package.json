@@ -4,7 +4,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
-    "start": "react-native start",
+    "start": "expo start",
     "test": "jest",
     "dev": "nodemon server/server.js"
   },
@@ -13,6 +13,7 @@
     "@react-navigation/native": "^5.7.1",
     "@react-navigation/stack": "^5.7.1",
     "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "expo": "~38.0.1",
     "expo-splash-screen": "~0.4.0",

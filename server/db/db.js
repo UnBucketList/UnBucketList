@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 require('dotenv').config();
 
 // sean use environment variables
-const PG_URI = process.env.PG_PW
+const PG_URI = process.env.PG_PW;
 
 const pool = new Pool({
   connectionString: PG_URI,
@@ -17,7 +17,6 @@ CREATE TABLE events (
   location      VARCHAR,
   date          DATE
 )
-
 CREATE TABLE users (
   _id   serial PRIMARY KEY,
   name  VARCHAR NOT NULL,
@@ -25,7 +24,6 @@ CREATE TABLE users (
   username VARCHAR UNIQUE NOT NULL,
   password VARCHAR NOT NULL
 )
-
 CREATE TABLE event_participants (
   _id serial PRIMARY KEY,
   user_username VARCHAR NOT NULL,
@@ -33,7 +31,6 @@ CREATE TABLE event_participants (
   FOREIGN KEY (user_username) REFERENCES users(username),
   FOREIGN KEY (event_id) REFERENCES events(_id)
 )
-
 */
 
 module.exports = {
@@ -41,4 +38,4 @@ module.exports = {
     console.log('executed query', text);
     return pool.query(text, params, callback);
   },
-}
+};
