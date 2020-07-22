@@ -21,6 +21,7 @@ verificationController.createUser = (req, res, next) => {
     const values = [name, email, username, hash];
     db.query(string, values)
       .then((result) => {
+        res.locals.username = username;
         return next();
       })
       .catch((err) => {
@@ -54,6 +55,7 @@ verificationController.verifyUser = (req, res, next) => {
           return next(err);
         }
         if (pwMatch) {
+          res.locals.username = username;
           return next();
         } else {
           return next({ log: "incorrect password" });
