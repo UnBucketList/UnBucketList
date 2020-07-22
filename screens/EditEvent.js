@@ -8,8 +8,46 @@ import {
   Button,
 } from 'react-native';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions.js';
+
+const mapStateToProps = (state) => ({
+  
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  editEvent : (event) => {
+      dispatch(actions.editEvent(event));
+    }
+});
+
 const EditEvent = (props) => {
-  let name, description, location, date, guests;
+let name, description, location, date, guests, event_id;
+
+
+const handleEditEvent = () => {
+// console.log('in handle edit', event)
+console.log('Event Name is', name);
+          console.log('Event Name is', description);
+          console.log('Event Location is', location);
+          console.log('Event Time is', date);
+          console.log('Participants are', guests);
+          console.log('event id is ', event_id)
+
+const event = {
+  name,
+  description,
+  location,
+  date,
+  guests,
+  event_id,
+};
+
+// props.editEvent(event)
+props.navigation.navigate('Home')
+}
+
+  
   return (
     <View style={styles.container}>
       <Text> Edit Event </Text>
@@ -54,14 +92,7 @@ const EditEvent = (props) => {
         style={styles.input}
       />
       <TouchableOpacity
-        onPress={() => {
-          console.log('Event Name is', name);
-          console.log('Event Name is', description);
-          console.log('Event Location is', location);
-          console.log('Event Time is', date);
-          console.log('Participants are', guests);
-          props.navigation.navigate('Home');
-        }}
+        onPress={handleEditEvent}
       >
         <Text>Edit</Text>
       </TouchableOpacity>
@@ -85,4 +116,4 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-export default EditEvent;
+export default connect(mapStateToProps, mapDispatchToProps)(EditEvent);

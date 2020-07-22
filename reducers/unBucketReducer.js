@@ -45,6 +45,7 @@ const unBucketReducer = (state = initialState, action) => {
 
     case types.EDIT_EVENT:
       events.forEach((elem) => {
+        console.log('is element the entire event obj?', elem)
         if (elem.eventId === action.payload.eventId) {
           event = action.payload;
         }

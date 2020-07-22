@@ -23,6 +23,14 @@ const Home = (props) => {
         <Text>Event Name: {event.event_name}</Text>
         <Text>Event Location: {event.location}</Text>
         <Text>Event Date: {event.date}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            console.log('Add event pressed');
+            props.navigation.navigate('EditEvent');
+          }}
+          >
+          <Text>Edit Event</Text>
+          </TouchableOpacity>
       </View>
     );
   });
