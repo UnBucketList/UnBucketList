@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -27,13 +27,6 @@ const AddEvent = (props) => {
   let event_name, description, location, date, guests;
 
   const handleAddEvent = () => {
-<<<<<<< HEAD
-    if (!event_name || !description) {
-      alert('You must set an event name and description');
-      return;
-    }
-=======
->>>>>>> master
     const event = {
       event_name,
       description,
@@ -41,20 +34,19 @@ const AddEvent = (props) => {
       date,
       guests,
     };
-    if(event.event_name === undefined || event.description === undefined){
+    if (event.event_name === undefined || event.description === undefined) {
       setNameValueEntered(false);
       // alert('Please include event Name and Description');
-      console.log('hey hey hey')
-    } else{
-      console.log('event object------>', event)
+      console.log('hey hey hey');
+    } else {
+      console.log('event object------>', event);
       props.addEvent(event, props.username, props.creator);
       props.navigation.navigate('Home');
     }
-    
   };
 
   return (
-     <View style={styles.container}>
+    <View style={styles.container}>
       <TextInput
         value={event_name}
         onChangeText={(e) => {
@@ -70,7 +62,7 @@ const AddEvent = (props) => {
         onChangeText={(e) => {
           description = e;
         }}
-        placeholder={nameValueEntered ? 'Details': "Event Details Required"}
+        placeholder={nameValueEntered ? 'Details' : 'Event Details Required'}
         style={nameValueEntered ? styles.input : styles.noInput}
         // style={styles.input}
         // placeholderTextColor={nameValueEntered ? 'gray' : 'red'}
