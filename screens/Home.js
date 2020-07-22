@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
@@ -23,9 +17,9 @@ const Home = (props) => {
   const eventList = props.events.map((event) => {
     return (
       <View style={styles.eventCard}>
-        <Text>Event Name: {event.eventName}</Text>
-        <Text>Event Location: {event.eventLoc}</Text>
-        <Text>Event Time: {event.eventTime}</Text>
+        <Text>Event Name: {event.name}</Text>
+        <Text>Event Location: {event.location}</Text>
+        <Text>Event Time: {event.date}</Text>
       </View>
     );
   });

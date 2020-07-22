@@ -26,7 +26,7 @@ const SignIn = (props) => {
   // makes fetch request to backend for logging in
   const handleLogin = () => {
     const body = JSON.stringify({ username, password });
-    fetch(`http://localhost:3000/user/login/${username}`, {
+    fetch(`http://localhost:3000/user/login/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

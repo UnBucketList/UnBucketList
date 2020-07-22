@@ -5,12 +5,10 @@ const initialState = {
   isLoggedIn: false,
   username: '',
   events: [],
-  lastEventId: 1000,
 };
 
 const unBucketReducer = (state = initialState, action) => {
   let events = state.events.slice();
-  let lastEventId = state.lastEventId;
 
   switch (action.type) {
     case types.LOGIN:
@@ -27,26 +25,18 @@ const unBucketReducer = (state = initialState, action) => {
       };
 
     case types.ADD_EVENT:
-      lastEventId++;
-      const {
-        eventName,
-        eventDetails,
-        eventLoc,
-        eventTime,
-        eventGuests,
-      } = action.payload;
+      const { name, description, location, date, guests } = action.payload;
       const newEvent = {
         eventId: lastEventId,
-        eventName,
-        eventDetails,
-        eventLoc,
-        eventTime,
-        eventGuests,
+        name,
+        description,
+        location,
+        date,
+        guests,
       };
       events.push(newEvent);
       return {
         ...state,
-        lastEventId,
         events,
       };
 

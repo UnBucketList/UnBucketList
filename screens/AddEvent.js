@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const AddEvent = (props) => {
-  let eventName, eventDetails, eventLoc, eventTime, eventGuests;
+  let event_name, description, location, date, eventGuests;
 
   // const handleclick = (event) => {
   //   console.log('im in handleclick', event);
@@ -30,33 +30,33 @@ const AddEvent = (props) => {
   return (
     <View style={styles.container}>
       <TextInput
-        value={eventName}
+        value={event_name}
         onChangeText={(e) => {
-          eventName = e;
+          event_name = e;
         }}
-        placeholder={'Name'}
+        placeholder={'event_name'}
         style={styles.input}
       />
       <TextInput
-        value={eventDetails}
+        value={description}
         onChangeText={(e) => {
-          eventDetails = e;
+          description = e;
         }}
         placeholder={'Details'}
         style={styles.input}
       />
       <TextInput
-        value={eventLoc}
+        value={location}
         onChangeText={(e) => {
-          eventLoc = e;
+          location = e;
         }}
         placeholder={'Location'}
         style={styles.input}
       />
       <TextInput
-        value={eventTime}
+        value={date}
         onChangeText={(e) => {
-          eventTime = e;
+          date = e;
         }}
         placeholder={'Time of Event'}
         style={styles.input}
@@ -72,10 +72,10 @@ const AddEvent = (props) => {
       <TouchableOpacity
         onPress={() => {
           const event = {
-            eventName,
-            eventDetails,
-            eventLoc,
-            eventTime,
+            event_name,
+            description,
+            location,
+            date,
             eventGuests,
           };
           props.addEvent(event);
