@@ -50,7 +50,7 @@ const SignUp = (props) => {
       .then((data) => {
         console.log('Data from signup', data);
         if (data.username) {
-          props.login(data.username);
+          props.login(data.username, data.name);
           props.navigation.navigate('Home');
         } else {
           alert('Sign up failed');
