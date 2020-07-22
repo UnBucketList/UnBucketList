@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 const eventRouter = require('./routes/eventRouter');
@@ -9,6 +10,7 @@ const PORT = 3000;
 
 // are these needed?  sean
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/event', eventRouter);
