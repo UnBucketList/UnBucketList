@@ -51,7 +51,6 @@ eventController.addCreatorToEvent = (req, res, next) => {
 eventController.addNewEvent = (req, res, next) => {
   const { username } = req.params;
   const { name, creator, description, location, date } = req.body;
-  console.log('req body add event', req.body);
 
   let queryString = `INSERT INTO events (name, creator, username, description, location, date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING events._id, events.name, events.creator, events.username, events.description, events.location, events.date`;
 
@@ -106,11 +105,26 @@ eventController.deleteEvent = (req, res, next) => {
 };
 
 eventController.addParticipants = (req, res, next) => {
-  const { username, event } = req.params;
+  const { username } = req.params;
   const { guests } = req.body;
-  guests.split('');
 
-  let queryString = ``;
+  let event;
+  req.params.event ? (event = req.params.event) : (event = res.locals.eventID);
+
+  const split = guests.split(',');
+
+  split.forEach((participant) => {
+    let queryString = `INSERT INTO event_participants (user_username, event_id) VALUES ($1, $2)`;
+    let params = [participant, event];
+
+    db.query(queryString, params, (err, response) => {
+      if (err) {
+        return next(err);
+      }
+      console.log('response adding participants', response.rows);
+    });
+  });
+  return next();
 };
 
 // controller to grab all participants for an event
