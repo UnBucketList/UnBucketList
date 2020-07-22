@@ -2,41 +2,7 @@ const db = require('../db/db.js');
 
 const eventController = {};
 
-// currently grabs only the events created by the current user
-// NEED TO ADD THE EVENTS THAT THE CURRENT USER IS A PARTICIPANT OF
-// ALSO SEND BACK ALL THE DETAILS FOR AN EVENT INSTEAD OF JUST NAME LOCATION DATE
-// eventController.getUserEvents = (req, res, next) => {
-//   //const { username } = req.params;
-//   let username;
-//   req.body.username
-//     ? (username = res.locals.username)
-//     : (username = req.params.username);
-//   console.log('username', username);
-
-//   let queryString = `
-//     SELECT
-//     e.creator as creator, e.description as description,
-//     e.location as location, e.date as date, e._id as event_id,
-//     e.name as event_name
-//     FROM
-//     events e
-//     WHERE
-//     e.username = $1
-//     `;
-
-//   let params = [username];
-
-//   db.query(queryString, params, (err, response) => {
-//     if (err) {
-//       console.log('error in getting events for particular user', err);
-//       return next(err);
-//     }
-//     console.log('response', response.rows);
-//     // res.locals.allEvents = response.rows;
-//     return next();
-//   });
-// };
-
+// grabs all events that a user created and is a participant of
 eventController.getParticipatingEvents = (req, res, next) => {
   let username = res.locals.username;
 
