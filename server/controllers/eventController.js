@@ -3,12 +3,12 @@ const db = require('../db/db.js');
 const eventController = {};
 
 eventController.getUserEvents = (req, res, next) => {
-  const { id } = req.params;
+  const { username } = req.params;
 
   let queryString =
     'SELECT events.name, events.location, events.date FROM events INNER JOIN users u ON u.name = events.creator WHERE u.username = $1';
 
-  let params = [id];
+  let params = [username];
 
   db.query(queryString, params, (err, response) => {
     if (err) {
@@ -21,11 +21,13 @@ eventController.getUserEvents = (req, res, next) => {
 };
 
 eventController.addCreatorToEvent = (req, res, next) => {
-  const { id } = req.params;
+  const { username } = req.params;
   const event = res.locals.eventID;
+
   let queryString = `INSERT INTO event_participants (user_username, event_id) VALUES ($1, $2)`;
-  let params = [id, event];
-  console.log('event', event);
+
+  let params = [username, event];
+
   db.query(queryString, params, (err, response) => {
     if (err) {
       console.log('error in adding creator to event', err);
@@ -36,7 +38,7 @@ eventController.addCreatorToEvent = (req, res, next) => {
 
 // TODO : adds a new event by current user
 eventController.addNewEvent = (req, res, next) => {
-  const { id } = req.params;
+  const { username } = req.params;
   const { name, creator, description, location, date } = req.body;
 
   let queryString = `INSERT INTO events (name, creator, description, location, date) VALUES ($1, $2, $3, $4, $5) RETURNING (events._id)`;
@@ -56,7 +58,7 @@ eventController.addNewEvent = (req, res, next) => {
 
 // TODO : edits an existing event
 eventController.editEvent = (req, res, next) => {
-  const { id, event } = req.params;
+  const { username, event } = req.params;
   const { name, creator, description, location, date } = req.body;
 
   // 'event name' and columns and values have to be changed accordingly
@@ -73,7 +75,7 @@ eventController.editEvent = (req, res, next) => {
 };
 
 eventController.deleteEvent = (req, res, next) => {
-  const { id, event } = req.params;
+  const { username, event } = req.params;
   // "id" needs to be changed to current event _id
   let queryString = `DELETE FROM events WHERE events._id = $1`;
 

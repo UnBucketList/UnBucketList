@@ -4,7 +4,7 @@ const eventController = require('../controllers/eventController.js');
 
 // COMPLETED
 eventRouter.put(
-  '/:id/:event',
+  '/:username/:event',
   eventController.editEvent,
   eventController.getUserEvents,
   (req, res) => {
@@ -14,7 +14,7 @@ eventRouter.put(
 
 // COMPLETED
 eventRouter.delete(
-  '/:id/:event',
+  '/:username/:event',
   eventController.deleteEvent,
   eventController.getUserEvents,
   (req, res) => {
@@ -24,7 +24,7 @@ eventRouter.delete(
 
 // COMPLETED
 eventRouter.post(
-  '/:id',
+  '/:username',
   eventController.addNewEvent,
   eventController.addCreatorToEvent,
   eventController.getUserEvents,
@@ -34,8 +34,12 @@ eventRouter.post(
 );
 
 // COMPLETED
-eventRouter.get('/:id/:event', eventController.getParticipants, (req, res) => {
-  res.status(200).json(res.locals.participants);
-});
+eventRouter.get(
+  '/:username/:event',
+  eventController.getParticipants,
+  (req, res) => {
+    res.status(200).json(res.locals.participants);
+  }
+);
 
 module.exports = eventRouter;
