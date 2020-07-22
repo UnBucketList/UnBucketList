@@ -31,7 +31,7 @@ export const addEvent = (event, username, creator) => {
     guests: event.guests,
   });
   return (dispatch) => {
-    fetch(`http://localhost:3000/event/${username}`, {
+    fetch(`https://unbucketlist.herokuapp.com/event/${username}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
