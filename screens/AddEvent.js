@@ -26,6 +26,10 @@ const AddEvent = (props) => {
   let event_name, description, location, date, guests;
 
   const handleAddEvent = () => {
+    if (!event_name || !description) {
+      alert('You must set an event name and description');
+      return;
+    }
     const event = {
       event_name,
       description,
