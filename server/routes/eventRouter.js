@@ -8,7 +8,7 @@ eventRouter.put(
   eventController.editEvent,
   eventController.getUserEvents,
   (req, res) => {
-    res.status(200).json(res.locals.allEvents);
+    res.status(200).json({ events: res.locals.allEvents });
   }
 );
 
@@ -18,7 +18,7 @@ eventRouter.delete(
   eventController.deleteEvent,
   eventController.getUserEvents,
   (req, res) => {
-    res.status(200).json(res.locals.allEvents);
+    res.status(200).json({ events: res.locals.allEvents });
   }
 );
 
@@ -29,7 +29,7 @@ eventRouter.post(
   eventController.addCreatorToEvent,
   eventController.getUserEvents,
   (req, res) => {
-    res.status(200).json(res.locals.allEvents);
+    res.status(200).json({ events: res.locals.allEvents });
   }
 );
 
@@ -38,7 +38,7 @@ eventRouter.get(
   '/:username/:event',
   eventController.getParticipants,
   (req, res) => {
-    res.status(200).json(res.locals.participants);
+    res.status(200).json({ participants: res.locals.participants });
   }
 );
 
