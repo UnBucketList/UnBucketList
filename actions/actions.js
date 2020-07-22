@@ -7,6 +7,13 @@ export const login = (userId) => {
   };
 };
 
+export const setEvents = (events) => {
+  return {
+    type: types.SET_EVENTS,
+    payload: events,
+  };
+};
+
 export const addEvent = (event) => {
   return {
     type: types.ADD_EVENT,

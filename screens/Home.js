@@ -9,6 +9,7 @@ import {
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
+  username: state.unBucket.username,
   events: state.unBucket.events,
 });
 
@@ -18,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Home = (props) => {
   console.log(props.events);
+  console.log('Username is', props.username);
   const eventList = props.events.map((event) => {
     return (
       <View style={styles.eventCard}>
