@@ -12,7 +12,7 @@ const pool = new Pool({
 CREATE TABLE events (
   _id           serial PRIMARY KEY,
   name          VARCHAR NOT NULL,
-  creator       VARCHAR UNIQUE NOT NULL,
+  creator       VARCHAR NOT NULL,
   description   VARCHAR NOT NULL,
   location      VARCHAR,
   date          DATE
@@ -28,9 +28,9 @@ CREATE TABLE users (
 
 CREATE TABLE event_participants (
   _id serial PRIMARY KEY,
-  user_id       INT NOT NULL,
+  user_username VARCHAR NOT NULL,
   event_id      INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(_id),
+  FOREIGN KEY (user_username) REFERENCES users(username),
   FOREIGN KEY (event_id) REFERENCES events(_id)
 )
 

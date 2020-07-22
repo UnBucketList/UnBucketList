@@ -11,7 +11,6 @@ userRouter.post(
   verificationController.createUser,
   //probably need to send to eventController to get all events BOTH
   (req, res) => {
-
     // will need to send res.locals info
     return res.status(404).json("working SON");
   }

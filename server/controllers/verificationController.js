@@ -11,7 +11,6 @@ verificationController.createUser = (req, res, next) => {
   let string = `
   INSERT INTO users (name, email, username, password)
   VALUES ($1, $2, $3, $4)
-  RETURNING _id;
   `;
 
   bcrypt.hash(password, parseInt(process.env.SALT), function (err, hash) {
@@ -22,7 +21,7 @@ verificationController.createUser = (req, res, next) => {
     const values = [name, email, username, hash];
     db.query(string, values)
       .then((result) => {
-        res.locals.user_id = result.rows[0]._id;
+        res.locals.username = username;
         return next();
       })
       .catch((err) => {
@@ -35,6 +34,7 @@ verificationController.createUser = (req, res, next) => {
 
 verificationController.verifyUser = (req, res, next) => {
   console.log("made it to verify user");
+  console.log(req.body);
   let { username, password } = req.body;
   username = username.toLowerCase();
   const values = [username];
@@ -43,6 +43,9 @@ verificationController.verifyUser = (req, res, next) => {
   `;
   db.query(string, values)
     .then((result) => {
+      if (!result.rows.length) {
+        return res.json("incorrect username or password");
+      }
       bcrypt.compare(password, result.rows[0].password, function (
         err,
         pwMatch
@@ -52,7 +55,7 @@ verificationController.verifyUser = (req, res, next) => {
           return next(err);
         }
         if (pwMatch) {
-          res.locals.user_id = result.rows[0]._id;
+          res.locals.username = username;
           return next();
         } else {
           return next({ log: "incorrect password" });
@@ -60,11 +63,9 @@ verificationController.verifyUser = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log("err in verifyUser");
+      console.log("err in verifyUser", err);
       return next(err);
     });
 };
-
-//res.locals.user_id
 
 module.exports = verificationController;
