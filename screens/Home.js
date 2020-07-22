@@ -30,7 +30,7 @@ const Home = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text>Welcome {props.username}!</Text>
+        <Text>Welcome {props.creator}!</Text>
         <Text>Here is your unBucket List</Text>
       </View>
       <View style={styles.eventContainer}>{eventList}</View>
