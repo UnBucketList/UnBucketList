@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
@@ -19,7 +25,7 @@ const Home = (props) => {
 
   const eventList = props.events.map((event) => {
     return (
-      <View style={styles.eventCard}>
+      <View style={styles.eventCard} key={props.events.event_id}>
         <Text>Event Name: {event.event_name}</Text>
         <Text>Event Location: {event.location}</Text>
         <Text>Event Date: {event.date}</Text>
@@ -33,7 +39,7 @@ const Home = (props) => {
         <Text>Welcome {props.creator}!</Text>
         <Text>Here is your unBucket List</Text>
       </View>
-      <View style={styles.eventContainer}>{eventList}</View>
+      <ScrollView style={styles.eventContainer}>{eventList}</ScrollView>
       <TouchableOpacity
         onPress={() => {
           console.log('Add event pressed');

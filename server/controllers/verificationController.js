@@ -22,6 +22,7 @@ verificationController.createUser = (req, res, next) => {
     db.query(string, values)
       .then((result) => {
         res.locals.username = username;
+        res.locals.name = name;
         return next();
       })
       .catch((err) => {
