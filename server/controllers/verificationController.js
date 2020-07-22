@@ -59,7 +59,7 @@ verificationController.verifyUser = (req, res, next) => {
   db.query(string, values)
     .then((result) => {
       if (!result.rows.length) {
-        return res.json("incorrect username or password");
+        return res.json({log: "incorrect username or password", status: 401});
       }
       bcrypt.compare(password, result.rows[0].password, function (
         err,
@@ -74,7 +74,7 @@ verificationController.verifyUser = (req, res, next) => {
           res.locals.name = result.rows[0].name;
           return next();
         } else {
-          return next({ log: "incorrect password" });
+          return next({ log: "incorrect username or password", status: 401 });
         }
       });
     })

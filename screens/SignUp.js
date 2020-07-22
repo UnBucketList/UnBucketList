@@ -54,12 +54,10 @@ const SignUp = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, 'DATA SEAN')
         if (data.errorMessage){
-          console.log('SEAN IN HERE')
           if (data.errorMessage === 'email'){
             setDuplicateData([true, false]);
-          } else if (data.errorMessage ==='username'){
+          } else if (data.errorMessage === 'username'){
             setDuplicateData([false, true]);
           }
           return;
