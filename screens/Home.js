@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     overflow: 'scroll',
+    maxHeight: 500,
   },
   eventCard: {
     backgroundColor: 'lightgray',
@@ -76,7 +77,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     margin: 5,
     height: 75,
-    overflow: 'scroll',
   },
 });
 
