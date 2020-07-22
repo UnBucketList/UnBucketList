@@ -27,9 +27,9 @@ eventRouter.post(
   '/:username',
   eventController.addNewEvent,
   eventController.addCreatorToEvent,
-  eventController.getUserEvents,
+  // eventController.getUserEvents,
   (req, res) => {
-    res.status(200).json({ events: res.locals.allEvents });
+    res.status(200).json({ addedEvent: res.locals.addedEvent });
   }
 );
 
