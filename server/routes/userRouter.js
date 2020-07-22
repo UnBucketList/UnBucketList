@@ -8,17 +8,22 @@ userRouter.get('/', (req, res) => {
 });
 
 userRouter.post('/signup', verificationController.createUser, (req, res) => {
-  return res.status(200).json({ username: res.locals.username, name: res.locals.name });
+  return res
+    .status(200)
+    .json({ username: res.locals.username, name: res.locals.name });
 });
 
 userRouter.post(
   '/login',
   verificationController.verifyUser,
-  eventController.getUserEvents,
+  // eventController.getUserEvents,
+  eventController.getParticipatingEvents,
   (req, res) => {
-    return res
-      .status(200)
-      .json({ username: res.locals.username, name: res.locals.name, events: res.locals.allEvents });
+    return res.status(200).json({
+      username: res.locals.username,
+      name: res.locals.name,
+      events: res.locals.allEvents,
+    });
     // {username: res.locals.username, events: res.locals.allEvents}
   }
 );
