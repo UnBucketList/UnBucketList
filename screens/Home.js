@@ -5,7 +5,6 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  FlatList,
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -21,19 +20,17 @@ const Home = (props) => {
   console.log(props.events);
   const eventList = props.events.map((event) => {
     return (
-      <View>
+      <View style={styles.eventCard}>
         <Text>Event Name: {event.eventName}</Text>
-        <Text>Event Details: {event.eventDetails}</Text>
         <Text>Event Location: {event.eventLoc}</Text>
         <Text>Event Time: {event.eventTime}</Text>
-        <Text>Participants: {event.eventGuests}</Text>
       </View>
     );
   });
   return (
     <View style={styles.container}>
       <Text>This is Home</Text>
-      {eventList}
+      <View style={styles.eventContainer}>{eventList}</View>
       <TouchableOpacity
         onPress={() => {
           console.log('Add event pressed');
@@ -42,21 +39,21 @@ const Home = (props) => {
       >
         <Text>Add an Event</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           console.log('Edit event pressed');
           props.navigation.navigate('EditEvent');
         }}
       >
         <Text>Edit an Event</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
     justifyContent: 'center',
@@ -64,6 +61,22 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     maxHeight: 200,
+  },
+  eventContainer: {
+    flex: 0.75,
+    backgroundColor: 'orange',
+    width: '90%',
+    borderWidth: 1,
+    borderRadius: 3,
+    overflow: 'scroll',
+  },
+  eventCard: {
+    backgroundColor: 'lightgray',
+    borderWidth: 1,
+    borderRadius: 3,
+    margin: 5,
+    height: 75,
+    overflow: 'scroll',
   },
 });
 

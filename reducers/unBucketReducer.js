@@ -10,6 +10,8 @@ const initialState = {
 
 const unBucketReducer = (state = initialState, action) => {
   let events = state.events.slice();
+  let lastEventId = state.lastEventId;
+
   switch (action.type) {
     case types.LOGIN:
       return {
@@ -38,6 +40,7 @@ const unBucketReducer = (state = initialState, action) => {
       events.push(newEvent);
       return {
         ...state,
+        lastEventId,
         events,
       };
 
