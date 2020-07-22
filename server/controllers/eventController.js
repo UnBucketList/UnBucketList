@@ -2,28 +2,30 @@ const db = require('../db/db.js');
 
 const eventController = {};
 
-// currently grabs only the events created by the current user
-// NEED TO ADD THE EVENTS THAT THE CURRENT USER IS A PARTICIPANT OF
-// ALSO SEND BACK ALL THE DETAILS FOR AN EVENT INSTEAD OF JUST NAME LOCATION DATE
-eventController.getUserEvents = (req, res, next) => {
-  //const { username } = req.params;
-  let username;
-  req.body.username
-    ? (username = res.locals.username)
-    : (username = req.params.username);
-  console.log('username', username);
+// grabs all events that a user created and is a participant of
+eventController.getParticipatingEvents = (req, res, next) => {
+  let username = res.locals.username;
 
-  let queryString =
-    'SELECT events.creator as creator, events.description as description, events.location as location, events.date as date, events._id as event_id, events.name as event_name FROM events WHERE events.username = $1';
+  let queryString = `
+  SELECT 
+  e.name, e.creator, e.username, e.description, e.location, e.date, e._id as event_id
+  FROM
+  events e
+  INNER JOIN 
+  event_participants ep
+  ON 
+  ep.event_id = e._id
+  WHERE
+  ep.user_username = $1
+  `;
 
   let params = [username];
 
   db.query(queryString, params, (err, response) => {
     if (err) {
-      console.log('error in getting events for particular user', err);
       return next(err);
     }
-    console.log('response', response.rows);
+    console.log('response from database', response.rows);
     res.locals.allEvents = response.rows;
     return next();
   });
@@ -34,7 +36,12 @@ eventController.addCreatorToEvent = (req, res, next) => {
   const event = res.locals.eventID;
   console.log('event', event);
 
-  let queryString = `INSERT INTO event_participants (user_username, event_id) VALUES ($1, $2)`;
+  let queryString = `
+  INSERT INTO 
+  event_participants (user_username, event_id) 
+  VALUES 
+  ($1, $2)
+  `;
 
   let params = [username, event];
 
@@ -52,7 +59,14 @@ eventController.addNewEvent = (req, res, next) => {
   const { username } = req.params;
   const { name, creator, description, location, date } = req.body;
 
-  let queryString = `INSERT INTO events (name, creator, username, description, location, date) VALUES ($1, $2, $3, $4, $5, $6) RETURNING events._id, events.name, events.creator, events.username, events.description, events.location, events.date`;
+  let queryString = `
+  INSERT INTO 
+  events (name, creator, username, description, location, date) 
+  VALUES 
+  ($1, $2, $3, $4, $5, $6) 
+  RETURNING 
+  events._id, events.name, events.creator, events.username, events.description, events.location, events.date
+  `;
 
   let params = [name, creator, username, description, location, date];
 
@@ -74,7 +88,14 @@ eventController.editEvent = (req, res, next) => {
   const { name, creator, description, location, date } = req.body;
 
   // 'event name' and columns and values have to be changed accordingly
-  let queryString = `UPDATE events SET name = $1, creator = $2, description = $3, location = $4, date = $5 WHERE events._id = $6`;
+  let queryString = `
+  UPDATE 
+  events 
+  SET 
+  name = $1, creator = $2, description = $3, location = $4, date = $5 
+  WHERE 
+  events._id = $6
+  `;
 
   let params = [name, creator, description, location, date, event];
 
@@ -90,7 +111,12 @@ eventController.editEvent = (req, res, next) => {
 eventController.deleteEvent = (req, res, next) => {
   const { username, event } = req.params;
   // "id" needs to be changed to current event _id
-  let queryString = `DELETE FROM events WHERE events._id = $1`;
+  let queryString = `
+  DELETE FROM 
+  events 
+  WHERE 
+  events._id = $1
+  `;
 
   let params = [event];
 
@@ -115,7 +141,12 @@ eventController.addParticipants = (req, res, next) => {
     const split = guests.split(',');
 
     split.forEach((participant) => {
-      let queryString = `INSERT INTO event_participants (user_username, event_id) VALUES ($1, $2)`;
+      let queryString = `
+      INSERT INTO 
+      event_participants (user_username, event_id) 
+      VALUES 
+      ($1, $2)
+      `;
       let params = [participant, event];
 
       db.query(queryString, params, (err, response) => {
@@ -134,7 +165,18 @@ eventController.addParticipants = (req, res, next) => {
 eventController.getParticipants = (req, res, next) => {
   const { id, event } = req.params;
   // "1" needs to be changed to the specific event_id in event_participants table
-  let queryString = `SELECT users.name FROM users INNER JOIN event_participants ep ON ep.user_username = users.username WHERE ep.event_id = $1`;
+  let queryString = `
+  SELECT 
+  users.name 
+  FROM 
+  users 
+  INNER JOIN 
+  event_participants ep 
+  ON 
+  ep.user_username = users.username 
+  WHERE 
+  ep.event_id = $1
+  `;
 
   let params = [event];
 
@@ -143,7 +185,6 @@ eventController.getParticipants = (req, res, next) => {
       console.log('error in getting participants for an event', err);
       return next(err);
     }
-    console.log('got participants', response.rows);
     res.locals.participants = response.rows;
     return next();
   });

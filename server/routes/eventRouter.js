@@ -6,7 +6,9 @@ const eventController = require('../controllers/eventController.js');
 eventRouter.put(
   '/:username/:event',
   eventController.editEvent,
-  eventController.getUserEvents,
+  eventController.addParticipants,
+  // eventController.getUserEvents,
+  eventController.getParticipatingEvents,
   (req, res) => {
     res.status(200).json({ events: res.locals.allEvents });
   }
@@ -16,7 +18,8 @@ eventRouter.put(
 eventRouter.delete(
   '/:username/:event',
   eventController.deleteEvent,
-  eventController.getUserEvents,
+  // eventController.getUserEvents,
+  eventController.getParticipatingEvents,
   (req, res) => {
     res.status(200).json({ events: res.locals.allEvents });
   }
