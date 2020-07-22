@@ -45,7 +45,8 @@ const AddEvent = (props) => {
       // alert('Please include event Name and Description');
       console.log('hey hey hey')
     } else{
-      props.addEvent(event, props.username);
+      console.log('event object------>', event)
+      props.addEvent(event, props.username, props.creator);
       props.navigation.navigate('Home');
     }
     
