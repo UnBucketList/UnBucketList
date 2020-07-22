@@ -13,24 +13,27 @@ CREATE TABLE events (
   _id           serial PRIMARY KEY,
   name          VARCHAR NOT NULL,
   creator       VARCHAR NOT NULL,
+  username      VARCHAR NOT NULL,
   description   VARCHAR NOT NULL,
   location      VARCHAR,
-  date          DATE
-)
+  date          VARCHAR
+);
+
 CREATE TABLE users (
   _id   serial PRIMARY KEY,
   name  VARCHAR NOT NULL,
   email VARCHAR UNIQUE NOT NULL,
   username VARCHAR UNIQUE NOT NULL,
   password VARCHAR NOT NULL
-)
+);
+
 CREATE TABLE event_participants (
   _id serial PRIMARY KEY,
   user_username VARCHAR NOT NULL,
   event_id      INT NOT NULL,
   FOREIGN KEY (user_username) REFERENCES users(username),
   FOREIGN KEY (event_id) REFERENCES events(_id)
-)
+);
 */
 
 module.exports = {
