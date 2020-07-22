@@ -5,20 +5,44 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  Button,
+  Alert,
 } from 'react-native';
 
 const SignUp = (props) => {
-  let name;
-  let email;
-  let username;
-  let password;
-  let ConfirmPassword;
+  let name, email, username, password, confirmPassword;
+
+  // makes fetch request to create a new account
+  // goes home on successful sign up
+  const handleSignUp = () => {
+    console.log('Inside handleSignUp user details are');
+    console.log(name, email, username, password);
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+    // **TODO** move line below to successful sign up once backend is connected
+    props.navigation.navigate('Home');
+    const body = JSON.stringify({
+      name,
+      email,
+      username,
+      password,
+    });
+    fetch('http://localhost:3000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body,
+    })
+      .then((res) => res.json())
+      .then((data) => console.log('Data from signup', data))
+      .catch((err) => console.log('Error signing up', err));
+  };
 
   return (
     <View style={styles.container}>
       <Text>Please enter information below</Text>
-      <br></br>
       <TextInput
         onChangeText={(e) => {
           name = e;
@@ -44,28 +68,19 @@ const SignUp = (props) => {
         onChangeText={(e) => {
           password = e;
         }}
-        placeholder={'password'}
+        placeholder={'Password'}
         secureTextEntry={true}
         style={styles.input}
       />
       <TextInput
         onChangeText={(e) => {
-          ConfirmPassword = e;
+          confirmPassword = e;
         }}
-        placeholder={'ConfirmPassword'}
+        placeholder={'Confirm Password'}
         secureTextEntry={true}
         style={styles.input}
       />
-      <TouchableOpacity
-        onPress={() => {
-          console.log(name);
-          console.log(email);
-          console.log(username);
-          console.log(password);
-          console.log(ConfirmPassword);
-          props.navigation.navigate('Home');
-        }}
-      >
+      <TouchableOpacity onPress={handleSignUp}>
         <Text>Sign-Up!</Text>
       </TouchableOpacity>
     </View>
@@ -84,7 +99,8 @@ const styles = StyleSheet.create({
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'gray',
+    borderRadius: 3,
     marginBottom: 10,
   },
 });
