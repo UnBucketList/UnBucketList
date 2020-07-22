@@ -17,10 +17,10 @@ const Home = (props) => {
   console.log('Creator name is', props.creator);
   console.log('Events in state are', props.events);
 
-  const eventList = props.events.map((event) => {
+  const eventList = props.events.map((event, i) => {
     return (
-      <View style={styles.eventCard}>
-        <Text>Event Name: {event.event_name}</Text>
+      <View key={`event${i}`} style={styles.eventCard}>
+        <Text>Event Name: {event.name}</Text>
         <Text>Event Location: {event.location}</Text>
         <Text>Event Date: {event.date}</Text>
       </View>
@@ -38,8 +38,7 @@ const Home = (props) => {
         onPress={() => {
           console.log('Add event pressed');
           props.navigation.navigate('AddEvent');
-        }}
-      >
+        }}>
         <Text>Add an Event</Text>
       </TouchableOpacity>
     </View>
