@@ -27,6 +27,7 @@ eventRouter.post(
   '/:username',
   eventController.addNewEvent,
   eventController.addCreatorToEvent,
+  eventController.addParticipants,
   // eventController.getUserEvents,
   (req, res) => {
     res.status(200).json({ addedEvent: res.locals.addedEvent });
@@ -39,14 +40,6 @@ eventRouter.get(
   eventController.getParticipants,
   (req, res) => {
     res.status(200).json({ participants: res.locals.participants });
-  }
-);
-
-eventRouter.post(
-  '/:username/:event',
-  eventController.addParticipants,
-  (req, res) => {
-    res.status(200).json();
   }
 );
 
