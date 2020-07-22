@@ -3,19 +3,21 @@ const db = require('../db/db.js');
 const eventController = {};
 
 eventController.getUserEvents = (req, res, next) => {
-  const { username } = req.params;
-
+  //const { username } = req.params;
+  let username;
+  req.body.username ? username = res.locals.username : username = req.params.username;
   let queryString =
-    'SELECT events.name, events.location, events.date FROM events INNER JOIN users u ON u.name = events.creator WHERE u.username = $1';
+    'SELECT events.name, events.location, events.date FROM events INNER JOIN users u ON u.username = events.creator WHERE u.username = $1';
 
   let params = [username];
 
   db.query(queryString, params, (err, response) => {
     if (err) {
       console.log('error in getting events for particular user', err);
+      return next(err);
     }
     res.locals.allEvents = response.rows;
-
+    console.log(res.locals.allEvents)
     return next();
   });
 };
@@ -31,6 +33,7 @@ eventController.addCreatorToEvent = (req, res, next) => {
   db.query(queryString, params, (err, response) => {
     if (err) {
       console.log('error in adding creator to event', err);
+      return next(err);
     }
     return next();
   });
@@ -48,6 +51,7 @@ eventController.addNewEvent = (req, res, next) => {
   db.query(queryString, params, (err, response) => {
     if (err) {
       console.log('error in creating new event', err);
+      return next(err);
     }
 
     console.log('response from adding new event', response.rows);
@@ -69,6 +73,7 @@ eventController.editEvent = (req, res, next) => {
   db.query(queryString, params, (err, response) => {
     if (err) {
       console.log('Error in query for editing event, ', err);
+      return next(err);
     }
     return next();
   });
@@ -84,6 +89,7 @@ eventController.deleteEvent = (req, res, next) => {
   db.query(queryString, params, (err, response) => {
     if (err) {
       console.log('error in deleting an event', err);
+      return next(err);
     }
     console.log('successfully deleted event', response.rows);
     return next();
@@ -101,6 +107,7 @@ eventController.getParticipants = (req, res, next) => {
   db.query(queryString, params, (err, response) => {
     if (err) {
       console.log('error in getting participants for an event', err);
+      return next(err);
     }
     console.log('got participants', response.rows);
     res.locals.participants = response.rows;
