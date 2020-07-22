@@ -3,44 +3,47 @@ import * as types from '../types/actionsTypes.js';
 // Set initial state
 const initialState = {
   isLoggedIn: false,
-  userId: null,
+  username: '',
   events: [],
-  lastEventId: 1000,
 };
 
 const unBucketReducer = (state = initialState, action) => {
   let events = state.events.slice();
-  let lastEventId = state.lastEventId;
 
   switch (action.type) {
     case types.LOGIN:
       return {
         ...state,
         isLoggedIn: true,
-        userId: action.payload,
+        username: action.payload,
+      };
+
+    case types.SET_EVENTS:
+      return {
+        ...state,
+        events: action.payload,
       };
 
     case types.ADD_EVENT:
-      lastEventId++;
       const {
-        eventName,
-        eventDetails,
-        eventLoc,
-        eventTime,
-        eventGuests,
+        event_id,
+        event_name,
+        description,
+        location,
+        date,
+        guests,
       } = action.payload;
       const newEvent = {
-        eventId: lastEventId,
-        eventName,
-        eventDetails,
-        eventLoc,
-        eventTime,
-        eventGuests,
+        event_id,
+        event_name,
+        description,
+        location,
+        date,
+        guests,
       };
       events.push(newEvent);
       return {
         ...state,
-        lastEventId,
         events,
       };
 

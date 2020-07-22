@@ -9,57 +9,57 @@ import {
 } from 'react-native';
 
 const EditEvent = (props) => {
-  let eventName, eventDetails, eventLoc, eventTime, eventGuests;
+  let name, description, location, date, guests;
   return (
     <View style={styles.container}>
       <Text> Edit Event </Text>
       <TextInput
-        value={eventName}
+        value={name}
         onChangeText={(e) => {
-          eventName = e;
+          name = e;
         }}
         placeholder="Event Name"
         style={styles.input}
       />
       <TextInput
-        value={eventDetails}
+        value={description}
         onChangeText={(e) => {
-          eventDetails = e;
+          description = e;
         }}
         placeholder="Event Details"
         style={styles.input}
       />
       <TextInput
-        value={eventLoc}
+        value={location}
         onChangeText={(e) => {
-          eventLoc = e;
+          location = e;
         }}
         placeholder="Location"
         style={styles.input}
       />
       <TextInput
-        value={eventTime}
+        value={date}
         onChangeText={(e) => {
-          eventTime = e;
+          date = e;
         }}
         placeholder="Event Time"
         style={styles.input}
       />
       <TextInput
-        value={eventGuests}
+        value={guests}
         onChangeText={(e) => {
-          eventGuests = e;
+          guests = e;
         }}
         placeholder="Participants"
         style={styles.input}
       />
       <TouchableOpacity
         onPress={() => {
-          console.log('Event Name is', eventName);
-          console.log('Event Name is', eventDetails);
-          console.log('Event Location is', eventLoc);
-          console.log('Event Time is', eventTime);
-          console.log('Participants are', eventGuests);
+          console.log('Event Name is', name);
+          console.log('Event Name is', description);
+          console.log('Event Location is', location);
+          console.log('Event Time is', date);
+          console.log('Participants are', guests);
           props.navigation.navigate('Home');
         }}
       >

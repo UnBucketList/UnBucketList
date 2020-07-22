@@ -6,11 +6,16 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
-  login: (userId) => {
-    dispatch(actions.login(userId));
+  login: (username) => {
+    dispatch(actions.login(username));
+  },
+  setEvents: (events) => {
+    dispatch(actions.setEvents(events));
   },
 });
 
@@ -20,12 +25,8 @@ const SignIn = (props) => {
 
   // makes fetch request to backend for logging in
   const handleLogin = () => {
-    console.log('Inside handleLogin username and password are');
-    console.log(username, password);
-    // **TODO** move line below inside fetch once backend is connected and only on successful login
-    props.navigation.navigate('Home');
     const body = JSON.stringify({ username, password });
-    fetch('http://localhost:3000/login', {
+    fetch(`http://localhost:3000/user/login/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,15 +36,24 @@ const SignIn = (props) => {
       .then((res) => res.json())
       .then((data) => {
         console.log('Data from login', data);
-        props.login(data);
+        if (data.username) {
+          props.login(data.username);
+          props.setEvents(data.events);
+          props.navigation.navigate('Home');
+        } else {
+          alert('Failed to login');
+        }
       })
       .catch((err) => console.log('Error logging in', err));
   };
 
   return (
     <View style={styles.container}>
-      <Text>Welcome to UnBucket List!</Text>
-      <Text>Please sign in to continue</Text>
+      <View style={styles.header}>
+        <Text>Welcome to UnBucket List!</Text>
+        <Text>Please sign in to continue</Text>
+      </View>
+
       <TextInput
         value={username}
         onChangeText={(e) => {
@@ -61,17 +71,20 @@ const SignIn = (props) => {
         secureTextEntry={true}
         style={styles.input}
       />
+
       <TouchableOpacity onPress={handleLogin}>
         <Text>Log In</Text>
       </TouchableOpacity>
-      <Text>Don't have an account?</Text>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate('SignUp');
-        }}
-      >
-        <Text>Sign Up!</Text>
-      </TouchableOpacity>
+      <Text>
+        Don't have an account?{' '}
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('SignUp');
+          }}
+        >
+          <Text>Sign Up!</Text>
+        </TouchableOpacity>
+      </Text>
     </View>
   );
 };
@@ -81,8 +94,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
+    //justifyContent: 'center',
+    marginTop: 180,
+  },
+  header: {
+    bottom: 10,
   },
   input: {
     width: 200,
@@ -95,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignIn;
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

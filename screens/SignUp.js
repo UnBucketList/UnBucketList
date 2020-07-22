@@ -8,6 +8,16 @@ import {
   Alert,
 } from 'react-native';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions.js';
+
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  login: (username) => {
+    dispatch(actions.login(username));
+  },
+});
+
 const SignUp = (props) => {
   let name, email, username, password, confirmPassword;
 
@@ -19,16 +29,17 @@ const SignUp = (props) => {
     if (password !== confirmPassword) {
       alert('Passwords do not match');
       return;
+    } else if (!username || !password || !email) {
+      alert('One or more fields not entered');
+      return;
     }
-    // **TODO** move line below to successful sign up once backend is connected
-    props.navigation.navigate('Home');
     const body = JSON.stringify({
       name,
       email,
       username,
       password,
     });
-    fetch('http://localhost:3000/signup', {
+    fetch('http://localhost:3000/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,13 +47,23 @@ const SignUp = (props) => {
       body,
     })
       .then((res) => res.json())
-      .then((data) => console.log('Data from signup', data))
+      .then((data) => {
+        console.log('Data from signup', data);
+        if (data.username) {
+          props.login(data.username);
+          props.navigation.navigate('Home');
+        } else {
+          alert('Sign up failed');
+        }
+      })
       .catch((err) => console.log('Error signing up', err));
   };
 
   return (
     <View style={styles.container}>
-      <Text>Please enter information below</Text>
+      <View style={styles.header}>
+        <Text>Please enter information below</Text>
+      </View>
       <TextInput
         onChangeText={(e) => {
           name = e;
@@ -68,7 +89,7 @@ const SignUp = (props) => {
         onChangeText={(e) => {
           password = e;
         }}
-        placeholder={'Password'}
+        placeholder={'password'}
         secureTextEntry={true}
         style={styles.input}
       />
@@ -76,7 +97,7 @@ const SignUp = (props) => {
         onChangeText={(e) => {
           confirmPassword = e;
         }}
-        placeholder={'Confirm Password'}
+        placeholder={'confirm password'}
         secureTextEntry={true}
         style={styles.input}
       />
@@ -92,7 +113,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
+    marginTop: 125,
+  },
+  header: {
+    bottom: 10,
   },
   input: {
     width: 200,
@@ -105,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp;
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

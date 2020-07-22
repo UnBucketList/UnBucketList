@@ -11,78 +11,74 @@ import {
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions.js';
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  username: state.unBucket.username,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  addEvent: (event) => {
-    dispatch(actions.addEvent(event));
+  addEvent: (event, username) => {
+    dispatch(actions.addEvent(event, username));
   },
 });
 
 const AddEvent = (props) => {
-  let eventName, eventDetails, eventLoc, eventTime, eventGuests;
+  let event_name, description, location, date, guests;
 
-  // const handleclick = (event) => {
-  //   console.log('im in handleclick', event);
-  //   props.addEvents(event);
-  // };
+  const handleAddEvent = () => {
+    const event = {
+      event_name,
+      description,
+      location,
+      date,
+      guests,
+    };
+    props.addEvent(event, props.username);
+    props.navigation.navigate('Home');
+  };
 
   return (
     <View style={styles.container}>
       <TextInput
-        value={eventName}
+        value={event_name}
         onChangeText={(e) => {
-          eventName = e;
+          event_name = e;
         }}
-        placeholder={'Name'}
+        placeholder={'Event Name'}
         style={styles.input}
       />
       <TextInput
-        value={eventDetails}
+        value={description}
         onChangeText={(e) => {
-          eventDetails = e;
+          description = e;
         }}
         placeholder={'Details'}
         style={styles.input}
       />
       <TextInput
-        value={eventLoc}
+        value={location}
         onChangeText={(e) => {
-          eventLoc = e;
+          location = e;
         }}
         placeholder={'Location'}
         style={styles.input}
       />
       <TextInput
-        value={eventTime}
+        value={date}
         onChangeText={(e) => {
-          eventTime = e;
+          date = e;
         }}
-        placeholder={'Time of Event'}
+        placeholder={'Date/Time of Event'}
         style={styles.input}
       />
       <TextInput
-        value={eventGuests}
+        value={guests}
         onChangeText={(e) => {
-          eventGuests = e;
+          guests = e;
         }}
         placeholder={'Participants'}
         style={styles.input}
       />
-      <TouchableOpacity
-        onPress={() => {
-          const event = {
-            eventName,
-            eventDetails,
-            eventLoc,
-            eventTime,
-            eventGuests,
-          };
-          props.addEvent(event);
-          //handleclick(event);
-          props.navigation.navigate('Home');
-        }}
-      >
+      <TouchableOpacity onPress={handleAddEvent}>
         <Text>Save New Event</Text>
       </TouchableOpacity>
     </View>
