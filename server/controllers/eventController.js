@@ -4,6 +4,7 @@ const eventController = {};
 
 // currently grabs only the events created by the current user
 // NEED TO ADD THE EVENTS THAT THE CURRENT USER IS A PARTICIPANT OF
+// ALSO SEND BACK ALL THE DETAILS FOR AN EVENT INSTEAD OF JUST NAME LOCATION DATE
 eventController.getUserEvents = (req, res, next) => {
   const { username } = req.params;
 
