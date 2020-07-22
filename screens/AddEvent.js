@@ -5,11 +5,27 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  Button,
 } from 'react-native';
+
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions.js';
+
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  addEvent: (event) => {
+    dispatch(actions.addEvent(event));
+  },
+});
 
 const AddEvent = (props) => {
   let eventName, eventDetails, eventLoc, eventTime, eventGuests;
+
+  // const handleclick = (event) => {
+  //   console.log('im in handleclick', event);
+  //   props.addEvents(event);
+  // };
+
   return (
     <View style={styles.container}>
       <TextInput
@@ -54,14 +70,15 @@ const AddEvent = (props) => {
       />
       <TouchableOpacity
         onPress={() => {
-          console.log(
-            'Event details',
+          const event = {
             eventName,
             eventDetails,
             eventLoc,
             eventTime,
-            eventGuests
-          );
+            eventGuests,
+          };
+          props.addEvent(event);
+          //handleclick(event);
           props.navigation.navigate('Home');
         }}
       >
@@ -89,4 +106,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddEvent;
+export default connect(mapStateToProps, mapDispatchToProps)(AddEvent);

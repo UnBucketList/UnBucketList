@@ -1,15 +1,40 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from 'react-native';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+  events: state.unBucket.events,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  // pertinent actions here
+});
 
 const Home = (props) => {
+  console.log(props.events);
+  const eventList = props.events.map((event) => {
+    return (
+      <View>
+        <Text>Event Name: {event.eventName}</Text>
+        <Text>Event Details: {event.eventDetails}</Text>
+        <Text>Event Location: {event.eventLoc}</Text>
+        <Text>Event Time: {event.eventTime}</Text>
+        <Text>Participants: {event.eventGuests}</Text>
+      </View>
+    );
+  });
   return (
     <View style={styles.container}>
       <Text>This is Home</Text>
       <br></br>
-      <View>
-        <Text>Events display here in ScrollView</Text>
-      </View>
+      <ScrollView style={{ flex: 2 }}>{eventList}</ScrollView>
       <br></br>
       <TouchableOpacity
         onPress={() => {
@@ -27,24 +52,13 @@ const Home = (props) => {
       >
         <Text>Edit an Event</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          console.log('Making fetch request');
-          fetch('https://dog.ceo/api/breeds/image/random')
-            .then((res) => res.json())
-            .then((data) => console.log('data from fetch', data))
-            .catch((err) => console.log('err in fetch', err));
-        }}
-      >
-        <Text>Fetch dogs</Text>
-      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
     justifyContent: 'center',
@@ -54,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
