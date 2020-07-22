@@ -4,6 +4,7 @@ import * as types from '../types/actionsTypes.js';
 const initialState = {
   isLoggedIn: false,
   username: '',
+  creator: '',
   events: [],
 };
 
@@ -15,7 +16,8 @@ const unBucketReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
-        username: action.payload,
+        username: action.payload.username,
+        creator: action.payload.creator,
       };
 
     case types.SET_EVENTS:

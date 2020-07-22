@@ -7,18 +7,18 @@ userRouter.get('/', (req, res) => {
   return res.status(200).json('userRouter');
 });
 
-userRouter.post('/signup/', verificationController.createUser, (req, res) => {
+userRouter.post('/signup', verificationController.createUser, (req, res) => {
   return res.status(200).json({ username: res.locals.username });
 });
 
 userRouter.post(
-  '/login/',
+  '/login',
   verificationController.verifyUser,
   eventController.getUserEvents,
   (req, res) => {
     return res
       .status(200)
-      .json({ username: res.locals.username, events: res.locals.allEvents });
+      .json({ username: res.locals.username, name: res.locals.name, events: res.locals.allEvents });
     // {username: res.locals.username, events: res.locals.allEvents}
   }
 );

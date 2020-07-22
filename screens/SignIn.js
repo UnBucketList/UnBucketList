@@ -11,8 +11,8 @@ import * as actions from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
-  login: (username) => {
-    dispatch(actions.login(username));
+  login: (username, creator) => {
+    dispatch(actions.login(username, creator));
   },
   setEvents: (events) => {
     dispatch(actions.setEvents(events));
@@ -37,7 +37,7 @@ const SignIn = (props) => {
       .then((data) => {
         console.log('Data from login', data);
         if (data.username) {
-          props.login(data.username);
+          props.login(data.username, data.name);
           props.setEvents(data.events);
           props.navigation.navigate('Home');
         } else {

@@ -39,7 +39,7 @@ verificationController.verifyUser = (req, res, next) => {
   username = username.toLowerCase();
   const values = [username];
   let string = `
-  SELECT password, _id FROM users WHERE username=$1;
+  SELECT name, username, password FROM users WHERE username=$1;
   `;
   db.query(string, values)
     .then((result) => {
@@ -55,7 +55,8 @@ verificationController.verifyUser = (req, res, next) => {
           return next(err);
         }
         if (pwMatch) {
-          res.locals.username = username;
+          res.locals.username = result.rows[0].username;
+          res.locals.name = result.rows[0].name;
           return next();
         } else {
           return next({ log: "incorrect password" });
