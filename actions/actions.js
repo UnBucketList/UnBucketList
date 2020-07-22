@@ -1,9 +1,9 @@
 import * as types from '../types/actionsTypes.js';
 
-export const login = (username) => {
+export const login = (username, creator) => {
   return {
     type: types.LOGIN,
-    payload: username,
+    payload: { username, creator },
   };
 };
 
@@ -14,11 +14,17 @@ export const setEvents = (events) => {
   };
 };
 
-export const addEvent = (event, username) => {
-  console.log('In actions addevent event and username are', event, username);
+export const addEvent = (event, username, creator) => {
+  console.log(
+    'In actions addevent event and username are',
+    event,
+    username,
+    creator
+  );
   const body = JSON.stringify({
     name: event.event_name,
-    creator: username,
+    username,
+    creator,
     description: event.description,
     location: event.location,
     date: event.date,
