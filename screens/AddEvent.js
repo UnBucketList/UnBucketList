@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -23,13 +23,17 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const AddEvent = (props) => {
+  const [nameValueEntered, setNameValueEntered] = useState(true);
   let event_name, description, location, date, guests;
 
   const handleAddEvent = () => {
+<<<<<<< HEAD
     if (!event_name || !description) {
       alert('You must set an event name and description');
       return;
     }
+=======
+>>>>>>> master
     const event = {
       event_name,
       description,
@@ -37,27 +41,39 @@ const AddEvent = (props) => {
       date,
       guests,
     };
-    props.addEvent(event, props.username, props.creator);
-    props.navigation.navigate('Home');
+    if(event.event_name === undefined || event.description === undefined){
+      setNameValueEntered(false);
+      // alert('Please include event Name and Description');
+      console.log('hey hey hey')
+    } else{
+      console.log('event object------>', event)
+      props.addEvent(event, props.username, props.creator);
+      props.navigation.navigate('Home');
+    }
+    
   };
 
   return (
-    <View style={styles.container}>
+     <View style={styles.container}>
       <TextInput
         value={event_name}
         onChangeText={(e) => {
           event_name = e;
         }}
-        placeholder={'Event Name'}
-        style={styles.input}
+        placeholder={nameValueEntered ? 'Event Name' : 'Event Name Required'}
+        style={nameValueEntered ? styles.input : styles.noInput}
+        // style={ styles.input}
+        // placeholderTextColor={nameValueEntered ? 'gray' : 'red'}
       />
       <TextInput
         value={description}
         onChangeText={(e) => {
           description = e;
         }}
-        placeholder={'Details'}
-        style={styles.input}
+        placeholder={nameValueEntered ? 'Details': "Event Details Required"}
+        style={nameValueEntered ? styles.input : styles.noInput}
+        // style={styles.input}
+        // placeholderTextColor={nameValueEntered ? 'gray' : 'red'}
       />
       <TextInput
         value={location}
@@ -104,6 +120,16 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: 'gray',
+    borderRadius: 3,
+    marginBottom: 10,
+  },
+  noInput: {
+    placeholderTextColor: 'red',
+    width: 200,
+    height: 44,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'red',
     borderRadius: 3,
     marginBottom: 10,
   },
