@@ -1,27 +1,27 @@
 const express = require("express");
 const userRouter = express.Router();
 const verificationController = require("../controllers/verificationController");
+const eventController = require('../controllers/eventController.js');
 
 userRouter.get("/", (req, res) => {
   return res.status(200).json("userRouter");
 });
 
 userRouter.post(
-  "/signup/:username",
+  "/signup/",
   verificationController.createUser,
-  //probably need to send to eventController to get all events BOTH
   (req, res) => {
-    // will need to send res.locals info
-    return res.status(200).json("working SON");
+    return res.status(200).json('work');
   }
 );
 
 userRouter.post(
-  "/login/:username",
+  "/login/",
   verificationController.verifyUser,
-  //probably need to send to eventController to get all events BOTH
+  eventController.getUserEvents,
   (req, res) => {
-    return res.status(200).json("worked");
+    return res.status(200).json({username: res.locals.username, events: res.locals.allEvents});
+    // {username: res.locals.username, events: res.locals.allEvents}
   }
 );
 
