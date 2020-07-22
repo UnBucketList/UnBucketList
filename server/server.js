@@ -10,6 +10,7 @@ const userRouter = require('./routes/userRouter');
 const PORT = 3000;
 
 // are these needed?  sean
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 

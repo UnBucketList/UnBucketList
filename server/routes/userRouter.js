@@ -7,8 +7,13 @@ userRouter.get('/', (req, res) => {
 });
 
 userRouter.post(
-  '/login',
-   verificationController.verifyUser,
+  '/signup',
+   verificationController.createUser,
+   //probably need to send to eventController to get all events
+   (req, res) => {
+     console.log('yay it worked')
+     return res.status(404).json('working SON');
+   }
 
   )
 
