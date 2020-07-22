@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
   username: state.unBucket.username,
+  creator: state.unBucket.creator,
   events: state.unBucket.events,
 });
 
@@ -13,6 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Home = (props) => {
   console.log('Username in Home is', props.username);
+  console.log('Creator name is', props.creator);
   console.log('Events in state are', props.events);
 
   const eventList = props.events.map((event) => {
@@ -28,7 +30,7 @@ const Home = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text>Welcome {props.username}!</Text>
+        <Text>Welcome {props.creator}!</Text>
         <Text>Here is your unBucket List</Text>
       </View>
       <View style={styles.eventContainer}>{eventList}</View>

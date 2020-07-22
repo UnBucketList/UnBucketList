@@ -13,11 +13,12 @@ import * as actions from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({
   username: state.unBucket.username,
+  creator: state.unBucket.creator,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addEvent: (event, username) => {
-    dispatch(actions.addEvent(event, username));
+  addEvent: (event, username, creator) => {
+    dispatch(actions.addEvent(event, username, creator));
   },
 });
 
@@ -26,6 +27,12 @@ const AddEvent = (props) => {
   let event_name, description, location, date, guests;
 
   const handleAddEvent = () => {
+    if (!event_name || !description) {
+      alert('You must set an event name and description');
+      return;
+    } else if (!date) {
+      date = null;
+    }
     const event = {
       event_name,
       description,
