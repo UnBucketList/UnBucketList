@@ -10,7 +10,8 @@ verificationController.createUser = (req, res, next) => {
   username = username.toLowerCase();
   let string = `
   INSERT INTO users (name, email, username, password)
-  VALUES ($1, $2, $3, $4);
+  VALUES ($1, $2, $3, $4)
+  RETURNING _id;
   `;
 
   bcrypt.hash(password, parseInt(process.env.SALT), function (err, hash) {
@@ -21,6 +22,7 @@ verificationController.createUser = (req, res, next) => {
     const values = [name, email, username, hash];
     db.query(string, values)
       .then((result) => {
+        res.locals.user_id = result.rows[0]._id;
         return next();
       })
       .catch((err) => {
@@ -37,7 +39,7 @@ verificationController.verifyUser = (req, res, next) => {
   username = username.toLowerCase();
   const values = [username];
   let string = `
-  SELECT password FROM users WHERE username=$1;
+  SELECT password, _id FROM users WHERE username=$1;
   `;
   db.query(string, values)
     .then((result) => {
@@ -50,6 +52,7 @@ verificationController.verifyUser = (req, res, next) => {
           return next(err);
         }
         if (pwMatch) {
+          res.locals.user_id = result.rows[0]._id;
           return next();
         } else {
           return next({ log: "incorrect password" });

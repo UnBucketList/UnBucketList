@@ -9,15 +9,21 @@ userRouter.get("/", (req, res) => {
 userRouter.post(
   "/signup",
   verificationController.createUser,
-  //probably need to send to eventController to get all events
+  //probably need to send to eventController to get all events BOTH
   (req, res) => {
-    console.log("yay it worked");
+
+    // will need to send res.locals info
     return res.status(404).json("working SON");
   }
 );
 
-userRouter.post("/login", verificationController.verifyUser, (req, res) => {
-  return res.status(404).json("worked");
-});
+userRouter.post(
+  "/login",
+  verificationController.verifyUser,
+  //probably need to send to eventController to get all events BOTH
+  (req, res) => {
+    return res.status(404).json("worked");
+  }
+);
 
 module.exports = userRouter;
