@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Home = (props) => {
   console.log('Username in Home is', props.username);
-  console.log('Creator name is', creator);
+  console.log('Creator name is', props.creator);
   console.log('Events in state are', props.events);
 
   const eventList = props.events.map((event) => {

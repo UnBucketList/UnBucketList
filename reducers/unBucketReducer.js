@@ -17,7 +17,7 @@ const unBucketReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         username: action.payload.username,
-        creator: action.payload.name,
+        creator: action.payload.creator,
       };
 
     case types.SET_EVENTS:
