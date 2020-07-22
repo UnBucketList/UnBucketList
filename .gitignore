@@ -64,4 +64,10 @@ web-build/
 
 # package-lock
 package-lock.json
+
+#vsCode
+.vsCode
+
+
+# dotenv
 .env
