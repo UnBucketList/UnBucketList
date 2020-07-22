@@ -2,6 +2,8 @@ const db = require('../db/db.js');
 
 const eventController = {};
 
+// currently grabs only the events created by the current user
+// NEED TO ADD THE EVENTS THAT THE CURRENT USER IS A PARTICIPANT OF
 eventController.getUserEvents = (req, res, next) => {
   const { username } = req.params;
 
