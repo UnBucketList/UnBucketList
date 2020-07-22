@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
+  TouchableHighlight,
+  Modal,
   ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -24,11 +26,38 @@ const Home = (props) => {
   console.log('Events in state are', props.events);
 
   const eventList = props.events.map((event) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    console.log('Modal Visibile?', modalVisible);
     return (
-      <View style={styles.eventCard}>
-        <Text>Event Name: {event.event_name}</Text>
-        <Text>Event Location: {event.location}</Text>
-        <Text>Event Date: {event.date}</Text>
+      <View>
+        <Modal animationType="fade" transparent={true} visible={modalVisible}>
+          <View>
+            <View style={styles.modalView}>
+              <Text>Hello World!</Text>
+
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              >
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+
+        <TouchableOpacity
+          onPress={() => {
+            setModalVisible(true);
+          }}
+        >
+          <View style={styles.eventCard}>
+            <Text>Event Name: {event.event_name}</Text>
+            <Text>Event Location: {event.location}</Text>
+            <Text>Event Date: {event.date}</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   });
@@ -78,9 +107,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     margin: 5,
-    height: 100,
+    height: 75,
     overflow: 'scroll',
     padding: 5,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
 
