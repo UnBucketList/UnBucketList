@@ -24,8 +24,14 @@ const mapDispatchToProps = (dispatch) => ({
 
 const AddEvent = (props) => {
   let event_name, description, location, date, guests;
-  console.log('Date is', date);
+
   const handleAddEvent = () => {
+    if (!event_name || !description) {
+      alert('You must set an event name and description');
+      return;
+    } else if (!date) {
+      date = null;
+    }
     const event = {
       event_name,
       description,

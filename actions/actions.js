@@ -42,7 +42,7 @@ export const addEvent = (event, username, creator) => {
         console.log('Data from addevent fetch', data);
         dispatch({
           type: types.ADD_EVENT,
-          payload: data,
+          payload: data.addedEvent,
         });
       });
   };
