@@ -25,7 +25,7 @@ const Home = (props) => {
 
   const eventList = props.events.map((event) => {
     return (
-      <View style={styles.eventCard} key={props.events.event_id}>
+      <View style={styles.eventCard}>
         <Text>Event Name: {event.event_name}</Text>
         <Text>Event Location: {event.location}</Text>
         <Text>Event Date: {event.date}</Text>
