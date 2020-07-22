@@ -6,7 +6,7 @@ const app = express();
 const eventRouter = require('./routes/eventRouter');
 const userRouter = require('./routes/userRouter');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // are these needed?  sean
 
