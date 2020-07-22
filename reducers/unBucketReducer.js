@@ -27,9 +27,16 @@ const unBucketReducer = (state = initialState, action) => {
       };
 
     case types.ADD_EVENT:
-      const { _id, name, description, location, date, guests } = action.payload;
+      const {
+        event_id,
+        name,
+        description,
+        location,
+        date,
+        guests,
+      } = action.payload;
       const newEvent = {
-        event_id: _id,
+        event_id: event_id,
         event_name: name,
         description,
         location,
