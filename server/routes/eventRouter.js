@@ -42,4 +42,12 @@ eventRouter.get(
   }
 );
 
+eventRouter.post(
+  '/:username/:event',
+  eventController.addParticipants,
+  (req, res) => {
+    res.status(200).json();
+  }
+);
+
 module.exports = eventRouter;
