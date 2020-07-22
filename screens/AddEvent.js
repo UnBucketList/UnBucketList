@@ -34,7 +34,7 @@ const AddEvent = (props) => {
         onChangeText={(e) => {
           event_name = e;
         }}
-        placeholder={'event_name'}
+        placeholder={'Event Name'}
         style={styles.input}
       />
       <TextInput
@@ -58,7 +58,7 @@ const AddEvent = (props) => {
         onChangeText={(e) => {
           date = e;
         }}
-        placeholder={'Time of Event'}
+        placeholder={'Date/Time of Event'}
         style={styles.input}
       />
       <TextInput
@@ -80,7 +80,7 @@ const AddEvent = (props) => {
           };
           props.addEvent(event);
           //handleclick(event);
-          props.navigation.navigate('Home');
+          //props.navigation.navigate('Home');
         }}
       >
         <Text>Save New Event</Text>

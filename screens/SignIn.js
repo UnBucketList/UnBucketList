@@ -11,8 +11,8 @@ import * as actions from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
-  login: (userId) => {
-    dispatch(actions.login(userId));
+  login: (username) => {
+    dispatch(actions.login(username));
   },
   setEvents: (events) => {
     dispatch(actions.setEvents(events));
@@ -49,8 +49,11 @@ const SignIn = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text>Welcome to UnBucket List!</Text>
-      <Text>Please sign in to continue</Text>
+      <View style={styles.header}>
+        <Text>Welcome to UnBucket List!</Text>
+        <Text>Please sign in to continue</Text>
+      </View>
+
       <TextInput
         value={username}
         onChangeText={(e) => {
@@ -68,17 +71,20 @@ const SignIn = (props) => {
         secureTextEntry={true}
         style={styles.input}
       />
+
       <TouchableOpacity onPress={handleLogin}>
         <Text>Log In</Text>
       </TouchableOpacity>
-      <Text>Don't have an account?</Text>
-      <TouchableOpacity
-        onPress={() => {
-          props.navigation.navigate('SignUp');
-        }}
-      >
-        <Text>Sign Up!</Text>
-      </TouchableOpacity>
+      <Text>
+        Don't have an account?{' '}
+        <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('SignUp');
+          }}
+        >
+          <Text>Sign Up!</Text>
+        </TouchableOpacity>
+      </Text>
     </View>
   );
 };
@@ -88,8 +94,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
+    //justifyContent: 'center',
+    marginTop: 180,
+  },
+  header: {
+    bottom: 10,
   },
   input: {
     width: 200,

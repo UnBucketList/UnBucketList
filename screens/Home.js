@@ -12,20 +12,24 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = (props) => {
-  console.log(props.events);
-  console.log('Username is', props.username);
+  console.log('Username in Home is', props.username);
+
   const eventList = props.events.map((event) => {
     return (
       <View style={styles.eventCard}>
         <Text>Event Name: {event.event_name}</Text>
         <Text>Event Location: {event.location}</Text>
-        <Text>Event Time: {event.date}</Text>
+        <Text>Event Date: {event.date}</Text>
       </View>
     );
   });
+
   return (
     <View style={styles.container}>
-      <Text>This is Home</Text>
+      <View style={styles.header}>
+        <Text>Welcome {props.username}!</Text>
+        <Text>Here is your unBucket List</Text>
+      </View>
       <View style={styles.eventContainer}>{eventList}</View>
       <TouchableOpacity
         onPress={() => {
@@ -35,14 +39,6 @@ const Home = (props) => {
       >
         <Text>Add an Event</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity
-        onPress={() => {
-          console.log('Edit event pressed');
-          props.navigation.navigate('EditEvent');
-        }}
-      >
-        <Text>Edit an Event</Text>
-      </TouchableOpacity> */}
     </View>
   );
 };
@@ -55,8 +51,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     bottom: 10,
   },
-  scrollContainer: {
-    maxHeight: 200,
+  header: {
+    margin: 10,
+    alignItems: 'center',
   },
   eventContainer: {
     flex: 0.75,
@@ -72,7 +69,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 3,
     margin: 5,
-    height: 75,
+    height: 100,
+    overflow: 'scroll',
+    padding: 5,
   },
 });
 

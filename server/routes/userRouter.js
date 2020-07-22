@@ -1,26 +1,24 @@
-const express = require("express");
+const express = require('express');
 const userRouter = express.Router();
-const verificationController = require("../controllers/verificationController");
+const verificationController = require('../controllers/verificationController');
 const eventController = require('../controllers/eventController.js');
 
-userRouter.get("/", (req, res) => {
-  return res.status(200).json("userRouter");
+userRouter.get('/', (req, res) => {
+  return res.status(200).json('userRouter');
+});
+
+userRouter.post('/signup/', verificationController.createUser, (req, res) => {
+  return res.status(200).json({ username: res.locals.username });
 });
 
 userRouter.post(
-  "/signup/",
-  verificationController.createUser,
-  (req, res) => {
-    return res.status(200).json('work');
-  }
-);
-
-userRouter.post(
-  "/login/",
+  '/login/',
   verificationController.verifyUser,
   eventController.getUserEvents,
   (req, res) => {
-    return res.status(200).json({username: res.locals.username, events: res.locals.allEvents});
+    return res
+      .status(200)
+      .json({ username: res.locals.username, events: res.locals.allEvents });
     // {username: res.locals.username, events: res.locals.allEvents}
   }
 );

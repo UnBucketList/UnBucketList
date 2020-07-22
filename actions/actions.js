@@ -1,9 +1,9 @@
 import * as types from '../types/actionsTypes.js';
 
-export const login = (userId) => {
+export const login = (username) => {
   return {
     type: types.LOGIN,
-    payload: userId,
+    payload: username,
   };
 };
 
