@@ -13,11 +13,12 @@ import * as actions from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({
   username: state.unBucket.username,
+  creator: state.unBucket.creator,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addEvent: (event, username) => {
-    dispatch(actions.addEvent(event, username));
+  addEvent: (event, username, creator) => {
+    dispatch(actions.addEvent(event, username, creator));
   },
 });
 
@@ -32,7 +33,7 @@ const AddEvent = (props) => {
       date,
       guests,
     };
-    props.addEvent(event, props.username);
+    props.addEvent(event, props.username, props.creator);
     props.navigation.navigate('Home');
   };
 
