@@ -26,8 +26,22 @@ verificationController.createUser = (req, res, next) => {
         return next();
       })
       .catch((err) => {
-        console.log("error in dbquery");
+        console.log('start');
         console.log(err);
+        console.log('end');
+        //if error is due to NOT NULL data already existing in database
+        if (err.code === '23505'){
+          let errorMessage;
+          // if due to duplicate email
+          if (err.constraint[6] === 'e'){
+            errorMessage = 'email'
+          } 
+          // if due to duplicate username
+          else if (err.constraint[6] === 'u'){
+            errorMessage = 'username'
+          }
+          return res.status(401).json({errorMessage})
+        }
         return next(err);
       });
   });
