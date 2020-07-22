@@ -33,16 +33,14 @@ const Home = (props) => {
   return (
     <View style={styles.container}>
       <Text>This is Home</Text>
-      <br></br>
-      <ScrollView style={{ flex: 2 }}>{eventList}</ScrollView>
-      <br></br>
+      {eventList}
       <TouchableOpacity
         onPress={() => {
           console.log('Add event pressed');
           props.navigation.navigate('AddEvent');
         }}
       >
-        <Text>+ Add an Event</Text>
+        <Text>Add an Event</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
@@ -62,6 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
     justifyContent: 'center',
+    bottom: 10,
   },
   scrollContainer: {
     maxHeight: 200,

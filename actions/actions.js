@@ -1,5 +1,11 @@
-//import axios from 'axios';
 import * as types from '../types/actionsTypes.js';
+
+export const login = (userId) => {
+  return {
+    type: types.LOGIN,
+    payload: userId,
+  };
+};
 
 export const addEvent = (event) => {
   return {

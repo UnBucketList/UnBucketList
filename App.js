@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Provider } from 'react-redux';
@@ -10,11 +9,14 @@ import SignUp from './screens/SignUp.js';
 import EditEvent from './screens/EditEvent.js';
 import AddEvent from './screens/AddEvent.js';
 
+// create stack for our screens
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
+    // Provider wrapping for redux store access
     <Provider store={store}>
+      {/* Navigation wrapping for routing access */}
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -53,12 +55,3 @@ export default function App() {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

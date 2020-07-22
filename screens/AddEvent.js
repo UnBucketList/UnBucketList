@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -101,7 +102,8 @@ const styles = StyleSheet.create({
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'gray',
+    borderRadius: 3,
     marginBottom: 10,
   },
 });
