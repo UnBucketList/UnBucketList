@@ -13,6 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Home = (props) => {
   console.log('Username in Home is', props.username);
+  console.log('Events in state are', props.events);
 
   const eventList = props.events.map((event) => {
     return (
