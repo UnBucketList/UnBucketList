@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, Button, TextInput, Modal } from 'react-native';
 
 import ShareEvent from './ShareEvent.js';
 import { connect } from 'react-redux';
@@ -17,6 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const CardDetails = (props) => {
+  const [modalVisible, setModalVisible] = useState(false);
   console.log('props.route.params is', props.route.params);
   let {
     event_id,
@@ -62,9 +63,9 @@ const CardDetails = (props) => {
                 title='Delete Event'
                 color='red'
                 onPress={() => {
-                  console.log('Delete opacity clicked');
-                  props.deleteEvent(props.username, event_id);
-                  props.navigation.navigate('Home');
+                  setModalVisible(true);
+                  // props.deleteEvent(props.username, event_id);
+                  // props.navigation.navigate('Home');
                 }}>
                 <Text style={styles.delete}>X</Text>
               </Button>
@@ -79,6 +80,33 @@ const CardDetails = (props) => {
           />
         </View>
       </View>
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <View style={styles.modalDeleteContainer}>
+          <Text style={styles.modalText}>Are you sure you want to delete this event?</Text>
+          <View style={styles.modalButtonContainer}>
+            <Button
+            title='Cancel'
+            color='white'
+              onPress={() => {
+                setModalVisible(false);
+              }}
+            >
+              <Text>Cancel</Text>
+            </Button>
+            <Button
+            title='Delete'
+            color='red'
+              onPress={() => {
+                setModalVisible(false);
+                props.deleteEvent(props.username, event_id);
+                props.navigation.navigate("Home");
+              }}
+            >
+              <Text>Delete</Text>
+            </Button>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -122,6 +150,23 @@ const styles = StyleSheet.create({
   },
   shareButton: {
     marginTop: 10,
+  },
+  modalDeleteContainer: {
+    alignSelf: "center",
+    top: '70%',
+    color: "white",
+  },
+  modalButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 180,
+    marginLeft: '25%',
+    marginTop: 15
+  },
+  modalText: {
+    color: '#BCCCDC',
+    fontSize: 18
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(CardDetails);
