@@ -1,13 +1,17 @@
 import React from 'react';
 import { Share, View, Button, StyleSheet } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ({
+  creator: state.unBucket.creator,
+});
 
 const ShareEvent = (props) => {
   const { event } = props;
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: `${event.creator} cordially invites you to an event: ${event.name}. Let's ${event.description} on ${event.date}`,
+        message: `${props.creator} cordially invites you to an event: ${event.name}. Let's ${event.description} on ${event.date}`,
         title: `You've got an unBucket list invite!`,
       });
       if (result.action === Share.sharedAction) {
@@ -37,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ShareEvent;
+export default connect(mapStateToProps, null)(ShareEvent);
