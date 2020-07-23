@@ -93,9 +93,3 @@ export default function App() {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    backgroundColor: '#090909',
-  },
-});

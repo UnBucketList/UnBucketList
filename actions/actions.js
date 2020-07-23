@@ -57,13 +57,16 @@ export const editEvent = (event, username, creator) => {
   });
   console.log('what does body look like', body);
   return (dispatch) => {
-    fetch(`http://localhost:3000/event/${username}/${event.event_id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body,
-    })
+    fetch(
+      `https://unbucketlist.herokuapp.com/event/${username}/${event.event_id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body,
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log('data from editevent fetch', data);
