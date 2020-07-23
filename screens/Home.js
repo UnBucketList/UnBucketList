@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Share } from 'react-native';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({

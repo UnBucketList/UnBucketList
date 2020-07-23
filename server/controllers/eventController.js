@@ -109,14 +109,14 @@ eventController.editEvent = (req, res, next) => {
   });
 };
 
-eventController.deleteEvent = (req, res, next) => {
+eventController.deleteFromEventParticipantsTable = (req, res, next) => {
   const { username, event } = req.params;
   // "id" needs to be changed to current event _id
   let queryString = `
-  DELETE FROM 
-  events 
+  DELETE FROM
+  event_participants ep
   WHERE 
-  events._id = $1
+  ep.event_id = $1 
   `;
 
   let params = [event];
@@ -127,6 +127,26 @@ eventController.deleteEvent = (req, res, next) => {
       return next(err);
     }
     //console.log('successfully deleted event', response.rows);
+    return next();
+  });
+};
+
+eventController.deleteFromEventsTable = (req, res, next) => {
+  const { event } = req.params;
+  let queryString = `
+  DELETE FROM 
+  events
+  WHERE 
+  events._id = $1
+  `;
+
+  let params = [event];
+
+  db.query(queryString, params, (err, response) => {
+    if (err) {
+      return next(err);
+    }
+    console.log('deleted from events table');
     return next();
   });
 };

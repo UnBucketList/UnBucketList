@@ -17,8 +17,8 @@ eventRouter.put(
 // COMPLETED
 eventRouter.delete(
   '/:username/:event',
-  eventController.deleteEvent,
-  // eventController.getUserEvents,
+  eventController.deleteFromEventParticipantsTable,
+  eventController.deleteFromEventsTable,
   eventController.getParticipatingEvents,
   (req, res) => {
     res.status(200).json({ events: res.locals.allEvents });
