@@ -16,17 +16,32 @@ const CardDetails = (props) => {
 
 
   return (
-    <View>
-      <View>Event Name: {name}</View>
-      <View>Description: {description}</View>
-      <View>Created By: {creator}</View>
-      <View>location: {location ? location : TBD}</View>
-      <View>date: {date ? date : TBD}</View>
-      <View>Who's Coming: {guests}</View>
+    <View style={styles.container}>
+      <Text>Event Name: {name}</Text>
+      <Text>Description: {description}</Text>
+      <Text>Created By: {creator}</Text>
+      <Text>location: {location ? location : TBD}</Text>
+      <Text>date: {date ? date : TBD}</Text>
+      <Text>Who's Coming: {guests}</Text>
+      <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('EditEvent', props.route.params);
+          }}
+          >
+          <Text>Edit Event</Text>
+          </TouchableOpacity>
     </View>
 
   )
 }
 
-
-export default (EditEvent)
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#ecf0f1',
+      alignItems: 'center',
+      justifyContent: 'center',
+      bottom: 10,
+    },
+})
+export default (CardDetails)
