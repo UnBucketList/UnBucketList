@@ -26,8 +26,8 @@ const Home = (props) => {
   const eventList = props.events.map((event, i) => {
     if (props.creator === event.creator) {
       return (
-        <View style={styles.myEventCard}>
-          <Text>Event Name: {event.event_name}</Text>
+        <View key={`event${i}`} style={styles.myEventCard}>
+          <Text>Event Name: {event.name}</Text>
           <Text>Event Location: {event.location}</Text>
           <Text>Event Date: {event.date}</Text>
           <TouchableOpacity
@@ -41,8 +41,8 @@ const Home = (props) => {
       );
     } else {
       return (
-        <View style={styles.friendEventCard}>
-          <Text>Event Name: {event.event_name}</Text>
+        <View key={`event${i}`} style={styles.friendEventCard}>
+          <Text>Event Name: {event.name}</Text>
           <Text>Event Location: {event.location}</Text>
           <Text>Event Date: {event.date}</Text>
         </View>
