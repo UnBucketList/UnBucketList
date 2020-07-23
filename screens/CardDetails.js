@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
   body: {
     display: 'flex',
     justifyContent: 'space-between',
+    backgroundColor: '#334E68',
     borderWidth: 1,
     borderRadius: 5,
     borderColor: '#9FB3C8',
