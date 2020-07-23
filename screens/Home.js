@@ -27,15 +27,30 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = (props) => {
-  const shareData = {
-    title: `New event invitation from ${props.creator}`,
-    message: `Come hang out with me`,
-  };
-
   const eventList = props.events.map((event, i) => {
     if (props.creator === event.creator) {
       return (
         <View key={`event${i}`} style={styles.myEventCard}>
+          <View style={styles.eventDetails}>
+            <Text style={styles.eventLabel}>
+              Event Name: <Text style={styles.eventValue}>{event.name}</Text>
+            </Text>
+            <Text style={styles.eventLabel}>
+              Event Location:{' '}
+              <Text style={styles.eventValue}>{event.location}</Text>
+            </Text>
+            <Text style={styles.eventLabel}>
+              Event Date: <Text style={styles.eventValue}>{event.date}</Text>
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                event.owner = true;
+                props.navigation.navigate('CardDetails', event);
+              }}
+            >
+              <Text style={styles.details}>More Details</Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.deleteButton}>
             <TouchableOpacity
               title="X"
@@ -55,29 +70,31 @@ const Home = (props) => {
               user={props.creator}
             />
           </View>
-          <Text style={styles.eventLabel}>
-            Event Name: <Text style={styles.eventValue}>{event.name}</Text>
-          </Text>
-          <Text style={styles.eventLabel}>
-            Event Location:{' '}
-            <Text style={styles.eventValue}>{event.location}</Text>
-          </Text>
-          <Text style={styles.eventLabel}>
-            Event Date: <Text style={styles.eventValue}>{event.date}</Text>
-          </Text>
-          <TouchableOpacity
-            onPress={() => {
-              event.owner = true;
-              props.navigation.navigate('CardDetails', event);
-            }}
-          >
-            <Text style={styles.details}>More Details</Text>
-          </TouchableOpacity>
         </View>
       );
     } else {
       return (
         <View key={`event${i}`} style={styles.friendEventCard}>
+          <View style={styles.eventDetails}>
+            <Text style={styles.eventLabel}>
+              Event Name: <Text style={styles.eventValue}>{event.name}</Text>{' '}
+            </Text>
+            <Text style={styles.eventLabel}>
+              Event Location:{' '}
+              <Text style={styles.eventValue}>{event.location}</Text>{' '}
+            </Text>
+            <Text style={styles.eventLabel}>
+              Event Date: <Text style={styles.eventValue}>{event.date}</Text>{' '}
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate('CardDetails', event);
+              }}
+            >
+              <Text style={styles.details}>More Details</Text>
+            </TouchableOpacity>
+          </View>
+
           <View style={styles.shareButton}>
             <ShareEvent
               key={event.event_id}
@@ -85,24 +102,6 @@ const Home = (props) => {
               user={props.creator}
             />
           </View>
-          <Text style={styles.eventLabel}>
-            Event Name: <Text style={styles.eventValue}>{event.name}</Text>{' '}
-          </Text>
-          <Text style={styles.eventLabel}>
-            Event Location:{' '}
-            <Text style={styles.eventValue}>{event.location}</Text>{' '}
-          </Text>
-          <Text style={styles.eventLabel}>
-            Event Date: <Text style={styles.eventValue}>{event.date}</Text>{' '}
-          </Text>
-
-          <TouchableOpacity
-            onPress={() => {
-              props.navigation.navigate('CardDetails', event);
-            }}
-          >
-            <Text style={styles.details}>More Details</Text>
-          </TouchableOpacity>
         </View>
       );
     }
@@ -169,10 +168,12 @@ const styles = StyleSheet.create({
     maxHeight: 500,
   },
   deleteButton: {
-    flex: 0,
-    alignItems: 'flex-end',
+    position: 'absolute',
+    top: 5,
+    right: 10,
   },
   myEventCard: {
+    flexDirection: 'row',
     backgroundColor: '#486581',
     borderWidth: 1,
     borderRadius: 5,
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   friendEventCard: {
+    flexDirection: 'row',
     backgroundColor: '#829AB1',
     borderWidth: 1,
     borderRadius: 3,
@@ -190,8 +192,11 @@ const styles = StyleSheet.create({
     overflow: 'scroll',
     padding: 5,
   },
+  eventDetails: {
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+  },
   shareButton: {
-    flex: 0,
     position: 'absolute',
     right: 10,
     bottom: 5,
