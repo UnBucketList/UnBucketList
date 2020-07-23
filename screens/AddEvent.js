@@ -34,11 +34,8 @@ const AddEvent = (props) => {
       date,
       guests,
     };
-
     if (event.event_name === undefined || event.description === undefined) {
       setNameValueEntered(false);
-      // alert('Please include event Name and Description');
-      console.log('hey hey hey');
     } else {
       console.log('event object------>', event);
       props.addEvent(event, props.username, props.creator);
@@ -48,6 +45,9 @@ const AddEvent = (props) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text>Please enter event details below</Text>
+      </View>
       <TextInput
         value={event_name}
         onChangeText={(e) => {
@@ -92,9 +92,11 @@ const AddEvent = (props) => {
         placeholder={'Participants'}
         style={styles.input}
       />
-      <TouchableOpacity onPress={handleAddEvent}>
-        <Text>Save New Event</Text>
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity onPress={handleAddEvent}>
+          <Text>Save New Event</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -104,8 +106,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
+    marginTop: 100,
+  },
+  header: {
+    marginBottom: 13,
   },
   input: {
     width: 200,
@@ -117,7 +121,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   noInput: {
-    placeholderTextColor: 'red',
     width: 200,
     height: 44,
     padding: 10,
