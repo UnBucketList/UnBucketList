@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => ({
   login: (username, creator) => {
     dispatch(actions.login(username, creator));
   },
+  setEvents: (events) => {
+    dispatch(actions.setEvents(events));
+  },
 });
 
 const SignUp = (props) => {
@@ -65,6 +68,7 @@ const SignUp = (props) => {
         console.log('Data from signup', data);
         if (data.username) {
           props.login(data.username, data.name);
+          props.setEvents([]);
           props.navigation.navigate('Home');
         } else {
           alert('Sign up failed');

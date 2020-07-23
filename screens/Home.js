@@ -24,8 +24,7 @@ const Home = (props) => {
           onPress={() => {
             event.owner = true;
             props.navigation.navigate('CardDetails', event);
-          }}
-        >
+          }}>
           <View style={styles.myEventCard}>
             <View style={styles.eventDetails}>
               <Text style={styles.eventLabel}>
@@ -33,10 +32,15 @@ const Home = (props) => {
               </Text>
               <Text style={styles.eventLabel}>
                 Event Location:{' '}
-                <Text style={styles.eventValue}>{event.location}</Text>
+                <Text style={styles.eventValue}>
+                  {event.location ? event.location : 'TBD'}
+                </Text>
               </Text>
               <Text style={styles.eventLabel}>
-                Event Date: <Text style={styles.eventValue}>{event.date}</Text>
+                Event Date:{' '}
+                <Text style={styles.eventValue}>
+                  {event.date ? event.date : 'TBD'}
+                </Text>
               </Text>
             </View>
           </View>
@@ -48,8 +52,7 @@ const Home = (props) => {
           key={`event${i}`}
           onPress={() => {
             props.navigation.navigate('CardDetails', event);
-          }}
-        >
+          }}>
           <View style={styles.friendEventCard}>
             <View style={styles.eventDetails}>
               <Text style={styles.eventLabel}>
@@ -87,8 +90,7 @@ const Home = (props) => {
         onPress={() => {
           console.log('Add event pressed');
           props.navigation.navigate('AddEvent');
-        }}
-      >
+        }}>
         <Text style={styles.text}>Add an Event</Text>
       </TouchableOpacity>
     </View>

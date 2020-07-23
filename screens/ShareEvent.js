@@ -11,7 +11,11 @@ const ShareEvent = (props) => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: `${props.creator} cordially invites you to ${event.creator}'s event: ${event.name}. Let's ${event.description} on ${event.date}`,
+        message: `${props.creator} cordially invites you to ${
+          event.creator
+        }'s event: ${event.name}. Let's ${event.description} ${
+          event.date ? 'on ' + event.date : 'sometime in the future'
+        }`,
         title: `You've got an unBucket list invite!`,
       });
       if (result.action === Share.sharedAction) {
@@ -29,7 +33,7 @@ const ShareEvent = (props) => {
   };
   return (
     <View>
-      <Button title="Share" onPress={onShare} />
+      <Button title='Share' onPress={onShare} />
     </View>
   );
 };

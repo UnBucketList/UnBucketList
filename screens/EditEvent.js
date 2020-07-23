@@ -57,50 +57,54 @@ const EditEvent = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text> Edit Event </Text>
-      <TextInput
-        onChangeText={(e) => {
-          name = e;
-        }}
-        placeholder={props.route.params.name}
-        placeholderTextColor='#91a6b4'
-        style={styles.input}
-      />
-      <TextInput
-        onChangeText={(e) => {
-          description = e;
-        }}
-        placeholder={props.route.params.description}
-        placeholderTextColor='#91a6b4'
-        style={styles.input}
-      />
-      <TextInput
-        onChangeText={(e) => {
-          location = e;
-        }}
-        placeholder={props.route.params.location}
-        placeholderTextColor='#91a6b4'
-        style={styles.input}
-      />
-      <TextInput
-        onChangeText={(e) => {
-          date = e;
-        }}
-        placeholder={props.route.params.date}
-        placeholderTextColor='#91a6b4'
-        style={styles.input}
-      />
-      <TextInput
-        onChangeText={(e) => {
-          guests = e;
-        }}
-        placeholder={props.route.params.guests}
-        placeholderTextColor='#91a6b4'
-        style={styles.input}
-      />
-      <TouchableOpacity onPress={handleEditEvent}>
-        <Text>Edit</Text>
-      </TouchableOpacity>
+      <View style={styles.body}>
+        <View style={styles.header}>
+          <Text style={styles.text}>Edit Event</Text>
+        </View>
+        <TextInput
+          onChangeText={(e) => {
+            name = e;
+          }}
+          placeholder={name}
+          placeholderTextColor='#91a6b4'
+          style={styles.input}
+        />
+        <TextInput
+          onChangeText={(e) => {
+            description = e;
+          }}
+          placeholder={description}
+          placeholderTextColor='#91a6b4'
+          style={styles.input}
+        />
+        <TextInput
+          onChangeText={(e) => {
+            location = e;
+          }}
+          placeholder={location ? location : 'Location'}
+          placeholderTextColor='#91a6b4'
+          style={styles.input}
+        />
+        <TextInput
+          onChangeText={(e) => {
+            date = e;
+          }}
+          placeholder={date ? date : 'Date mm/dd/yy'}
+          placeholderTextColor='#91a6b4'
+          style={styles.input}
+        />
+        <TextInput
+          onChangeText={(e) => {
+            guests = e;
+          }}
+          placeholder={guests ? guests : 'Participants'}
+          placeholderTextColor='#91a6b4'
+          style={styles.input}
+        />
+        <TouchableOpacity onPress={handleEditEvent}>
+          <Text style={styles.text}>Edit</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -110,6 +114,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#486581',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  body: {
+    alignItems: 'center',
+    marginBottom: 140,
+  },
+  header: {
+    marginBottom: 13,
+  },
+  text: {
+    color: '#d9e2ec',
   },
   input: {
     width: 200,
