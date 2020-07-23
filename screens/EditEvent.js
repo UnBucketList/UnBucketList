@@ -66,7 +66,7 @@ const EditEvent = (props) => {
             name = e;
           }}
           placeholder={name}
-          placeholderTextColor="#91a6b4"
+          placeholderTextColor='#91a6b4'
           style={styles.input}
         />
         <TextInput
@@ -74,7 +74,7 @@ const EditEvent = (props) => {
             description = e;
           }}
           placeholder={description}
-          placeholderTextColor="#91a6b4"
+          placeholderTextColor='#91a6b4'
           style={styles.input}
         />
         <TextInput
@@ -82,7 +82,7 @@ const EditEvent = (props) => {
             location = e;
           }}
           placeholder={location ? location : 'Location'}
-          placeholderTextColor="#91a6b4"
+          placeholderTextColor='#91a6b4'
           style={styles.input}
         />
         <TextInput
@@ -90,7 +90,7 @@ const EditEvent = (props) => {
             date = e;
           }}
           placeholder={date ? date : 'Date mm/dd/yy'}
-          placeholderTextColor="#91a6b4"
+          placeholderTextColor='#91a6b4'
           style={styles.input}
         />
         <TextInput
@@ -98,7 +98,7 @@ const EditEvent = (props) => {
             guests = e;
           }}
           placeholder={guests ? guests : 'Participants'}
-          placeholderTextColor="#91a6b4"
+          placeholderTextColor='#91a6b4'
           style={styles.input}
         />
         <TouchableOpacity onPress={handleEditEvent}>
