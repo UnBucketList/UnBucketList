@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share, View, Text, StyleSheet } from 'react-native';
+import { Share, View, Button, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ShareEvent = (props) => {
@@ -25,9 +25,7 @@ const ShareEvent = (props) => {
   };
   return (
     <View>
-      <TouchableOpacity onPress={onShare}>
-        <Text style={styles.text}>Share</Text>
-      </TouchableOpacity>
+      <Button title="Share" onPress={onShare} />
     </View>
   );
 };

@@ -2,11 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 import ShareEvent from './ShareEvent.js';
-
 import { connect } from 'react-redux';
-import * as actions from '../actions/actions.js';
+
+const mapStateToProps = (state) => ({
+  username: state.unBucket.username,
+  creator: state.unBucket.creator,
+});
 
 const CardDetails = (props) => {
+  console.log('props.route.params is', props.route.params);
   let {
     event_id,
     name,
@@ -36,6 +40,7 @@ const CardDetails = (props) => {
         <View style={styles.deleteButton}>
           <Button
             title="Delete Event"
+            color="red"
             onPress={() => {
               console.log('Delete opacity clicked');
               props.deleteEvent(props.username, event.event_id);
@@ -46,7 +51,11 @@ const CardDetails = (props) => {
         </View>
 
         <View style={styles.shareButton}>
-          <ShareEvent key={event.event_id} event={event} user={props.creator} />
+          <ShareEvent
+            key={event_id}
+            event={props.route.params}
+            user={creator}
+          />
         </View>
       </View>
     </View>
@@ -68,5 +77,8 @@ const styles = StyleSheet.create({
     color: '#627D98',
     fontSize: 18,
   },
+  buttonContainer: {
+    flexDirection: 'row',
+  },
 });
-export default CardDetails;
+export default connect(mapStateToProps, null)(CardDetails);
