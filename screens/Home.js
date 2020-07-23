@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     color: 'red',
     position: 'absolute',
     right: 10,
+    top: 5,
   },
   myEventCard: {
     backgroundColor: 'lightgray',

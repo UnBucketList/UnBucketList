@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   noInput: {
-    placeholderTextColor: 'red',
     width: 200,
     height: 44,
     padding: 10,

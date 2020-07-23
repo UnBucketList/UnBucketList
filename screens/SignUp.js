@@ -39,7 +39,7 @@ const SignUp = (props) => {
       username,
       password,
     });
-    fetch('http://localhost:3000/user/signup', {
+    fetch('https://unbucketlist.herokuapp.com/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -75,8 +75,8 @@ const SignIn = (props) => {
       <TouchableOpacity onPress={handleLogin}>
         <Text>Log In</Text>
       </TouchableOpacity>
-      <Text>
-        Don't have an account?{' '}
+      <View style={styles.signup}>
+        <Text>Don't have an account? </Text>
         <TouchableOpacity
           onPress={() => {
             props.navigation.navigate('SignUp');
@@ -84,7 +84,7 @@ const SignIn = (props) => {
         >
           <Text>Sign Up!</Text>
         </TouchableOpacity>
-      </Text>
+      </View>
     </View>
   );
 };

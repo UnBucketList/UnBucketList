@@ -31,7 +31,7 @@ export const addEvent = (event, username, creator) => {
     guests: event.guests,
   });
   return (dispatch) => {
-    fetch(`http://localhost:3000/event/${username}`, {
+    fetch(`https://unbucketlist.herokuapp.com/event/${username}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const editEvent = (event) => {
 
 export const deleteEvent = (username, eventId) => {
   return (dispatch) => {
-    fetch(`http://localhost:3000/event/${username}/${eventId}`, {
+    fetch(`https://unbucketlist.herokuapp.com/event/${username}/${eventId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -70,10 +70,15 @@ export const deleteEvent = (username, eventId) => {
       .then((res) => res.json())
       .then((data) => {
         console.log('Data from delete fetch is', data);
-        dispatch({
-          type: types.DELETE_EVENT,
-          payload: data,
-        }).catch((err) => console.log('Error deleteEvent fetch:', err));
-      });
+        if (Array.isArray(data)) {
+          dispatch({
+            type: types.DELETE_EVENT,
+            payload: data,
+          });
+        } else {
+          return data.err;
+        }
+      })
+      .catch((err) => console.log('Error deleteEvent fetch:', err));
   };
 };
