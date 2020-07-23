@@ -106,7 +106,7 @@ const AddEvent = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#BCCCDC',
+    backgroundColor: '#334E68',
     alignItems: 'center',
   },
   body: {
@@ -115,15 +115,18 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 13,
   },
+  inputPlaceholder: {
+    color: '#4865B1',
+  },
   text: {
-    color: '#102A43',
+    color: '#d9e2ec',
   },
   input: {
     width: 200,
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#829AB1',
     borderRadius: 3,
     marginBottom: 10,
   },
