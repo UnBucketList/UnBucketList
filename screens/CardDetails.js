@@ -26,7 +26,6 @@ const CardDetails = (props) => {
     date,
     guests,
     creator,
-    username,
   } = props.route.params;
 
   return (
@@ -34,34 +33,40 @@ const CardDetails = (props) => {
       <Text style={styles.text}>Event Name: {name}</Text>
       <Text style={styles.text}>Description: {description}</Text>
       <Text style={styles.text}>Created By: {creator}</Text>
-      <Text style={styles.text}>location: {location ? location : 'TBD'}</Text>
-      <Text style={styles.text}>date: {date ? date : 'TBD'}</Text>
+      <Text style={styles.text}>Location: {location ? location : 'TBD'}</Text>
+      <Text style={styles.text}>Date: {date ? date : 'TBD'}</Text>
       <Text style={styles.text}>{guests}</Text>
-      {props.creator === creator ? (
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Edit Event"
-            onPress={() => {
-              props.navigation.navigate('EditEvent', props.route.params);
-            }}
-          ></Button>
-          <View style={styles.deleteButton}>
+      <View style={styles.buttonContainer}>
+        {props.creator === creator ? (
+          <View style={styles.buttonContainer}>
             <Button
-              title="Delete Event"
-              color="red"
+              title="Edit Event"
               onPress={() => {
-                console.log('Delete opacity clicked');
-                props.deleteEvent(props.username, event_id);
-                props.navigation.navigate('Home');
+                props.navigation.navigate('EditEvent', props.route.params);
               }}
-            >
-              <Text style={styles.delete}>X</Text>
-            </Button>
+            ></Button>
+            <View style={styles.deleteButton}>
+              <Button
+                title="Delete Event"
+                color="red"
+                onPress={() => {
+                  console.log('Delete opacity clicked');
+                  props.deleteEvent(props.username, event_id);
+                  props.navigation.navigate('Home');
+                }}
+              >
+                <Text style={styles.delete}>X</Text>
+              </Button>
+            </View>
           </View>
+        ) : null}
+        <View style={styles.shareButton}>
+          <ShareEvent
+            key={event_id}
+            event={props.route.params}
+            user={creator}
+          />
         </View>
-      ) : null}
-      <View style={styles.shareButton}>
-        <ShareEvent key={event_id} event={props.route.params} user={creator} />
       </View>
     </View>
   );
@@ -70,10 +75,9 @@ const CardDetails = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#243B53',
+    backgroundColor: '#486581',
     alignItems: 'center',
     justifyContent: 'center',
-    bottom: 10,
   },
   text: {
     color: '#BCCCDC',
@@ -84,6 +88,13 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
+    margin: 10,
+  },
+  deleteButton: {
+    marginLeft: 10,
+  },
+  shareButton: {
+    marginTop: 10,
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(CardDetails);

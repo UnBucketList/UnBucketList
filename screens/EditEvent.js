@@ -63,6 +63,7 @@ const EditEvent = (props) => {
           name = e;
         }}
         placeholder={props.route.params.name}
+        placeholderTextColor="#91a6b4"
         style={styles.input}
       />
       <TextInput
@@ -70,6 +71,7 @@ const EditEvent = (props) => {
           description = e;
         }}
         placeholder={props.route.params.description}
+        placeholderTextColor="#91a6b4"
         style={styles.input}
       />
       <TextInput
@@ -77,6 +79,7 @@ const EditEvent = (props) => {
           location = e;
         }}
         placeholder={props.route.params.location}
+        placeholderTextColor="#91a6b4"
         style={styles.input}
       />
       <TextInput
@@ -84,6 +87,7 @@ const EditEvent = (props) => {
           date = e;
         }}
         placeholder={props.route.params.date}
+        placeholderTextColor="#91a6b4"
         style={styles.input}
       />
       <TextInput
@@ -91,6 +95,7 @@ const EditEvent = (props) => {
           guests = e;
         }}
         placeholder={props.route.params.guests}
+        placeholderTextColor="#91a6b4"
         style={styles.input}
       />
       <TouchableOpacity onPress={handleEditEvent}>
@@ -102,7 +107,7 @@ const EditEvent = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#486581',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 10,
@@ -114,6 +119,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     marginBottom: 10,
+    color: '#F0F4F8',
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EditEvent);

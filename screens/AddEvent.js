@@ -55,7 +55,7 @@ const AddEvent = (props) => {
             event_name = e;
           }}
           placeholder={nameValueEntered ? 'Event Name' : '*Event Name Required'}
-          placeholderTextColor={nameValueEntered ? '#999999' : 'red'}
+          placeholderTextColor={nameValueEntered ? '#91a6b4' : 'red'}
           style={nameValueEntered ? styles.input : styles.noInput}
         />
         <TextInput
@@ -64,7 +64,7 @@ const AddEvent = (props) => {
             description = e;
           }}
           placeholder={nameValueEntered ? 'Details' : '*Event Details Required'}
-          placeholderTextColor={nameValueEntered ? '#999999' : 'red'}
+          placeholderTextColor={nameValueEntered ? '#91a6b4' : 'red'}
           style={nameValueEntered ? styles.input : styles.noInput}
         />
         <TextInput
@@ -73,7 +73,7 @@ const AddEvent = (props) => {
             location = e;
           }}
           placeholder={'Location'}
-          placeholderTextColor="#999999"
+          placeholderTextColor="#91a6b4"
           style={styles.input}
         />
         <TextInput
@@ -82,7 +82,7 @@ const AddEvent = (props) => {
             date = e;
           }}
           placeholder={'Date: mm/dd/yyyy'}
-          placeholderTextColor="#999999"
+          placeholderTextColor="#91a6b4"
           style={styles.input}
         />
         <TextInput
@@ -91,7 +91,7 @@ const AddEvent = (props) => {
             guests = e;
           }}
           placeholder={'Participants'}
-          placeholderTextColor="#999999"
+          placeholderTextColor="#91a6b4"
           style={styles.input}
         />
         <View>
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     borderColor: '#829AB1',
     borderRadius: 3,
     marginBottom: 10,
+    color: '#F0F4F8',
   },
   noInput: {
     width: 200,

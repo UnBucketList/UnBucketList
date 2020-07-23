@@ -60,7 +60,14 @@ const Home = (props) => {
                 <Text style={styles.eventValue}>{event.location}</Text>{' '}
               </Text>
               <Text style={styles.eventLabel}>
-                Event Date: <Text style={styles.eventValue}>{event.date}</Text>{' '}
+                Event Date:{' '}
+                <Text style={styles.eventValue}>
+                  {event.date ? event.date : 'TBD'}
+                </Text>{' '}
+              </Text>
+              <Text style={styles.eventLabel}>
+                Event Creator:{' '}
+                <Text style={styles.eventValue}>{event.creator}</Text>{' '}
               </Text>
             </View>
           </View>
@@ -143,7 +150,6 @@ const styles = StyleSheet.create({
     borderColor: '#243B53',
     margin: 5,
     maxHeight: 100,
-    overflow: 'scroll',
     padding: 5,
   },
   friendEventCard: {
@@ -154,7 +160,6 @@ const styles = StyleSheet.create({
     borderColor: '#243B53',
     margin: 5,
     maxHeight: 100,
-    overflow: 'scroll',
     padding: 5,
   },
   eventDetails: {
