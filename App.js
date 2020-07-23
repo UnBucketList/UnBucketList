@@ -31,6 +31,7 @@ export default function App() {
                 backgroundColor: '#102A43',
               },
               headerTintColor: '#D9E2EC',
+              headerShown: false,
             }}
           />
           <Stack.Screen
@@ -42,6 +43,7 @@ export default function App() {
                 backgroundColor: '#102A43',
               },
               headerTintColor: '#D9E2EC',
+              headerBackTitle: 'Log Out',
             }}
           />
           <Stack.Screen

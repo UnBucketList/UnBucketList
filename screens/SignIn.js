@@ -103,13 +103,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
+    justifyContent: 'center',
     backgroundColor: '#243B53',
     alignItems: 'center',
   },
   body: {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
-    marginTop: 180,
   },
   header: {
     bottom: 10,
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#102A43',
     borderRadius: 3,
     marginBottom: 10,
     color: '#F0F4F8',

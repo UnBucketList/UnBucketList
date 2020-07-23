@@ -46,17 +46,19 @@ const Home = (props) => {
               onPress={() => {
                 event.owner = true;
                 props.navigation.navigate('CardDetails', event);
-              }}>
+              }}
+            >
               <Text style={styles.details}>More Details</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.deleteButton}>
             <TouchableOpacity
-              title='X'
+              title="X"
               onPress={() => {
                 console.log('Delete opacity clicked');
                 props.deleteEvent(props.username, event.event_id);
-              }}>
+              }}
+            >
               <Text style={styles.delete}>X</Text>
             </TouchableOpacity>
           </View>
@@ -87,7 +89,8 @@ const Home = (props) => {
             <TouchableOpacity
               onPress={() => {
                 props.navigation.navigate('CardDetails', event);
-              }}>
+              }}
+            >
               <Text style={styles.details}>More Details</Text>
             </TouchableOpacity>
           </View>
@@ -115,7 +118,8 @@ const Home = (props) => {
         onPress={() => {
           console.log('Add event pressed');
           props.navigation.navigate('AddEvent');
-        }}>
+        }}
+      >
         <Text style={styles.text}>Add an Event</Text>
       </TouchableOpacity>
     </View>
@@ -125,9 +129,10 @@ const Home = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
     backgroundColor: '#486581',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   detailsContainer: {
     width: 80,
@@ -138,6 +143,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#F0F4F8',
+    fontSize: 18,
   },
   details: {
     color: '#BCCCDC',
@@ -170,20 +176,22 @@ const styles = StyleSheet.create({
   myEventCard: {
     flexDirection: 'row',
     backgroundColor: '#829AB1',
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 5,
+    borderColor: '#243B53',
     margin: 5,
-    height: 100,
+    maxHeight: 100,
     overflow: 'scroll',
     padding: 5,
   },
   friendEventCard: {
     flexDirection: 'row',
     backgroundColor: '#486581',
-    borderWidth: 1,
-    borderRadius: 3,
+    borderWidth: 0.5,
+    borderRadius: 5,
+    borderColor: '#243B53',
     margin: 5,
-    height: 100,
+    maxHeight: 100,
     overflow: 'scroll',
     padding: 5,
   },
