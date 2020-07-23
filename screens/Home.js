@@ -53,7 +53,7 @@ const Home = (props) => {
           <Text>Event Date: {event.date}</Text>
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate('EditEvent');
+              props.navigation.navigate('EditEvent',event);
             }}
           >
             <Text>Edit Event</Text>

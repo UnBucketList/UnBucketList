@@ -49,7 +49,6 @@ export const editEvent = (event,username,creator) => {
   // console.log('event should be everything from editted message', event.name,username)
   const body = JSON.stringify({
     name: event.name,
-    username,
     creator,
     description: event.description,
     location: event.location,

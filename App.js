@@ -49,7 +49,8 @@ export default function App() {
           />
           <Stack.Screen
             name="EditEvent"
-            component={EditEvent}
+            
+          component={EditEvent}
             options={{ title: 'UnBucket List - Edit Event' }}
           />
           <Stack.Screen
