@@ -52,47 +52,48 @@ const SignIn = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>Welcome to UnBucket List!</Text>
-        <Text>Please sign in to continue</Text>
-      </View>
+      <View style={styles.body}>
+        <View style={styles.header}>
+          <Text style={styles.text}>Welcome to UnBucket List!</Text>
+          <Text style={styles.text}>Please sign in to continue</Text>
+        </View>
 
-      <TextInput
-        value={username}
-        onChangeText={(e) => {
-          username = e;
-        }}
-        placeholder={'Username'}
-        style={styles.input}
-      />
-      <TextInput
-        value={password}
-        onChangeText={(pw) => {
-          password = pw;
-        }}
-        placeholder={'Password'}
-        secureTextEntry={true}
-        style={styles.input}
-      />
-      {loginFail ? (
-        <Text style={styles.errMsg}>
-          * Username does not exist or password was incorrect, please try again
-          or sign up below
-        </Text>
-      ) : null}
-
-      <TouchableOpacity onPress={handleLogin}>
-        <Text>Log In</Text>
-      </TouchableOpacity>
-      <View style={styles.signup}>
-        <Text>Don't have an account? </Text>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate('SignUp');
+        <TextInput
+          value={username}
+          onChangeText={(e) => {
+            username = e;
           }}
-        >
-          <Text>Sign Up!</Text>
+          placeholder={'Username'}
+          style={styles.input}
+        />
+        <TextInput
+          value={password}
+          onChangeText={(pw) => {
+            password = pw;
+          }}
+          placeholder={'Password'}
+          secureTextEntry={true}
+          style={styles.input}
+        />
+        {loginFail ? (
+          <Text style={styles.errMsg}>
+            * Username does not exist or password was incorrect, please try
+            again or sign up below
+          </Text>
+        ) : null}
+
+        <TouchableOpacity onPress={handleLogin}>
+          <Text style={styles.text}>Log In</Text>
         </TouchableOpacity>
+        <View style={styles.signup}>
+          <Text style={styles.text}>Don't have an account? </Text>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate('SignUp');
+            }}>
+            <Text style={styles.text}>Sign Up!</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -101,12 +102,20 @@ const SignIn = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ecf0f1',
+    display: 'flex',
+    backgroundColor: '#243B53',
     alignItems: 'center',
+  },
+  body: {
+    display: 'flex',
+    justifyContent: 'center',
     marginTop: 180,
   },
   header: {
     bottom: 10,
+  },
+  text: {
+    color: '#F0F4F8',
   },
   input: {
     width: 200,
@@ -116,6 +125,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 3,
     marginBottom: 10,
+    color: '#F0F4F8',
   },
   signup: {
     flexDirection: 'row',
