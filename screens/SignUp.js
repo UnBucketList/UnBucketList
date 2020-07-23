@@ -139,10 +139,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#829AB1',
     alignItems: 'center',
-    //justifyContent: 'center',
   },
   body: {
     marginTop: 125,
+    alignItems: 'center',
   },
   text: {
     color: '#334E68',
