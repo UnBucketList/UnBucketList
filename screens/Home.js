@@ -24,18 +24,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Home = (props) => {
 
-<<<<<<< HEAD
-   const eventList = props.events.map((event, i) => {
-    return (
-      <View key={`event${i}`} style={styles.eventCard}>
-        <Text>Event Name: {event.name}</Text>
-        <Text>Event Location: {event.location}</Text>
-        <Text>Event Date: {event.date}</Text>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate('EditEvent', event);
-          }}
-=======
   const shareData = {
     title: `New event invitation from ${props.creator}`,
     message: `Come hand out with me`,
@@ -67,22 +55,9 @@ const Home = (props) => {
             onPress={() => {
               props.navigation.navigate('EditEvent');
             }}
->>>>>>> master
           >
             <Text>Edit Event</Text>
           </TouchableOpacity>
-<<<<<<< HEAD
-          <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate('CardDetails', event);
-          }}
-          >
-          <Text color={'blue'}>More Details</Text>
-          </TouchableOpacity>
-
-      </View>
-    );
-=======
         </View>
       );
     } else {
@@ -94,7 +69,6 @@ const Home = (props) => {
         </View>
       );
     }
->>>>>>> master
   });
 
   return (
