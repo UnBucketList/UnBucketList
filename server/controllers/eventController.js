@@ -9,7 +9,8 @@ eventController.getParticipatingEvents = (req, res, next) => {
   res.locals.username
     ? (username = res.locals.username)
     : (username = req.params.username);
-
+  console.log('username in getparticipatingevents', username);
+  console.log('req.params', req.params);
   let queryString = `
   SELECT  
   e.name, e.creator, e.username, e.description, e.location, e.date, e._id as event_id
@@ -126,7 +127,7 @@ eventController.deleteFromEventParticipantsTable = (req, res, next) => {
 
   db.query(queryString, params, (err, response) => {
     if (err) {
-    //  console.log('error in deleting an event', err);
+      //  console.log('error in deleting an event', err);
       return next(err);
     }
     //console.log('successfully deleted event', response.rows);

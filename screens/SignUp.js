@@ -54,10 +54,10 @@ const SignUp = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.errorMessage){
-          if (data.errorMessage === 'email'){
+        if (data.errorMessage) {
+          if (data.errorMessage === 'email') {
             setDuplicateData([true, false]);
-          } else if (data.errorMessage === 'username'){
+          } else if (data.errorMessage === 'username') {
             setDuplicateData([false, true]);
           }
           return;
@@ -80,30 +80,38 @@ const SignUp = (props) => {
       </View>
       <TextInput
         onChangeText={(e) => {
-          setName(text => text += e);
+          setName(e);
         }}
         placeholder={'name'}
         style={styles.input}
       />
-      {duplicateData[0] ? <Text style={styles.errMsg}>*Email already exists, enter new address or log in</Text> : null}
+      {duplicateData[0] ? (
+        <Text style={styles.errMsg}>
+          *Email already exists, enter new address or log in
+        </Text>
+      ) : null}
       <TextInput
         onChangeText={(e) => {
-          setEmail(text => text += e);
+          setEmail(e);
         }}
         placeholder={'email'}
         style={duplicateData[0] ? styles.duplicateInput : styles.input}
       />
-      {duplicateData[1] ? <Text style={styles.errMsg}>*Username already exists, enter new username or log in</Text> : null}
+      {duplicateData[1] ? (
+        <Text style={styles.errMsg}>
+          *Username already exists, enter new username or log in
+        </Text>
+      ) : null}
       <TextInput
         onChangeText={(e) => {
-          setUsername(text => text += e);
+          setUsername(e);
         }}
         placeholder={'username'}
         style={duplicateData[1] ? styles.duplicateInput : styles.input}
       />
       <TextInput
         onChangeText={(e) => {
-          setPassword(text => text += e);
+          setPassword(e);
         }}
         placeholder={'password'}
         secureTextEntry={true}
@@ -111,7 +119,7 @@ const SignUp = (props) => {
       />
       <TextInput
         onChangeText={(e) => {
-          setConfirmPassword(text => text += e);
+          setConfirmPassword(e);
         }}
         placeholder={'confirm password'}
         secureTextEntry={true}
@@ -155,7 +163,7 @@ const styles = StyleSheet.create({
   },
   errMsg: {
     color: 'red',
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
