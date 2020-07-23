@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#829AB1',
     alignItems: 'center',
     justifyContent: 'center',
-    bottom: 10,
   },
   detailsContainer: {
     width: 80,
