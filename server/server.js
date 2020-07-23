@@ -35,11 +35,7 @@ app.use((err, req, res, next) => {
   };
 
   const errorObj = Object.assign(defaultErr, err);
-<<<<<<< HEAD
-  console.log('THE ERROR, ', err);
-=======
   console.log('THE ERROR IN GLOBAL ERROR HANDLER: ', err);
->>>>>>> master
   return res.status(errorObj.status).json(errorObj.message);
 });
 
