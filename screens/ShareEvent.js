@@ -11,7 +11,7 @@ const ShareEvent = (props) => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: `${props.creator} cordially invites you to an event: ${event.name}. Let's ${event.description} on ${event.date}`,
+        message: `${props.creator} cordially invites you to ${event.creator}'s event: ${event.name}. Let's ${event.description} on ${event.date}`,
         title: `You've got an unBucket list invite!`,
       });
       if (result.action === Share.sharedAction) {
