@@ -106,7 +106,7 @@ const AddEvent = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#334E68',
+    backgroundColor: '#486581',
     alignItems: 'center',
   },
   body: {
