@@ -32,11 +32,6 @@ const Home = (props) => {
     message: `Come hang out with me`,
   };
 
-  const shareEvent = async () => {
-    const result = await Share.share(shareData);
-    console.log('result', result);
-  };
-
   const eventList = props.events.map((event, i) => {
     if (props.creator === event.creator) {
       return (
@@ -48,7 +43,7 @@ const Home = (props) => {
                 console.log('Delete opacity clicked');
                 props.deleteEvent(props.username, event.event_id);
               }}>
-              <Text>X</Text>
+              <Text style={styles.delete}>X</Text>
             </TouchableOpacity>
           </View>
 
@@ -74,11 +69,7 @@ const Home = (props) => {
               event.owner = true;
               props.navigation.navigate('CardDetails', event);
             }}>
-            <Text color={'blue'}>More Details</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => Linking.openURL('mailto:saejinkang95@gmail.com')}>
-            <Text>Share</Text>
+            <Text style={styles.details}>More Details</Text>
           </TouchableOpacity>
         </View>
       );
@@ -102,11 +93,12 @@ const Home = (props) => {
           <Text style={styles.eventLabel}>
             Event Date: <Text style={styles.eventValue}>{event.date}</Text>{' '}
           </Text>
+
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('CardDetails', event);
             }}>
-            <Text color={'blue'}>More Details</Text>
+            <Text style={styles.details}>More Details</Text>
           </TouchableOpacity>
         </View>
       );
@@ -134,10 +126,13 @@ const Home = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#243B53',
+    backgroundColor: '#829AB1',
     alignItems: 'center',
     justifyContent: 'center',
     bottom: 10,
+  },
+  detailsContainer: {
+    width: 80,
   },
   header: {
     margin: 10,
@@ -146,8 +141,16 @@ const styles = StyleSheet.create({
   text: {
     color: '#F0F4F8',
   },
+  details: {
+    color: '#BCCCDC',
+    fontWeight: 'bold',
+  },
   eventLabel: {
     color: '#102A43',
+    fontWeight: 'bold',
+  },
+  delete: {
+    color: 'white',
     fontWeight: 'bold',
   },
   eventValue: {
@@ -156,10 +159,8 @@ const styles = StyleSheet.create({
   },
   eventContainer: {
     flex: 0.75,
-    backgroundColor: '#627D98',
+    backgroundColor: '#829AB1',
     width: '90%',
-    borderWidth: 1,
-    borderRadius: 5,
     overflow: 'scroll',
     maxHeight: 500,
   },
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   myEventCard: {
-    backgroundColor: '#829AB1',
+    backgroundColor: '#486581',
     borderWidth: 1,
     borderRadius: 5,
     margin: 5,
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   friendEventCard: {
-    backgroundColor: '#486581',
+    backgroundColor: '#829AB1',
     borderWidth: 1,
     borderRadius: 3,
     margin: 5,
