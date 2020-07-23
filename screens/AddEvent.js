@@ -36,8 +36,6 @@ const AddEvent = (props) => {
     };
     if (event.event_name === undefined || event.description === undefined) {
       setNameValueEntered(false);
-      // alert('Please include event Name and Description');
-      console.log('hey hey hey');
     } else {
       console.log('event object------>', event);
       props.addEvent(event, props.username, props.creator);
@@ -47,6 +45,9 @@ const AddEvent = (props) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text>Please enter event details below</Text>
+      </View>
       <TextInput
         value={event_name}
         onChangeText={(e) => {
