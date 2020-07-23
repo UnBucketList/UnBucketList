@@ -54,11 +54,12 @@ export const editEvent = (event, username, creator) => {
     location: event.location,
     date: event.date,
     guests: event.guests,
+    username: username,
   });
   console.log('what does body look like', body);
   return (dispatch) => {
     fetch(
-      `https://unbucketlist.herokuapp.com/event/${username}/${event.event_id}`,
+      `https://unbucketlist.herokuapp.com/event/${event.event_id}`,
       {
         method: 'PUT',
         headers: {

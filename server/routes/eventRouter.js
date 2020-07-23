@@ -4,7 +4,7 @@ const eventController = require('../controllers/eventController.js');
 
 // COMPLETED
 eventRouter.put(
-  '/:username/:event',
+  '/:event',
   eventController.editEvent,
   eventController.addParticipants,
   eventController.getParticipants,

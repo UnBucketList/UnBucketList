@@ -7,9 +7,9 @@ eventController.getParticipatingEvents = (req, res, next) => {
   let username;
   res.locals.username
     ? (username = res.locals.username)
-    : (username = req.params.username);
-  console.log('username in getparticipatingevents', username);
-  console.log('req.params', req.params);
+    : (username = req.params.username)
+  //console.log('username in getparticipatingevents', username);
+  //console.log('req.params', req.params);
   let queryString = `
   SELECT  
   e.name, e.creator, e.username, e.description, e.location, e.date, e._id as event_id
@@ -51,7 +51,7 @@ eventController.addCreatorToEvent = (req, res, next) => {
 
   db.query(queryString, params, (err, response) => {
     if (err) {
-      console.log('error in adding creator to event', err);
+      //console.log('error in adding creator to event', err);
       return next(err);
     }
     return next();
@@ -89,7 +89,8 @@ eventController.addNewEvent = (req, res, next) => {
 // TODO : edits an existing event
 eventController.editEvent = (req, res, next) => {
   const { event } = req.params;
-  const { name, creator, description, location, date } = req.body;
+  const { name, creator, description, location, date, username } = req.body;
+  res.locals.username = username;
 
   // 'event name' and columns and values have to be changed accordingly
   let queryString = `
@@ -173,7 +174,9 @@ eventController.addParticipants = (req, res, next) => {
 
       db.query(queryString, params, (err, response) => {
         if (err) {
-          return next(err);
+          if (err.constraint !== 'event_participants_user_username_fkey'){
+            return next(err);
+          }
         }
         //console.log('response adding participants', response.rows);
       });
