@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -28,7 +28,7 @@ const SignIn = (props) => {
   // makes fetch request to backend for logging in
   const handleLogin = () => {
     const body = JSON.stringify({ username, password });
-    fetch(`http://localhost:3000/user/login/`, {
+    fetch(`https://unbucketlist.herokuapp.com/user/login/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -74,13 +74,18 @@ const SignIn = (props) => {
         secureTextEntry={true}
         style={styles.input}
       />
-      {loginFail ? <Text style={styles.errMsg}>* Username does not exist or password was incorrect, please try again or sign up below</Text> : null}
+      {loginFail ? (
+        <Text style={styles.errMsg}>
+          * Username does not exist or password was incorrect, please try again
+          or sign up below
+        </Text>
+      ) : null}
 
       <TouchableOpacity onPress={handleLogin}>
         <Text>Log In</Text>
       </TouchableOpacity>
-      <Text>
-        Don't have an account?{' '}
+      <View style={styles.signup}>
+        <Text>Don't have an account? </Text>
         <TouchableOpacity
           onPress={() => {
             props.navigation.navigate('SignUp');
@@ -88,7 +93,7 @@ const SignIn = (props) => {
         >
           <Text>Sign Up!</Text>
         </TouchableOpacity>
-      </Text>
+      </View>
     </View>
   );
 };
@@ -98,7 +103,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    //justifyContent: 'center',
     marginTop: 180,
   },
   header: {
@@ -113,11 +117,15 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     marginBottom: 10,
   },
+  signup: {
+    flexDirection: 'row',
+    top: 5,
+  },
   errMsg: {
     width: 250,
     color: 'red',
     textAlign: 'center',
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

@@ -5,10 +5,13 @@ const eventController = {};
 // grabs all events that a user created and is a participant of
 eventController.getParticipatingEvents = (req, res, next) => {
   let username;
-  res.locals.username ? username = res.locals.username: username = req.params.username;
+
+  res.locals.username
+    ? (username = res.locals.username)
+    : (username = req.params.username);
 
   let queryString = `
-  SELECT 
+  SELECT  
   e.name, e.creator, e.username, e.description, e.location, e.date, e._id as event_id
   FROM
   events e
@@ -139,7 +142,6 @@ eventController.deleteFromEventsTable = (req, res, next) => {
   WHERE 
   events._id = $1
   `;
-
   let params = [event];
 
   db.query(queryString, params, (err, response) => {
