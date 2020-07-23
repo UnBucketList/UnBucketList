@@ -34,6 +34,7 @@ const AddEvent = (props) => {
       date,
       guests,
     };
+
     if (event.event_name === undefined || event.description === undefined) {
       setNameValueEntered(false);
       // alert('Please include event Name and Description');
