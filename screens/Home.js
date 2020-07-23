@@ -30,47 +30,27 @@ const Home = (props) => {
   const eventList = props.events.map((event, i) => {
     if (props.creator === event.creator) {
       return (
-        <View key={`event${i}`} style={styles.myEventCard}>
-          <View style={styles.eventDetails}>
-            <Text style={styles.eventLabel}>
-              Event Name: <Text style={styles.eventValue}>{event.name}</Text>
-            </Text>
-            <Text style={styles.eventLabel}>
-              Event Location:{' '}
-              <Text style={styles.eventValue}>{event.location}</Text>
-            </Text>
-            <Text style={styles.eventLabel}>
-              Event Date: <Text style={styles.eventValue}>{event.date}</Text>
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                event.owner = true;
-                props.navigation.navigate('CardDetails', event);
-              }}
-            >
-              <Text style={styles.details}>More Details</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            event.owner = true;
+            props.navigation.navigate('CardDetails', event);
+          }}
+        >
+          <View key={`event${i}`} style={styles.myEventCard}>
+            <View style={styles.eventDetails}>
+              <Text style={styles.eventLabel}>
+                Event Name: <Text style={styles.eventValue}>{event.name}</Text>
+              </Text>
+              <Text style={styles.eventLabel}>
+                Event Location:{' '}
+                <Text style={styles.eventValue}>{event.location}</Text>
+              </Text>
+              <Text style={styles.eventLabel}>
+                Event Date: <Text style={styles.eventValue}>{event.date}</Text>
+              </Text>
+            </View>
           </View>
-          <View style={styles.deleteButton}>
-            <TouchableOpacity
-              title="X"
-              onPress={() => {
-                console.log('Delete opacity clicked');
-                props.deleteEvent(props.username, event.event_id);
-              }}
-            >
-              <Text style={styles.delete}>X</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.shareButton}>
-            <ShareEvent
-              key={event.event_id}
-              event={event}
-              user={props.creator}
-            />
-          </View>
-        </View>
+        </TouchableOpacity>
       );
     } else {
       return (

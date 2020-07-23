@@ -90,7 +90,8 @@ const SignIn = (props) => {
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('SignUp');
-            }}>
+            }}
+          >
             <Text style={styles.text}>Sign Up!</Text>
           </TouchableOpacity>
         </View>
