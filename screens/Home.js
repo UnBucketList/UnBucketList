@@ -27,6 +27,16 @@ const Home = (props) => {
   console.log('Creator name is', props.creator);
   console.log('Events in state are', props.events);
 
+  const shareData = {
+    title: `New event invitation from ${props.creator}`,
+    message: `Come hand out with me`,
+  };
+
+  const shareEvent = async () => {
+    const result = await Share.share(shareData);
+    console.log('result', result);
+  };
+
   const eventList = props.events.map((event, i) => {
     if (props.creator === event.creator) {
       return (

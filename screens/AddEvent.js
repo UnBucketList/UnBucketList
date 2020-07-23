@@ -47,9 +47,6 @@ const AddEvent = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>Please enter event details below</Text>
-      </View>
       <TextInput
         value={event_name}
         onChangeText={(e) => {
@@ -83,7 +80,7 @@ const AddEvent = (props) => {
         onChangeText={(e) => {
           date = e;
         }}
-        placeholder={'Date/Time of Event'}
+        placeholder={'mm/dd/yyyy'}
         style={styles.input}
       />
       <TextInput

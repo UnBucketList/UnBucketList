@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -20,6 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const SignIn = (props) => {
+  const [loginFail, setLoginFail] = useState(false);
+
   let username;
   let password;
 
@@ -41,7 +43,8 @@ const SignIn = (props) => {
           props.setEvents(data.events);
           props.navigation.navigate('Home');
         } else {
-          alert('Failed to login');
+          setLoginFail(true);
+          return;
         }
       })
       .catch((err) => console.log('Error logging in', err));
@@ -71,6 +74,12 @@ const SignIn = (props) => {
         secureTextEntry={true}
         style={styles.input}
       />
+      {loginFail ? (
+        <Text style={styles.errMsg}>
+          * Username does not exist or password was incorrect, please try again
+          or sign up below
+        </Text>
+      ) : null}
 
       <TouchableOpacity onPress={handleLogin}>
         <Text>Log In</Text>
@@ -111,6 +120,11 @@ const styles = StyleSheet.create({
   signup: {
     flexDirection: 'row',
     top: 5,
+  },
+  errMsg: {
+    width: 250,
+    color: 'red',
+    textAlign: 'center',
   },
 });
 
