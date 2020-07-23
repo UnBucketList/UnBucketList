@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    //justifyContent: 'center',
     marginTop: 180,
   },
   header: {
@@ -108,6 +107,10 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 3,
     marginBottom: 10,
+  },
+  signup: {
+    flexDirection: 'row',
+    top: 5,
   },
 });
 

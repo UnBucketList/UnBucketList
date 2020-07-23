@@ -47,6 +47,9 @@ const AddEvent = (props) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text>Please enter event details below</Text>
+      </View>
       <TextInput
         value={event_name}
         onChangeText={(e) => {
@@ -91,9 +94,11 @@ const AddEvent = (props) => {
         placeholder={'Participants'}
         style={styles.input}
       />
-      <TouchableOpacity onPress={handleAddEvent}>
-        <Text>Save New Event</Text>
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity onPress={handleAddEvent}>
+          <Text>Save New Event</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -103,8 +108,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ecf0f1',
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
+    marginTop: 100,
+  },
+  header: {
+    marginBottom: 13,
   },
   input: {
     width: 200,

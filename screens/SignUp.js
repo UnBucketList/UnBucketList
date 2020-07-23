@@ -13,8 +13,8 @@ import * as actions from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
-  login: (username) => {
-    dispatch(actions.login(username));
+  login: (username, creator) => {
+    dispatch(actions.login(username, creator));
   },
 });
 
