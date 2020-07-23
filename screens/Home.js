@@ -4,12 +4,15 @@ import {
   Text,
   View,
   TouchableOpacity,
+  TouchableHighlight,
   ScrollView,
   Alert,
-  Linking,
+  Share,
+  Button,
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions.js';
+import ShareEvent from './ShareEvent.js';
 
 const mapStateToProps = (state) => ({
   username: state.unBucket.username,
@@ -24,9 +27,15 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = (props) => {
-  console.log('Username in Home is', props.username);
-  console.log('Creator name is', props.creator);
-  console.log('Events in state are', props.events);
+  const shareData = {
+    title: `New event invitation from ${props.creator}`,
+    message: `Come hang out with me`,
+  };
+
+  const shareEvent = async () => {
+    const result = await Share.share(shareData);
+    console.log('result', result);
+  };
 
   const eventList = props.events.map((event, i) => {
     if (props.creator === event.creator) {
@@ -34,12 +43,21 @@ const Home = (props) => {
         <View key={`event${i}`} style={styles.myEventCard}>
           <View style={styles.deleteButton}>
             <TouchableOpacity
+              title='X'
               onPress={() => {
                 console.log('Delete opacity clicked');
                 props.deleteEvent(props.username, event.event_id);
               }}>
               <Text>X</Text>
             </TouchableOpacity>
+          </View>
+
+          <View style={styles.shareButton}>
+            <ShareEvent
+              key={event.event_id}
+              event={event}
+              user={props.creator}
+            />
           </View>
           <Text style={styles.eventLabel}>
             Event Name: <Text style={styles.eventValue}>{event.name}</Text>
@@ -53,9 +71,10 @@ const Home = (props) => {
           </Text>
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate('EditEvent');
+              event.owner = true;
+              props.navigation.navigate('CardDetails', event);
             }}>
-            <Text>Edit Event</Text>
+            <Text color={'blue'}>More Details</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => Linking.openURL('mailto:saejinkang95@gmail.com')}>
@@ -66,16 +85,29 @@ const Home = (props) => {
     } else {
       return (
         <View key={`event${i}`} style={styles.friendEventCard}>
+          <View style={styles.shareButton}>
+            <ShareEvent
+              key={event.event_id}
+              event={event}
+              user={props.creator}
+            />
+          </View>
           <Text style={styles.eventLabel}>
-            Event Name: <Text style={styles.eventValue}>{event.name}</Text>
+            Event Name: <Text style={styles.eventValue}>{event.name}</Text>{' '}
           </Text>
           <Text style={styles.eventLabel}>
             Event Location:{' '}
-            <Text style={styles.eventValue}>{event.location}</Text>
+            <Text style={styles.eventValue}>{event.location}</Text>{' '}
           </Text>
           <Text style={styles.eventLabel}>
-            Event Date:<Text style={styles.eventValue}> {event.date}</Text>
+            Event Date: <Text style={styles.eventValue}>{event.date}</Text>{' '}
           </Text>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate('CardDetails', event);
+            }}>
+            <Text color={'blue'}>More Details</Text>
+          </TouchableOpacity>
         </View>
       );
     }
@@ -133,9 +165,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     flex: 0,
-    position: 'absolute',
-    right: 10,
-    top: 5,
+    alignItems: 'flex-end',
   },
   myEventCard: {
     backgroundColor: '#829AB1',
@@ -154,6 +184,12 @@ const styles = StyleSheet.create({
     height: 100,
     overflow: 'scroll',
     padding: 5,
+  },
+  shareButton: {
+    flex: 0,
+    position: 'absolute',
+    right: 10,
+    bottom: 5,
   },
 });
 

@@ -8,61 +8,92 @@ import {
   Button,
 } from 'react-native';
 
+import { connect } from 'react-redux';
+import * as actions from '../actions/actions.js';
+
+const mapStateToProps = (state) => ({
+  events: state.events,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  editEvent: (event, username, creator) => {
+    dispatch(actions.editEvent(event, username, creator));
+  },
+});
+
 const EditEvent = (props) => {
-  let name, description, location, date, guests;
+  let {
+    event_id,
+    name,
+    description,
+    location,
+    date,
+    guests,
+    creator,
+    username,
+  } = props.route.params;
+
+  console.log(props.route.params);
+
+  const handleEditEvent = () => {
+    //           console.log('Event Name is', description);
+    //           console.log('Event Location is', location);
+    //           console.log('Event Time is', date);
+    //           console.log('Participants are', guests);
+    //           console.log('event id is ', event_id)
+
+    const event = {
+      name,
+      description,
+      location,
+      date,
+      guests,
+      event_id,
+    };
+    console.log('event name', event);
+    props.editEvent(event, username, creator);
+    props.navigation.navigate('Home');
+  };
+
   return (
     <View style={styles.container}>
       <Text> Edit Event </Text>
       <TextInput
-        value={name}
         onChangeText={(e) => {
           name = e;
         }}
-        placeholder="Event Name"
+        placeholder={props.route.params.name}
         style={styles.input}
       />
       <TextInput
-        value={description}
         onChangeText={(e) => {
           description = e;
         }}
-        placeholder="Event Details"
+        placeholder={props.route.params.description}
         style={styles.input}
       />
       <TextInput
-        value={location}
         onChangeText={(e) => {
           location = e;
         }}
-        placeholder="Location"
+        placeholder={props.route.params.location}
         style={styles.input}
       />
       <TextInput
-        value={date}
         onChangeText={(e) => {
           date = e;
         }}
-        placeholder="Event Time"
+        placeholder={props.route.params.date}
         style={styles.input}
       />
       <TextInput
-        value={guests}
         onChangeText={(e) => {
           guests = e;
         }}
-        placeholder="Participants"
+        placeholder={props.route.params.guests}
         style={styles.input}
       />
-      <TouchableOpacity
-        onPress={() => {
-          console.log('Event Name is', name);
-          console.log('Event Name is', description);
-          console.log('Event Location is', location);
-          console.log('Event Time is', date);
-          console.log('Participants are', guests);
-          props.navigation.navigate('Home');
-        }}
-      >
+      <TouchableOpacity onPress={handleEditEvent}>
         <Text>Edit</Text>
       </TouchableOpacity>
     </View>
@@ -85,4 +116,4 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
-export default EditEvent;
+export default connect(mapStateToProps, mapDispatchToProps)(EditEvent);

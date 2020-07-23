@@ -9,6 +9,8 @@ import SignIn from './screens/SignIn.js';
 import SignUp from './screens/SignUp.js';
 import EditEvent from './screens/EditEvent.js';
 import AddEvent from './screens/AddEvent.js';
+import CardDetails from './screens/CardDetails.js';
+//. should be good to try
 
 // create stack for our screens
 const Stack = createStackNavigator();
@@ -24,7 +26,7 @@ export default function App() {
             name='SignIn'
             component={SignIn}
             options={{
-              title: 'UnBucket List - Sign In',
+              title: 'Sign In',
               headerStyle: {
                 backgroundColor: '#102A43',
               },
@@ -35,7 +37,7 @@ export default function App() {
             name='Home'
             component={Home}
             options={{
-              title: 'UnBucket List - Home',
+              title: 'Home',
               headerStyle: {
                 backgroundColor: '#102A43',
               },
@@ -46,7 +48,7 @@ export default function App() {
             name='SignUp'
             component={SignUp}
             options={{
-              title: 'UnBucket List - Sign Up',
+              title: 'Sign Up',
               headerStyle: {
                 backgroundColor: '#102A43',
               },
@@ -57,7 +59,7 @@ export default function App() {
             name='AddEvent'
             component={AddEvent}
             options={{
-              title: 'UnBucket List - Add Event',
+              title: 'Add Event',
               headerStyle: {
                 backgroundColor: '#102A43',
               },
@@ -68,7 +70,18 @@ export default function App() {
             name='EditEvent'
             component={EditEvent}
             options={{
-              title: 'UnBucket List - Edit Event',
+              title: 'Edit Event',
+              headerStyle: {
+                backgroundColor: '#102A43',
+              },
+              headerTintColor: '#D9E2EC',
+            }}
+          />
+          <Stack.Screen
+            name='CardDetails'
+            component={CardDetails}
+            options={{
+              title: 'Details',
               headerStyle: {
                 backgroundColor: '#102A43',
               },

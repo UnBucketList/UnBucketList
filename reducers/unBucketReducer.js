@@ -30,16 +30,16 @@ const unBucketReducer = (state = initialState, action) => {
       console.log('action payload', action.payload);
       const {
         _id,
-        creator,
         name,
+        creator,
         description,
         location,
         date,
         guests,
       } = action.payload;
       const newEvent = {
-        creator,
         event_id: _id,
+        creator,
         name,
         description,
         location,
@@ -47,6 +47,7 @@ const unBucketReducer = (state = initialState, action) => {
         guests,
       };
       events.push(newEvent);
+      console.log(newEvent, 'new evetn');
       return {
         ...state,
         events,
