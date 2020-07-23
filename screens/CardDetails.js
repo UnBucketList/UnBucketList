@@ -20,9 +20,9 @@ const CardDetails = (props) => {
       <Text>Event Name: {name}</Text>
       <Text>Description: {description}</Text>
       <Text>Created By: {creator}</Text>
-      <Text>location: {location ? location : TBD}</Text>
-      <Text>date: {date ? date : TBD}</Text>
-      <Text>Who's Coming: {guests}</Text>
+      <Text>location: {location ? location : 'TBD'}</Text>
+      <Text>date: {date ? date : 'TBD'}</Text>
+      <Text>{guests}</Text>
       <TouchableOpacity
           onPress={() => {
             props.navigation.navigate('EditEvent', props.route.params);

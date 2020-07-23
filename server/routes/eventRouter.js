@@ -7,6 +7,7 @@ eventRouter.put(
   '/:username/:event',
   eventController.editEvent,
   eventController.addParticipants,
+  eventController.getParticipants,
   // eventController.getUserEvents,
   eventController.getParticipatingEvents,
   (req, res) => {

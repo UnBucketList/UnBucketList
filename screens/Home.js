@@ -52,11 +52,12 @@ const Home = (props) => {
           <Text>Event Location: {event.location}</Text>
           <Text>Event Date: {event.date}</Text>
           <TouchableOpacity
-            onPress={() => {
-              props.navigation.navigate('EditEvent',event);
-            }}
+          onPress={() => {
+            event.owner = true;
+            props.navigation.navigate('CardDetails', event);
+          }}
           >
-            <Text>Edit Event</Text>
+            <Text color={'blue'}>More Details</Text>
           </TouchableOpacity>
         </View>
       );
@@ -66,6 +67,13 @@ const Home = (props) => {
           <Text>Event Name: {event.name}</Text>
           <Text>Event Location: {event.location}</Text>
           <Text>Event Date: {event.date}</Text>
+          <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('CardDetails', event);
+          }}
+          >
+            <Text color={'blue'}>More Details</Text>
+          </TouchableOpacity>
         </View>
       );
     }
