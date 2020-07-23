@@ -27,27 +27,18 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = (props) => {
-  const shareData = {
-    title: `New event invitation from ${props.creator}`,
-    message: `Come hang out with me`,
-  };
-
-  const shareEvent = async () => {
-    const result = await Share.share(shareData);
-    console.log('result', result);
-  };
-
   const eventList = props.events.map((event, i) => {
     if (props.creator === event.creator) {
       return (
         <View key={`event${i}`} style={styles.myEventCard}>
           <View style={styles.deleteButton}>
             <TouchableOpacity
-              title='X'
+              title="X"
               onPress={() => {
                 console.log('Delete opacity clicked');
                 props.deleteEvent(props.username, event.event_id);
-              }}>
+              }}
+            >
               <Text>X</Text>
             </TouchableOpacity>
           </View>
@@ -73,12 +64,9 @@ const Home = (props) => {
             onPress={() => {
               event.owner = true;
               props.navigation.navigate('CardDetails', event);
-            }}>
+            }}
+          >
             <Text color={'blue'}>More Details</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => Linking.openURL('mailto:saejinkang95@gmail.com')}>
-            <Text>Share</Text>
           </TouchableOpacity>
         </View>
       );
@@ -105,7 +93,8 @@ const Home = (props) => {
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('CardDetails', event);
-            }}>
+            }}
+          >
             <Text color={'blue'}>More Details</Text>
           </TouchableOpacity>
         </View>
@@ -124,7 +113,8 @@ const Home = (props) => {
         onPress={() => {
           console.log('Add event pressed');
           props.navigation.navigate('AddEvent');
-        }}>
+        }}
+      >
         <Text style={styles.text}>Add an Event</Text>
       </TouchableOpacity>
     </View>
