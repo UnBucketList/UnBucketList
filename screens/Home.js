@@ -46,19 +46,17 @@ const Home = (props) => {
               onPress={() => {
                 event.owner = true;
                 props.navigation.navigate('CardDetails', event);
-              }}
-            >
+              }}>
               <Text style={styles.details}>More Details</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.deleteButton}>
             <TouchableOpacity
-              title="X"
+              title='X'
               onPress={() => {
                 console.log('Delete opacity clicked');
                 props.deleteEvent(props.username, event.event_id);
-              }}
-            >
+              }}>
               <Text style={styles.delete}>X</Text>
             </TouchableOpacity>
           </View>
@@ -89,8 +87,7 @@ const Home = (props) => {
             <TouchableOpacity
               onPress={() => {
                 props.navigation.navigate('CardDetails', event);
-              }}
-            >
+              }}>
               <Text style={styles.details}>More Details</Text>
             </TouchableOpacity>
           </View>
@@ -118,8 +115,7 @@ const Home = (props) => {
         onPress={() => {
           console.log('Add event pressed');
           props.navigation.navigate('AddEvent');
-        }}
-      >
+        }}>
         <Text style={styles.text}>Add an Event</Text>
       </TouchableOpacity>
     </View>
@@ -173,7 +169,7 @@ const styles = StyleSheet.create({
   },
   myEventCard: {
     flexDirection: 'row',
-    backgroundColor: '#486581',
+    backgroundColor: '#829AB1',
     borderWidth: 1,
     borderRadius: 5,
     margin: 5,
@@ -183,7 +179,7 @@ const styles = StyleSheet.create({
   },
   friendEventCard: {
     flexDirection: 'row',
-    backgroundColor: '#829AB1',
+    backgroundColor: '#486581',
     borderWidth: 1,
     borderRadius: 3,
     margin: 5,
