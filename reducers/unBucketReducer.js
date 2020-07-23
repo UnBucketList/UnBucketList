@@ -40,7 +40,7 @@ const unBucketReducer = (state = initialState, action) => {
       const newEvent = {
         creator,
         event_id: _id,
-        event_name: name,
+        name,
         description,
         location,
         date,

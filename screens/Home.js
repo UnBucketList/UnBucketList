@@ -38,6 +38,7 @@ const Home = (props) => {
   };
 
   const eventList = props.events.map((event, i) => {
+    console.log('Event in map function', event);
     if (props.creator === event.creator) {
       return (
         <View key={`event${i}`} style={styles.myEventCard}>
@@ -116,7 +117,6 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     flex: 0,
-    color: 'red',
     position: 'absolute',
     right: 10,
     top: 5,

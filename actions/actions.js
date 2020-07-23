@@ -15,12 +15,6 @@ export const setEvents = (events) => {
 };
 
 export const addEvent = (event, username, creator) => {
-  console.log(
-    'In actions addevent event and username are',
-    event,
-    username,
-    creator
-  );
   const body = JSON.stringify({
     name: event.event_name,
     username,
@@ -61,7 +55,7 @@ export const editEvent = (event) => {
 
 export const deleteEvent = (username, eventId) => {
   return (dispatch) => {
-    fetch(`https://unbucketlist.herokuapp.com/event/${username}/${eventId}`, {
+    fetch(`http://localhost:3000/event/${username}/${eventId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -70,10 +64,10 @@ export const deleteEvent = (username, eventId) => {
       .then((res) => res.json())
       .then((data) => {
         console.log('Data from delete fetch is', data);
-        if (Array.isArray(data)) {
+        if (Array.isArray(data.events)) {
           dispatch({
             type: types.DELETE_EVENT,
-            payload: data,
+            payload: data.events,
           });
         } else {
           return data.err;
