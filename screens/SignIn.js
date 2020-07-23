@@ -21,9 +21,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const SignIn = (props) => {
   const [loginFail, setLoginFail] = useState(false);
-
-  let username;
-  let password;
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   // makes fetch request to backend for logging in
   const handleLogin = () => {
@@ -61,17 +60,19 @@ const SignIn = (props) => {
         <TextInput
           value={username}
           onChangeText={(e) => {
-            username = e;
+            setUsername(e);
           }}
           placeholder={'Username'}
+          placeholderTextColor="#91a6b4"
           style={styles.input}
         />
         <TextInput
           value={password}
           onChangeText={(pw) => {
-            password = pw;
+            setPassword(pw);
           }}
           placeholder={'Password'}
+          placeholderTextColor="#91a6b4"
           secureTextEntry={true}
           style={styles.input}
         />
@@ -90,7 +91,8 @@ const SignIn = (props) => {
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('SignUp');
-            }}>
+            }}
+          >
             <Text style={styles.text}>Sign Up!</Text>
           </TouchableOpacity>
         </View>
@@ -111,12 +113,15 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   header: {
-    bottom: 10,
+    bottom: 20,
+    alignItems: 'center',
   },
   text: {
     color: '#F0F4F8',
+    fontSize: 16,
   },
   input: {
     width: 200,

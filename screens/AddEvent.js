@@ -54,20 +54,18 @@ const AddEvent = (props) => {
           onChangeText={(e) => {
             event_name = e;
           }}
-          placeholder={nameValueEntered ? 'Event Name' : 'Event Name Required'}
+          placeholder={nameValueEntered ? 'Event Name' : '*Event Name Required'}
+          placeholderTextColor={nameValueEntered ? '#91a6b4' : 'red'}
           style={nameValueEntered ? styles.input : styles.noInput}
-          // style={ styles.input}
-          // placeholderTextColor={nameValueEntered ? 'gray' : 'red'}
         />
         <TextInput
           value={description}
           onChangeText={(e) => {
             description = e;
           }}
-          placeholder={nameValueEntered ? 'Details' : 'Event Details Required'}
+          placeholder={nameValueEntered ? 'Details' : '*Event Details Required'}
+          placeholderTextColor={nameValueEntered ? '#91a6b4' : 'red'}
           style={nameValueEntered ? styles.input : styles.noInput}
-          // style={styles.input}
-          // placeholderTextColor={nameValueEntered ? 'gray' : 'red'}
         />
         <TextInput
           value={location}
@@ -75,6 +73,7 @@ const AddEvent = (props) => {
             location = e;
           }}
           placeholder={'Location'}
+          placeholderTextColor="#91a6b4"
           style={styles.input}
         />
         <TextInput
@@ -82,7 +81,8 @@ const AddEvent = (props) => {
           onChangeText={(e) => {
             date = e;
           }}
-          placeholder={'mm/dd/yyyy'}
+          placeholder={'Date: mm/dd/yyyy'}
+          placeholderTextColor="#91a6b4"
           style={styles.input}
         />
         <TextInput
@@ -91,6 +91,7 @@ const AddEvent = (props) => {
             guests = e;
           }}
           placeholder={'Participants'}
+          placeholderTextColor="#91a6b4"
           style={styles.input}
         />
         <View>
@@ -110,7 +111,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   body: {
-    marginTop: 140,
+    marginTop: 100,
+    alignItems: 'center',
   },
   header: {
     marginBottom: 13,
@@ -129,6 +131,7 @@ const styles = StyleSheet.create({
     borderColor: '#829AB1',
     borderRadius: 3,
     marginBottom: 10,
+    color: '#F0F4F8',
   },
   noInput: {
     width: 200,

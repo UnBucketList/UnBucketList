@@ -83,7 +83,8 @@ const SignUp = (props) => {
           onChangeText={(e) => {
             setName(e);
           }}
-          placeholder={'name'}
+          placeholder={'Name'}
+          placeholderTextColor="#91a6b4"
           style={styles.input}
         />
         {duplicateData[0] ? (
@@ -95,7 +96,8 @@ const SignUp = (props) => {
           onChangeText={(e) => {
             setEmail(e);
           }}
-          placeholder={'email'}
+          placeholder={'Email'}
+          placeholderTextColor="#91a6b4"
           style={duplicateData[0] ? styles.duplicateInput : styles.input}
         />
         {duplicateData[1] ? (
@@ -107,14 +109,16 @@ const SignUp = (props) => {
           onChangeText={(e) => {
             setUsername(e);
           }}
-          placeholder={'username'}
+          placeholder={'Username'}
+          placeholderTextColor="#91a6b4"
           style={duplicateData[1] ? styles.duplicateInput : styles.input}
         />
         <TextInput
           onChangeText={(e) => {
             setPassword(e);
           }}
-          placeholder={'password'}
+          placeholder={'Password'}
+          placeholderTextColor="#91a6b4"
           secureTextEntry={true}
           style={styles.input}
         />
@@ -122,7 +126,8 @@ const SignUp = (props) => {
           onChangeText={(e) => {
             setConfirmPassword(e);
           }}
-          placeholder={'confirm password'}
+          placeholder={'Confirm password'}
+          placeholderTextColor="#91a6b4"
           secureTextEntry={true}
           style={styles.input}
         />
@@ -137,16 +142,18 @@ const SignUp = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#829AB1',
+    backgroundColor: '#243B53',
     alignItems: 'center',
     display: 'flex',
-    justifyContent: 'center',
+    //justifyContent: 'center',
   },
   body: {
     display: 'flex',
+    alignItems: 'center',
+    marginTop: 100,
   },
   text: {
-    color: '#334E68',
+    color: '#F0F4F8',
     fontSize: 16,
   },
   header: {
@@ -160,6 +167,7 @@ const styles = StyleSheet.create({
     borderColor: '#102A43',
     borderRadius: 3,
     marginBottom: 10,
+    color: '#F0F4F8',
   },
   duplicateInput: {
     width: 200,

@@ -4,15 +4,10 @@ import {
   Text,
   View,
   TouchableOpacity,
-  TouchableHighlight,
   ScrollView,
   Alert,
-  Share,
-  Button,
 } from 'react-native';
 import { connect } from 'react-redux';
-import * as actions from '../actions/actions.js';
-import ShareEvent from './ShareEvent.js';
 
 const mapStateToProps = (state) => ({
   username: state.unBucket.username,
@@ -20,86 +15,63 @@ const mapStateToProps = (state) => ({
   events: state.unBucket.events,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  deleteEvent: (username, eventId) => {
-    dispatch(actions.deleteEvent(username, eventId));
-  },
-});
-
 const Home = (props) => {
   const eventList = props.events.map((event, i) => {
     if (props.creator === event.creator) {
       return (
-        <View key={`event${i}`} style={styles.myEventCard}>
-          <View style={styles.eventDetails}>
-            <Text style={styles.eventLabel}>
-              Event Name: <Text style={styles.eventValue}>{event.name}</Text>
-            </Text>
-            <Text style={styles.eventLabel}>
-              Event Location:{' '}
-              <Text style={styles.eventValue}>{event.location}</Text>
-            </Text>
-            <Text style={styles.eventLabel}>
-              Event Date: <Text style={styles.eventValue}>{event.date}</Text>
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                event.owner = true;
-                props.navigation.navigate('CardDetails', event);
-              }}>
-              <Text style={styles.details}>More Details</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+          key={`event${i}`}
+          onPress={() => {
+            event.owner = true;
+            props.navigation.navigate('CardDetails', event);
+          }}
+        >
+          <View style={styles.myEventCard}>
+            <View style={styles.eventDetails}>
+              <Text style={styles.eventLabel}>
+                Event Name: <Text style={styles.eventValue}>{event.name}</Text>
+              </Text>
+              <Text style={styles.eventLabel}>
+                Event Location:{' '}
+                <Text style={styles.eventValue}>{event.location}</Text>
+              </Text>
+              <Text style={styles.eventLabel}>
+                Event Date: <Text style={styles.eventValue}>{event.date}</Text>
+              </Text>
+            </View>
           </View>
-          <View style={styles.deleteButton}>
-            <TouchableOpacity
-              title='X'
-              onPress={() => {
-                console.log('Delete opacity clicked');
-                props.deleteEvent(props.username, event.event_id);
-              }}>
-              <Text style={styles.delete}>X</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.shareButton}>
-            <ShareEvent
-              key={event.event_id}
-              event={event}
-              user={props.creator}
-            />
-          </View>
-        </View>
+        </TouchableOpacity>
       );
     } else {
       return (
-        <View key={`event${i}`} style={styles.friendEventCard}>
-          <View style={styles.eventDetails}>
-            <Text style={styles.eventLabel}>
-              Event Name: <Text style={styles.eventValue}>{event.name}</Text>{' '}
-            </Text>
-            <Text style={styles.eventLabel}>
-              Event Location:{' '}
-              <Text style={styles.eventValue}>{event.location}</Text>{' '}
-            </Text>
-            <Text style={styles.eventLabel}>
-              Event Date: <Text style={styles.eventValue}>{event.date}</Text>{' '}
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                props.navigation.navigate('CardDetails', event);
-              }}>
-              <Text style={styles.details}>More Details</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+          key={`event${i}`}
+          onPress={() => {
+            props.navigation.navigate('CardDetails', event);
+          }}
+        >
+          <View style={styles.friendEventCard}>
+            <View style={styles.eventDetails}>
+              <Text style={styles.eventLabel}>
+                Event Name: <Text style={styles.eventValue}>{event.name}</Text>{' '}
+              </Text>
+              <Text style={styles.eventLabel}>
+                Event Location:{' '}
+                <Text style={styles.eventValue}>{event.location}</Text>{' '}
+              </Text>
+              <Text style={styles.eventLabel}>
+                Event Date:{' '}
+                <Text style={styles.eventValue}>
+                  {event.date ? event.date : 'TBD'}
+                </Text>{' '}
+              </Text>
+              <Text style={styles.eventLabel}>
+                Event Creator:{' '}
+                <Text style={styles.eventValue}>{event.creator}</Text>{' '}
+              </Text>
+            </View>
           </View>
-
-          <View style={styles.shareButton}>
-            <ShareEvent
-              key={event.event_id}
-              event={event}
-              user={props.creator}
-            />
-          </View>
-        </View>
+        </TouchableOpacity>
       );
     }
   });
@@ -115,7 +87,8 @@ const Home = (props) => {
         onPress={() => {
           console.log('Add event pressed');
           props.navigation.navigate('AddEvent');
-        }}>
+        }}
+      >
         <Text style={styles.text}>Add an Event</Text>
       </TouchableOpacity>
     </View>
@@ -177,7 +150,6 @@ const styles = StyleSheet.create({
     borderColor: '#243B53',
     margin: 5,
     maxHeight: 100,
-    overflow: 'scroll',
     padding: 5,
   },
   friendEventCard: {
@@ -188,7 +160,6 @@ const styles = StyleSheet.create({
     borderColor: '#243B53',
     margin: 5,
     maxHeight: 100,
-    overflow: 'scroll',
     padding: 5,
   },
   eventDetails: {
@@ -202,4 +173,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, null)(Home);
