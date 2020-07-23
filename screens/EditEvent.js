@@ -12,56 +12,60 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({
-  events: state.events
+  events: state.events,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  editEvent : (event,username,creator) => {
-      dispatch(actions.editEvent(event,username,creator));
-    }
+  editEvent: (event, username, creator) => {
+    dispatch(actions.editEvent(event, username, creator));
+  },
 });
 
-const EditEvent = (props) => { 
-let {event_id, name, description, location, date, guests, creator, username} = props.route.params;
+const EditEvent = (props) => {
+  let {
+    event_id,
+    name,
+    description,
+    location,
+    date,
+    guests,
+    creator,
+    username,
+  } = props.route.params;
 
-console.log(props.route.params)
+  console.log(props.route.params);
 
-const handleEditEvent = () => {
- console.log('in handle edit', props.route.params.creator)
+  const handleEditEvent = () => {
+    //           console.log('Event Name is', description);
+    //           console.log('Event Location is', location);
+    //           console.log('Event Time is', date);
+    //           console.log('Participants are', guests);
+    //           console.log('event id is ', event_id)
 
-//           console.log('Event Name is', description);
-//           console.log('Event Location is', location);
-//           console.log('Event Time is', date);
-//           console.log('Participants are', guests);
-//           console.log('event id is ', event_id)
+    const event = {
+      name,
+      description,
+      location,
+      date,
+      guests,
+      event_id,
+    };
+    console.log('event name', event);
+    props.editEvent(event, username, creator);
+    props.navigation.navigate('Home');
+  };
 
-const event = {
-  name,
-  description,
-  location,
-  date,
-  guests,
-  event_id,
-};
-console.log('event name', event)
-props.editEvent(event,username,creator)
-props.navigation.navigate('Home')
-}
-
-  
   return (
     <View style={styles.container}>
       <Text> Edit Event </Text>
       <TextInput
-        
         onChangeText={(e) => {
-          name = e
+          name = e;
         }}
         placeholder={props.route.params.name}
         style={styles.input}
       />
       <TextInput
-        
         onChangeText={(e) => {
           description = e;
         }}
@@ -69,7 +73,6 @@ props.navigation.navigate('Home')
         style={styles.input}
       />
       <TextInput
-        
         onChangeText={(e) => {
           location = e;
         }}
@@ -77,7 +80,6 @@ props.navigation.navigate('Home')
         style={styles.input}
       />
       <TextInput
-        
         onChangeText={(e) => {
           date = e;
         }}
@@ -85,16 +87,13 @@ props.navigation.navigate('Home')
         style={styles.input}
       />
       <TextInput
-        
         onChangeText={(e) => {
           guests = e;
         }}
         placeholder={props.route.params.guests}
         style={styles.input}
       />
-      <TouchableOpacity
-        onPress={handleEditEvent}
-      >
+      <TouchableOpacity onPress={handleEditEvent}>
         <Text>Edit</Text>
       </TouchableOpacity>
     </View>

@@ -27,7 +27,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = (props) => {
-
   const shareData = {
     title: `New event invitation from ${props.creator}`,
     message: `Come hang out with me`,
@@ -64,10 +63,10 @@ const Home = (props) => {
           <Text>Event Location: {event.location}</Text>
           <Text>Event Date: {event.date}</Text>
           <TouchableOpacity
-          onPress={() => {
-            event.owner = true;
-            props.navigation.navigate('CardDetails', event);
-          }}
+            onPress={() => {
+              event.owner = true;
+              props.navigation.navigate('CardDetails', event);
+            }}
           >
             <Text color={'blue'}>More Details</Text>
           </TouchableOpacity>
@@ -87,9 +86,9 @@ const Home = (props) => {
           <Text>Event Location: {event.location}</Text>
           <Text>Event Date: {event.date}</Text>
           <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate('CardDetails', event);
-          }}
+            onPress={() => {
+              props.navigation.navigate('CardDetails', event);
+            }}
           >
             <Text color={'blue'}>More Details</Text>
           </TouchableOpacity>

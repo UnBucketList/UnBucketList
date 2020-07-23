@@ -3,7 +3,6 @@ import { Share, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ShareEvent = (props) => {
-  console.log('Props in share button', props);
   const { event } = props;
   const onShare = async () => {
     try {
