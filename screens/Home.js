@@ -5,6 +5,8 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  Button,
+  Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -27,6 +29,30 @@ const Home = (props) => {
     if (props.creator === event.creator) {
       return (
         <View key={`event${i}`} style={styles.myEventCard}>
+          <View style={styles.deleteButton}>
+            <Button
+              color="red"
+              title="X"
+              onPress={() => {
+                Alert.alert(
+                  'Delete Event',
+                  'Are you sure you want to delete this event?',
+                  [
+                    {
+                      text: 'Cancel',
+                      onPress: () => console.log('Cancel Pressed'),
+                      style: 'cancel',
+                    },
+                    {
+                      text: 'Yes',
+                      onPress: () => console.log('OK pressed'),
+                    },
+                  ],
+                  { cancelable: true }
+                );
+              }}
+            ></Button>
+          </View>
           <Text>Event Name: {event.name}</Text>
           <Text>Event Location: {event.location}</Text>
           <Text>Event Date: {event.date}</Text>
@@ -89,6 +115,14 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     overflow: 'scroll',
     maxHeight: 500,
+  },
+  deleteButton: {
+    flex: 0,
+    color: 'red',
+    position: 'absolute',
+    width: 30,
+    height: 20,
+    right: 5,
   },
   myEventCard: {
     backgroundColor: 'lightgray',
