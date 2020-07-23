@@ -43,15 +43,15 @@ const Home = (props) => {
         <View key={`event${i}`} style={styles.myEventCard}>
           <View style={styles.deleteButton}>
             <TouchableOpacity
-              title="X"
+              title='X'
               onPress={() => {
                 console.log('Delete opacity clicked');
                 props.deleteEvent(props.username, event.event_id);
-              }}
-            >
+              }}>
               <Text>X</Text>
             </TouchableOpacity>
           </View>
+
           <View style={styles.shareButton}>
             <ShareEvent
               key={event.event_id}
@@ -59,16 +59,26 @@ const Home = (props) => {
               user={props.creator}
             />
           </View>
-          <Text>Event Name: {event.name}</Text>
-          <Text>Event Location: {event.location}</Text>
-          <Text>Event Date: {event.date}</Text>
+          <Text style={styles.eventLabel}>
+            Event Name: <Text style={styles.eventValue}>{event.name}</Text>
+          </Text>
+          <Text style={styles.eventLabel}>
+            Event Location:{' '}
+            <Text style={styles.eventValue}>{event.location}</Text>
+          </Text>
+          <Text style={styles.eventLabel}>
+            Event Date: <Text style={styles.eventValue}>{event.date}</Text>
+          </Text>
           <TouchableOpacity
             onPress={() => {
               event.owner = true;
               props.navigation.navigate('CardDetails', event);
-            }}
-          >
+            }}>
             <Text color={'blue'}>More Details</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL('mailto:saejinkang95@gmail.com')}>
+            <Text>Share</Text>
           </TouchableOpacity>
         </View>
       );
@@ -82,14 +92,20 @@ const Home = (props) => {
               user={props.creator}
             />
           </View>
-          <Text>Event Name: {event.name}</Text>
-          <Text>Event Location: {event.location}</Text>
-          <Text>Event Date: {event.date}</Text>
+          <Text style={styles.eventLabel}>
+            Event Name: <Text style={styles.eventValue}>{event.name}</Text>{' '}
+          </Text>
+          <Text style={styles.eventLabel}>
+            Event Location:{' '}
+            <Text style={styles.eventValue}>{event.location}</Text>{' '}
+          </Text>
+          <Text style={styles.eventLabel}>
+            Event Date: <Text style={styles.eventValue}>{event.date}</Text>{' '}
+          </Text>
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('CardDetails', event);
-            }}
-          >
+            }}>
             <Text color={'blue'}>More Details</Text>
           </TouchableOpacity>
         </View>
@@ -100,17 +116,16 @@ const Home = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text>Welcome {props.creator}!</Text>
-        <Text>Here is your unBucket List</Text>
+        <Text style={styles.text}>Welcome {props.creator}!</Text>
+        <Text style={styles.text}>Here is your unBucket List</Text>
       </View>
       <ScrollView style={styles.eventContainer}>{eventList}</ScrollView>
       <TouchableOpacity
         onPress={() => {
           console.log('Add event pressed');
           props.navigation.navigate('AddEvent');
-        }}
-      >
-        <Text>Add an Event</Text>
+        }}>
+        <Text style={styles.text}>Add an Event</Text>
       </TouchableOpacity>
     </View>
   );
@@ -119,7 +134,7 @@ const Home = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#243B53',
     alignItems: 'center',
     justifyContent: 'center',
     bottom: 10,
@@ -128,12 +143,23 @@ const styles = StyleSheet.create({
     margin: 10,
     alignItems: 'center',
   },
+  text: {
+    color: '#F0F4F8',
+  },
+  eventLabel: {
+    color: '#102A43',
+    fontWeight: 'bold',
+  },
+  eventValue: {
+    color: '#D9E2EC',
+    fontWeight: 'bold',
+  },
   eventContainer: {
     flex: 0.75,
-    backgroundColor: 'orange',
+    backgroundColor: '#627D98',
     width: '90%',
     borderWidth: 1,
-    borderRadius: 3,
+    borderRadius: 5,
     overflow: 'scroll',
     maxHeight: 500,
   },
@@ -142,16 +168,16 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   myEventCard: {
-    backgroundColor: 'lightgray',
+    backgroundColor: '#829AB1',
     borderWidth: 1,
-    borderRadius: 3,
+    borderRadius: 5,
     margin: 5,
     height: 100,
     overflow: 'scroll',
     padding: 5,
   },
   friendEventCard: {
-    backgroundColor: 'gray',
+    backgroundColor: '#486581',
     borderWidth: 1,
     borderRadius: 3,
     margin: 5,

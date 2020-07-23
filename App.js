@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './store';
 import Home from './screens/Home.js';
@@ -22,44 +23,79 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
-            name="SignIn"
+            name='SignIn'
             component={SignIn}
-            options={{ title: 'UnBucket List - Sign In' }}
+            options={{
+              title: 'Sign In',
+              headerStyle: {
+                backgroundColor: '#102A43',
+              },
+              headerTintColor: '#D9E2EC',
+            }}
           />
           <Stack.Screen
-            name="Home"
+            name='Home'
             component={Home}
             options={{
-              title: 'UnBucket List - Home',
+              title: 'Home',
+              headerStyle: {
+                backgroundColor: '#102A43',
+              },
+              headerTintColor: '#D9E2EC',
             }}
           />
           <Stack.Screen
-            name="SignUp"
+            name='SignUp'
             component={SignUp}
             options={{
-              title: 'UnBucket List - Sign Up',
+              title: 'Sign Up',
+              headerStyle: {
+                backgroundColor: '#102A43',
+              },
+              headerTintColor: '#D9E2EC',
             }}
           />
           <Stack.Screen
-            name="AddEvent"
+            name='AddEvent'
             component={AddEvent}
             options={{
-              title: 'UnBucket List - Add Event',
+              title: 'Add Event',
+              headerStyle: {
+                backgroundColor: '#102A43',
+              },
+              headerTintColor: '#D9E2EC',
             }}
           />
           <Stack.Screen
-            name="EditEvent"
-            
-          component={EditEvent}
-            options={{ title: 'UnBucket List - Edit Event' }}
+            name='EditEvent'
+            component={EditEvent}
+            options={{
+              title: 'Edit Event',
+              headerStyle: {
+                backgroundColor: '#102A43',
+              },
+              headerTintColor: '#D9E2EC',
+            }}
           />
           <Stack.Screen
-            name="CardDetails"
+            name='CardDetails'
             component={CardDetails}
-            options={{ title: 'UnBucket List - CardDetails' }}
+            options={{
+              title: 'Details',
+              headerStyle: {
+                backgroundColor: '#102A43',
+              },
+              headerTintColor: '#D9E2EC',
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#090909',
+  },
+});

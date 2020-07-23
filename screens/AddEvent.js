@@ -45,57 +45,59 @@ const AddEvent = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>Please enter event details below</Text>
-      </View>
-      <TextInput
-        value={event_name}
-        onChangeText={(e) => {
-          event_name = e;
-        }}
-        placeholder={nameValueEntered ? 'Event Name' : 'Event Name Required'}
-        style={nameValueEntered ? styles.input : styles.noInput}
-        // style={ styles.input}
-        // placeholderTextColor={nameValueEntered ? 'gray' : 'red'}
-      />
-      <TextInput
-        value={description}
-        onChangeText={(e) => {
-          description = e;
-        }}
-        placeholder={nameValueEntered ? 'Details' : 'Event Details Required'}
-        style={nameValueEntered ? styles.input : styles.noInput}
-        // style={styles.input}
-        // placeholderTextColor={nameValueEntered ? 'gray' : 'red'}
-      />
-      <TextInput
-        value={location}
-        onChangeText={(e) => {
-          location = e;
-        }}
-        placeholder={'Location'}
-        style={styles.input}
-      />
-      <TextInput
-        value={date}
-        onChangeText={(e) => {
-          date = e;
-        }}
-        placeholder={'mm/dd/yyyy'}
-        style={styles.input}
-      />
-      <TextInput
-        value={guests}
-        onChangeText={(e) => {
-          guests = e;
-        }}
-        placeholder={'Participants'}
-        style={styles.input}
-      />
-      <View>
-        <TouchableOpacity onPress={handleAddEvent}>
-          <Text>Save New Event</Text>
-        </TouchableOpacity>
+      <View style={styles.body}>
+        <View style={styles.header}>
+          <Text style={styles.text}>Please enter event details below</Text>
+        </View>
+        <TextInput
+          value={event_name}
+          onChangeText={(e) => {
+            event_name = e;
+          }}
+          placeholder={nameValueEntered ? 'Event Name' : 'Event Name Required'}
+          style={nameValueEntered ? styles.input : styles.noInput}
+          // style={ styles.input}
+          // placeholderTextColor={nameValueEntered ? 'gray' : 'red'}
+        />
+        <TextInput
+          value={description}
+          onChangeText={(e) => {
+            description = e;
+          }}
+          placeholder={nameValueEntered ? 'Details' : 'Event Details Required'}
+          style={nameValueEntered ? styles.input : styles.noInput}
+          // style={styles.input}
+          // placeholderTextColor={nameValueEntered ? 'gray' : 'red'}
+        />
+        <TextInput
+          value={location}
+          onChangeText={(e) => {
+            location = e;
+          }}
+          placeholder={'Location'}
+          style={styles.input}
+        />
+        <TextInput
+          value={date}
+          onChangeText={(e) => {
+            date = e;
+          }}
+          placeholder={'mm/dd/yyyy'}
+          style={styles.input}
+        />
+        <TextInput
+          value={guests}
+          onChangeText={(e) => {
+            guests = e;
+          }}
+          placeholder={'Participants'}
+          style={styles.input}
+        />
+        <View>
+          <TouchableOpacity onPress={handleAddEvent}>
+            <Text style={styles.text}>Save New Event</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -104,12 +106,17 @@ const AddEvent = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#BCCCDC',
     alignItems: 'center',
-    marginTop: 100,
+  },
+  body: {
+    marginTop: 140,
   },
   header: {
     marginBottom: 13,
+  },
+  text: {
+    color: '#102A43',
   },
   input: {
     width: 200,
