@@ -13,8 +13,8 @@ import * as actions from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
-  login: (username) => {
-    dispatch(actions.login(username));
+  login: (username, creator) => {
+    dispatch(actions.login(username, creator));
   },
 });
 
@@ -45,7 +45,7 @@ const SignUp = (props) => {
       username,
       password,
     });
-    fetch('http://localhost:3000/user/signup', {
+    fetch('https://unbucketlist.herokuapp.com/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
