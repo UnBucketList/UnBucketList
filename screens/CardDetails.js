@@ -47,7 +47,7 @@ const CardDetails = (props) => {
         <Text style={styles.eventLabel}>
           Date: <Text style={styles.eventValue}>{date ? date : 'TBD'}</Text>
         </Text>
-        <Text style={styles.eventLabel}>{guests}</Text>
+        {/* <Text style={styles.eventLabel}>{guests}</Text> */}
       </View>
       <View style={styles.buttonContainer}>
         {props.creator === creator ? (
@@ -94,6 +94,10 @@ const styles = StyleSheet.create({
   body: {
     display: 'flex',
     justifyContent: 'space-between',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#9FB3C8',
+    padding: 15,
   },
   eventLabel: {
     color: '#829AB1',
