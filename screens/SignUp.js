@@ -75,59 +75,61 @@ const SignUp = (props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>Please enter information below</Text>
+      <View style={styles.body}>
+        <View style={styles.header}>
+          <Text style={styles.text}>Please enter information below</Text>
+        </View>
+        <TextInput
+          onChangeText={(e) => {
+            setName(e);
+          }}
+          placeholder={'name'}
+          style={styles.input}
+        />
+        {duplicateData[0] ? (
+          <Text style={styles.errMsg}>
+            *Email already exists, enter new address or log in
+          </Text>
+        ) : null}
+        <TextInput
+          onChangeText={(e) => {
+            setEmail(e);
+          }}
+          placeholder={'email'}
+          style={duplicateData[0] ? styles.duplicateInput : styles.input}
+        />
+        {duplicateData[1] ? (
+          <Text style={styles.errMsg}>
+            *Username already exists, enter new username or log in
+          </Text>
+        ) : null}
+        <TextInput
+          onChangeText={(e) => {
+            setUsername(e);
+          }}
+          placeholder={'username'}
+          style={duplicateData[1] ? styles.duplicateInput : styles.input}
+        />
+        <TextInput
+          onChangeText={(e) => {
+            setPassword(e);
+          }}
+          placeholder={'password'}
+          secureTextEntry={true}
+          style={styles.input}
+        />
+        <TextInput
+          onChangeText={(e) => {
+            setConfirmPassword(e);
+          }}
+          placeholder={'confirm password'}
+          secureTextEntry={true}
+          style={styles.input}
+        />
+        <TouchableOpacity onPress={handleSignUp}>
+          <Text style={styles.text}>Sign-Up!</Text>
+        </TouchableOpacity>
       </View>
-      <TextInput
-        onChangeText={(e) => {
-          setName(e);
-        }}
-        placeholder={'name'}
-        style={styles.input}
-      />
-      {duplicateData[0] ? (
-        <Text style={styles.errMsg}>
-          *Email already exists, enter new address or log in
-        </Text>
-      ) : null}
-      <TextInput
-        onChangeText={(e) => {
-          setEmail(e);
-        }}
-        placeholder={'email'}
-        style={duplicateData[0] ? styles.duplicateInput : styles.input}
-      />
-      {duplicateData[1] ? (
-        <Text style={styles.errMsg}>
-          *Username already exists, enter new username or log in
-        </Text>
-      ) : null}
-      <TextInput
-        onChangeText={(e) => {
-          setUsername(e);
-        }}
-        placeholder={'username'}
-        style={duplicateData[1] ? styles.duplicateInput : styles.input}
-      />
-      <TextInput
-        onChangeText={(e) => {
-          setPassword(e);
-        }}
-        placeholder={'password'}
-        secureTextEntry={true}
-        style={styles.input}
-      />
-      <TextInput
-        onChangeText={(e) => {
-          setConfirmPassword(e);
-        }}
-        placeholder={'confirm password'}
-        secureTextEntry={true}
-        style={styles.input}
-      />
-      <TouchableOpacity onPress={handleSignUp}>
-        <Text>Sign-Up!</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -135,10 +137,15 @@ const SignUp = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#829AB1',
     alignItems: 'center',
     //justifyContent: 'center',
+  },
+  body: {
     marginTop: 125,
+  },
+  text: {
+    color: '#334E68',
   },
   header: {
     bottom: 10,
@@ -148,7 +155,7 @@ const styles = StyleSheet.create({
     height: 44,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#102A43',
     borderRadius: 3,
     marginBottom: 10,
   },

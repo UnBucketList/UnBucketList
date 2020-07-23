@@ -129,7 +129,7 @@ const Home = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#829AB1',
+    backgroundColor: '#486581',
     alignItems: 'center',
     justifyContent: 'center',
     bottom: 10,
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   eventContainer: {
     flex: 0.75,
-    backgroundColor: '#829AB1',
+    backgroundColor: '#486581',
     width: '90%',
     overflow: 'scroll',
     maxHeight: 500,
