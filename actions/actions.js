@@ -15,12 +15,6 @@ export const setEvents = (events) => {
 };
 
 export const addEvent = (event, username, creator) => {
-  console.log(
-    'In actions addevent event and username are',
-    event,
-    username,
-    creator
-  );
   const body = JSON.stringify({
     name: event.event_name,
     username,
@@ -31,7 +25,7 @@ export const addEvent = (event, username, creator) => {
     guests: event.guests,
   });
   return (dispatch) => {
-    fetch(`http://localhost:3000/event/${username}`, {
+    fetch(`https://unbucketlist.herokuapp.com/event/${username}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,12 +34,13 @@ export const addEvent = (event, username, creator) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log('Data from addevent fetch', data);
+        console.log('Data from addEvent fetch', data);
         dispatch({
           type: types.ADD_EVENT,
           payload: data.addedEvent,
         });
-      });
+      })
+      .catch((err) => console.log('Error in addEvent fetch:', err));
   };
 };
 
@@ -53,16 +48,31 @@ export const editEvent = (event) => {
   return (dispatch) => {
     dispatch({
       type: types.EDIT_EVENT,
-      payload: event,
+      payload: data,
     });
   };
 };
 
-export const deleteEvent = (event) => {
+export const deleteEvent = (username, eventId) => {
   return (dispatch) => {
-    dispatch({
-      type: types.DELETE_EVENT,
-      payload: event,
-    });
+    fetch(`https://unbucketlist.herokuapp.com/event/${username}/${eventId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('Data from delete fetch is', data);
+        if (Array.isArray(data.events)) {
+          dispatch({
+            type: types.DELETE_EVENT,
+            payload: data.events,
+          });
+        } else {
+          return data.err;
+        }
+      })
+      .catch((err) => console.log('Error deleteEvent fetch:', err));
   };
 };
