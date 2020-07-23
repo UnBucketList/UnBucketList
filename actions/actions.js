@@ -55,7 +55,7 @@ export const editEvent = (event) => {
 
 export const deleteEvent = (username, eventId) => {
   return (dispatch) => {
-    fetch(`http://localhost:3000/event/${username}/${eventId}`, {
+    fetch(`https://unbucketlist.herokuapp.com/event/${username}/${eventId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
