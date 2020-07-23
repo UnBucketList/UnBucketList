@@ -18,7 +18,7 @@ app.use('/event', eventRouter);
 app.use('/user', userRouter);
 
 app.use('/', (req, res) => {
-  res.send('hello world');
+  res.send('helloooo world');
 });
 
 // Catch-all route handler
@@ -35,7 +35,7 @@ app.use((err, req, res, next) => {
   };
 
   const errorObj = Object.assign(defaultErr, err);
-  console.log(errorObj.log);
+  console.log('THE ERROR, ', err);
   return res.status(errorObj.status).json(errorObj.message);
 });
 

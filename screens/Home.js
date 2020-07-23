@@ -13,11 +13,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = (props) => {
-  console.log('Username in Home is', props.username);
-  console.log('Creator name is', props.creator);
-  console.log('Events in state are', props.events);
 
-  const eventList = props.events.map((event, i) => {
+   const eventList = props.events.map((event, i) => {
     return (
       <View key={`event${i}`} style={styles.eventCard}>
         <Text>Event Name: {event.name}</Text>
@@ -25,12 +22,19 @@ const Home = (props) => {
         <Text>Event Date: {event.date}</Text>
         <TouchableOpacity
           onPress={() => {
-            console.log('Add event pressed');
-            props.navigation.navigate('EditEvent');
+            props.navigation.navigate('EditEvent', event);
           }}
           >
           <Text>Edit Event</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('CardDetails', event);
+          }}
+          >
+          <Text color={'blue'}>More Details</Text>
+          </TouchableOpacity>
+
       </View>
     );
   });

@@ -4,7 +4,8 @@ const eventController = {};
 
 // grabs all events that a user created and is a participant of
 eventController.getParticipatingEvents = (req, res, next) => {
-  let username = res.locals.username;
+  let username;
+  res.locals.username ? username = res.locals.username: username = req.params.username;
 
   let queryString = `
   SELECT 
@@ -25,7 +26,7 @@ eventController.getParticipatingEvents = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    console.log('response from database', response.rows);
+    //console.log('response from database', response.rows);
     res.locals.allEvents = response.rows;
     return next();
   });
@@ -34,7 +35,7 @@ eventController.getParticipatingEvents = (req, res, next) => {
 eventController.addCreatorToEvent = (req, res, next) => {
   const { username } = req.params;
   const event = res.locals.eventID;
-  console.log('event', event);
+  //console.log('event', event);
 
   let queryString = `
   INSERT INTO 
@@ -72,10 +73,10 @@ eventController.addNewEvent = (req, res, next) => {
 
   db.query(queryString, params, (err, response) => {
     if (err) {
-      console.log('error in creating new event', err);
+      //console.log('error in creating new event', err);
       return next(err);
     }
-    console.log('response from adding new event', response.rows);
+    //console.log('response from adding new event', response.rows);
     res.locals.eventID = response.rows[0]._id;
     res.locals.addedEvent = response.rows[0];
     return next();
@@ -92,16 +93,16 @@ eventController.editEvent = (req, res, next) => {
   UPDATE 
   events 
   SET 
-  name = $1, creator = $2, description = $3, location = $4, date = $5 
+  name = $1, creator = $2, username = $3, description = $4, location = $5, date = $6 
   WHERE 
-  events._id = $6
+  events._id = $7
   `;
 
-  let params = [name, creator, description, location, date, event];
+  let params = [name, creator, username, description, location, date, event];
 
   db.query(queryString, params, (err, response) => {
     if (err) {
-      console.log('Error in query for editing event, ', err);
+      //console.log('Error in query for editing event, ', err);
       return next(err);
     }
     return next();
@@ -122,10 +123,10 @@ eventController.deleteEvent = (req, res, next) => {
 
   db.query(queryString, params, (err, response) => {
     if (err) {
-      console.log('error in deleting an event', err);
+    //  console.log('error in deleting an event', err);
       return next(err);
     }
-    console.log('successfully deleted event', response.rows);
+    //console.log('successfully deleted event', response.rows);
     return next();
   });
 };
@@ -153,12 +154,13 @@ eventController.addParticipants = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        console.log('response adding participants', response.rows);
+        //console.log('response adding participants', response.rows);
       });
     });
     return next();
+  } else {
+    return next();
   }
-  return next();
 };
 
 // controller to grab all participants for an event
@@ -182,7 +184,7 @@ eventController.getParticipants = (req, res, next) => {
 
   db.query(queryString, params, (err, response) => {
     if (err) {
-      console.log('error in getting participants for an event', err);
+      //console.log('error in getting participants for an event', err);
       return next(err);
     }
     res.locals.participants = response.rows;
