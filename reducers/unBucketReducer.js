@@ -28,24 +28,33 @@ const unBucketReducer = (state = initialState, action) => {
 
     case types.ADD_EVENT:
       console.log('action payload', action.payload);
-      const { _id, name, description, location, date, guests } = action.payload;
+      const {
+        _id,
+        name,
+        creator,
+        description,
+        location,
+        date,
+        guests,
+      } = action.payload;
       const newEvent = {
         event_id: _id,
-        event_name: name,
+        creator,
+        name,
         description,
         location,
         date,
         guests,
       };
       events.push(newEvent);
-      console.log(newEvent, 'new evetn')
+      console.log(newEvent, 'new evetn');
       return {
         ...state,
         events,
       };
 
     case types.EDIT_EVENT:
-      events = action.payload
+      events = action.payload;
       return {
         ...state,
         events,

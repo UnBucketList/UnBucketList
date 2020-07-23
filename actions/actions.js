@@ -44,8 +44,8 @@ export const addEvent = (event, username, creator) => {
   };
 };
 
-export const editEvent = (event,username,creator) => {
-  console.log(event, 'WHAT IS THE EVENT')
+export const editEvent = (event, username, creator) => {
+  console.log(event, 'WHAT IS THE EVENT');
   // console.log('event should be everything from editted message', event.name,username)
   const body = JSON.stringify({
     name: event.name,
@@ -54,27 +54,28 @@ export const editEvent = (event,username,creator) => {
     location: event.location,
     date: event.date,
     guests: event.guests,
-    
-  })
-  console.log('what does body look like', body)
-  return (dispatch) => {
-    fetch(`http://localhost:3000/event/${username}/${event.event_id}`,{
-      method: 'PUT',
-      headers: {
-      'Content-Type': 'application/json',
-    },
-    body,
-  })
-  .then((res) => res.json())
-    .then((data) => {
-        console.log('data from editevent fetch', data);
-    dispatch({
-      type: types.EDIT_EVENT,
-      payload: data.events,
-    });
   });
-}
-
+  console.log('what does body look like', body);
+  return (dispatch) => {
+    fetch(
+      `https://unbucketlist.herokuapp.com/event/${username}/${event.event_id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data from editevent fetch', data);
+        dispatch({
+          type: types.EDIT_EVENT,
+          payload: data.events,
+        });
+      });
+  };
 };
 
 export const deleteEvent = (username, eventId) => {
