@@ -1,3 +1,5 @@
 # UnBucket List
 
-### For the activities we want to do after quarantine ends
+## Mobile event planning app for when the quarantine lifts
+
+### Send invites to your friends!
