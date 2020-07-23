@@ -125,10 +125,10 @@ const Home = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
     backgroundColor: '#486581',
     alignItems: 'center',
-    justifyContent: 'center',
-    bottom: 10,
   },
   detailsContainer: {
     width: 80,
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#F0F4F8',
+    fontSize: 18,
   },
   details: {
     color: '#BCCCDC',
@@ -171,20 +172,22 @@ const styles = StyleSheet.create({
   myEventCard: {
     flexDirection: 'row',
     backgroundColor: '#829AB1',
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 5,
+    borderColor: '#243B53',
     margin: 5,
-    height: 100,
+    maxHeight: 100,
     overflow: 'scroll',
     padding: 5,
   },
   friendEventCard: {
     flexDirection: 'row',
     backgroundColor: '#486581',
-    borderWidth: 1,
-    borderRadius: 3,
+    borderWidth: 0.5,
+    borderRadius: 5,
+    borderColor: '#243B53',
     margin: 5,
-    height: 100,
+    maxHeight: 100,
     overflow: 'scroll',
     padding: 5,
   },
