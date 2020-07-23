@@ -4,7 +4,10 @@ const eventController = {};
 
 // grabs all events that a user created and is a participant of
 eventController.getParticipatingEvents = (req, res, next) => {
-  let username = res.locals.username;
+  let username;
+  res.locals.username
+    ? (username = res.locals.username)
+    : (username = req.params.username);
 
   let queryString = `
   SELECT 
@@ -84,7 +87,7 @@ eventController.addNewEvent = (req, res, next) => {
 
 // TODO : edits an existing event
 eventController.editEvent = (req, res, next) => {
-  const { username, event } = req.params;
+  const { event } = req.params;
   const { name, creator, description, location, date } = req.body;
 
   // 'event name' and columns and values have to be changed accordingly
@@ -109,7 +112,7 @@ eventController.editEvent = (req, res, next) => {
 };
 
 eventController.deleteFromEventParticipantsTable = (req, res, next) => {
-  const { username, event } = req.params;
+  const { event } = req.params;
   // "id" needs to be changed to current event _id
   let queryString = `
   DELETE FROM
@@ -151,7 +154,6 @@ eventController.deleteFromEventsTable = (req, res, next) => {
 };
 
 eventController.addParticipants = (req, res, next) => {
-  const { username } = req.params;
   const { guests } = req.body;
 
   let event;
@@ -183,7 +185,7 @@ eventController.addParticipants = (req, res, next) => {
 
 // controller to grab all participants for an event
 eventController.getParticipants = (req, res, next) => {
-  const { id, event } = req.params;
+  const { event } = req.params;
   // "1" needs to be changed to the specific event_id in event_participants table
   let queryString = `
   SELECT 
