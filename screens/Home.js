@@ -27,9 +27,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const Home = (props) => {
-  console.log('Username in Home is', props.username);
-  console.log('Creator name is', props.creator);
-  console.log('Events in state are', props.events);
 
   const shareData = {
     title: `New event invitation from ${props.creator}`,
@@ -67,11 +64,12 @@ const Home = (props) => {
           <Text>Event Location: {event.location}</Text>
           <Text>Event Date: {event.date}</Text>
           <TouchableOpacity
-            onPress={() => {
-              props.navigation.navigate('EditEvent');
-            }}
+          onPress={() => {
+            event.owner = true;
+            props.navigation.navigate('CardDetails', event);
+          }}
           >
-            <Text>Edit Event</Text>
+            <Text color={'blue'}>More Details</Text>
           </TouchableOpacity>
         </View>
       );
@@ -88,6 +86,13 @@ const Home = (props) => {
           <Text>Event Name: {event.name}</Text>
           <Text>Event Location: {event.location}</Text>
           <Text>Event Date: {event.date}</Text>
+          <TouchableOpacity
+          onPress={() => {
+            props.navigation.navigate('CardDetails', event);
+          }}
+          >
+            <Text color={'blue'}>More Details</Text>
+          </TouchableOpacity>
         </View>
       );
     }
