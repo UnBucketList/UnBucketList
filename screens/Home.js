@@ -5,10 +5,10 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Button,
   Alert,
 } from 'react-native';
 import { connect } from 'react-redux';
+import * as actions from '../actions/actions.js';
 
 const mapStateToProps = (state) => ({
   username: state.unBucket.username,
@@ -17,7 +17,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // pertinent actions here
+  deleteEvent: (username, eventId) => {
+    dispatch(actions.deleteEvent(username, eventId));
+  },
 });
 
 const Home = (props) => {
@@ -30,28 +32,14 @@ const Home = (props) => {
       return (
         <View key={`event${i}`} style={styles.myEventCard}>
           <View style={styles.deleteButton}>
-            <Button
-              color="red"
-              title="X"
+            <TouchableOpacity
               onPress={() => {
-                Alert.alert(
-                  'Delete Event',
-                  'Are you sure you want to delete this event?',
-                  [
-                    {
-                      text: 'Cancel',
-                      onPress: () => console.log('Cancel Pressed'),
-                      style: 'cancel',
-                    },
-                    {
-                      text: 'Yes',
-                      onPress: () => console.log('OK pressed'),
-                    },
-                  ],
-                  { cancelable: true }
-                );
+                console.log('Delete opacity clicked');
+                props.deleteEvent(props.username, event.event_id);
               }}
-            ></Button>
+            >
+              <Text>X</Text>
+            </TouchableOpacity>
           </View>
           <Text>Event Name: {event.name}</Text>
           <Text>Event Location: {event.location}</Text>
@@ -120,9 +108,7 @@ const styles = StyleSheet.create({
     flex: 0,
     color: 'red',
     position: 'absolute',
-    width: 30,
-    height: 20,
-    right: 5,
+    right: 10,
   },
   myEventCard: {
     backgroundColor: 'lightgray',

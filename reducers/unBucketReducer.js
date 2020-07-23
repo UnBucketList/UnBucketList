@@ -44,25 +44,15 @@ const unBucketReducer = (state = initialState, action) => {
       };
 
     case types.EDIT_EVENT:
-      events.forEach((elem) => {
-        if (elem.eventId === action.payload.eventId) {
-          event = action.payload;
-        }
-      });
       return {
         ...state,
-        events,
+        events: action.payload,
       };
 
     case types.DELETE_EVENT:
-      events.forEach((elem, index) => {
-        if (elem.eventId === action.payload.eventId) {
-          events.splice(index, 1);
-        }
-      });
       return {
         ...state,
-        events,
+        events: action.payload,
       };
 
     default:
