@@ -18,7 +18,7 @@ app.use('/event', eventRouter);
 app.use('/user', userRouter);
 
 app.use('/', (req, res) => {
-  res.send('hello world');
+  res.send('helloooo world');
 });
 
 // Catch-all route handler

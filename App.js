@@ -8,6 +8,8 @@ import SignIn from './screens/SignIn.js';
 import SignUp from './screens/SignUp.js';
 import EditEvent from './screens/EditEvent.js';
 import AddEvent from './screens/AddEvent.js';
+import CardDetails from './screens/CardDetails.js';
+//. should be good to try
 
 // create stack for our screens
 const Stack = createStackNavigator();
@@ -47,8 +49,14 @@ export default function App() {
           />
           <Stack.Screen
             name="EditEvent"
-            component={EditEvent}
+            
+          component={EditEvent}
             options={{ title: 'UnBucket List - Edit Event' }}
+          />
+          <Stack.Screen
+            name="CardDetails"
+            component={CardDetails}
+            options={{ title: 'UnBucket List - CardDetails' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
