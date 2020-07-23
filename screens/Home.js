@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Share } from 'react-native';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
@@ -16,6 +16,16 @@ const Home = (props) => {
   console.log('Username in Home is', props.username);
   console.log('Creator name is', props.creator);
   console.log('Events in state are', props.events);
+
+  const shareData = {
+    title: `New event invitation from ${props.creator}`,
+    message: `Come hand out with me`,
+  };
+
+  const shareEvent = async () => {
+    const result = await Share.share(shareData);
+    console.log('result', result);
+  };
 
   const eventList = props.events.map((event, i) => {
     return (
